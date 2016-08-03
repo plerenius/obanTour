@@ -1,0 +1,23 @@
+a:link { /* unvisited link */
+
+    text-decoration: none;
+
+    color:#000055
+
+}
+
+a:visited { /* visited link */
+
+    text-decoration: none;
+
+    color:#000055
+
+}
+
+a:hover { /* mouse over link */
+
+    text-decoration: underline;
+
+    color:#0000DD
+
+}
