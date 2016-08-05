@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 require_once("Connections/pdo_connect.php");
+require_once("Player.php");
+
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (ISSET($_GET['year'])) {
@@ -9,26 +11,8 @@ if (ISSET($_GET['year'])) {
 } else {
 	$year=2016;
 }
-	echo "Year set to $year!<br />";
 
-class player {
-	public $name = "No name";
-	public $results = array(0,0,0,0,0,0);
-	public $total = 0;
-	public $topFour = array(-1,-2,-3,-4);
-	
-	function __construct($name,$results) {
-		
-	}
-	
-	function getBestFourResult() {
-		$tot = 0;
-		foreach ($topFour as $p) {
-			$tot += $p;
-		}
-		return $tot;
-	}
-}
+echo "Year set to $year!<br />";
 
 $competions_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.* FROM competitions AS c\n"
 	. "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
