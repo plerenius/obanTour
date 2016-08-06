@@ -22,7 +22,7 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
 		$this->numOfPlayers = 11;
 		$this->result = 36;
 		$this->rank = 2;
-		$this->closestFlag = 0;
+		$this->closestFlag = 1;
 		$this->longestDrive = 1;
 		$this->c1 = new Competition($this->id,$this->name,$this->numOfPlayers,$this->result,$this->rank,$this->closestFlag,$this->longestDrive);
 	}
@@ -48,7 +48,11 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($this->longestDrive, $this->c1->getLongestDrive());
 	}
 	
-	public function testGetPoints() {
-		$this->assertEquals(10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1,$this->c1->getPoints());
+	public function testGetRankPoints() {
+		$this->assertEquals(10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1,$this->c1->getRankPoints());
+	}
+	
+	public function testGetTotalPoints() {
+		$this->assertEquals(10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 3,$this->c1->getTotalPoints());
 	}
 }

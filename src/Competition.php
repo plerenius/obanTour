@@ -34,7 +34,11 @@ class Competition {
 		return $this->longestDrive;
 	}
 	
-	function getPoints() {
+	function getRankPoints() {
 		return (10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1);
+	}
+	
+	function getTotalPoints() {
+		return $this->getRankPoints() + (($this->closestFlag != 0)?2:0);
 	}
 }
