@@ -40,6 +40,28 @@ $result_q->execute();
 
 $players_r = $result_q->fetchAll();
 //print_r($players_r[0]);
+
+$playerList=array();
+foreach ($players_r as $p) {
+	$result=array();
+	$nf=array();
+	foreach ($competitions as $c) {
+		$result[] = number_format($p["c".$c['id']],2);
+		$nf[] = $p["nf".$c['id']];
+	}
+	$playerList[]=new Player($p['name'],$result);
+}
+
+$numOfCompetitions = 4;
+
+function cmp($a, $b)
+{
+	$resultA = $a->getBestResult(4);
+	$resultB = $b->getBestResult(4);
+    return $resultA == $resultB ? 0 : ( $resultA > $resultB ) ? -1 : 1;
+}
+
+usort($playerList, "cmp");
 ?>
 <table>
 <tbody>
@@ -56,6 +78,13 @@ foreach ($competitions as $c) {
 </tr>
 <?php
 $pos=0;
+foreach ($playerList as $p) {
+	$pos++;
+	echo "<tr><td>".$pos."</td>\n";
+	echo $p->getTableString($numOfCompetitions);
+}
+echo "<tr><th> Old list</th></tr>";
+$pos = 0;
 foreach ($players_r as $p) {
 	$pos++;
 	echo "<tr><td>".$pos."</td>\n";

@@ -39,4 +39,9 @@ class PlayerTest extends PHPUnit_Framework_TestCase
 			$this->assertEquals($r, $this->p1->getResult($i++));
 		}
 	}
+	
+	public function testGetTableString()
+	{
+		$this->assertEquals($this->name, $this->p1->getTableString());
+	}
 }
