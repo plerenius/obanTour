@@ -2,20 +2,26 @@
 
 class Player {
 	private $name = "No name";
-	private $results;
+	private $competitions = array();
 	
-	function __construct($name,$results) {
+	function __construct($name) {
 		echo "Creating a player named $name<br />";
 		$this->name=$name;
-		$this->results=$results;
 	}
 	
-	function getBestResult($numberOfResults) {
+	function addCompetition($comp) {
+		$this->competitions[] = $comp;
+	}
+	
+	function getBestPoints($numberOfResults) {
 		$tot = 0;
-		$sortedResult = $this->results;
-		rsort($sortedResult);	
-		for ($i=0;$i<$numberOfResults;$i++) {
-			$tot += $sortedResult[$i];
+		$sortedResult = $this->competitions;
+		usort($sortedResult,function($a,$b) {
+			return $a < $b?1:-1;
+		});
+		print_r($sortedResult);
+		for ($i=1;$i<=$numberOfResults;$i++) {
+			$tot += $sortedResult[$i]->getTotalPoints();
 		}
 		return $tot;
 	}
@@ -24,26 +30,26 @@ class Player {
 		return $this->name;
 	}
 	
-	function getResult($index) {
-		return $this->results[$index];
+	function getPoints($index) {
+		return $this->competitions[$index]->getTotalPoints();
 	}
 	
 	function getTableString($numberOfResults) {
 		$nf=0;
 		$str = "<td>".$this->name."</td>\n";
-		foreach ($this->results as $r) {
-			if ($r == 0) {
+		foreach ($this->competitions as $c) {
+			if ($c->getRankPoints() == 0) {
 				$str .= "<td align=right>-</td>\n";
 			} else {
-				$str .= "<td align=right>".number_format($r,2)."</td>\n";
+				$str .= "<td align=right>".number_format($c->getRankPoints(),2)."</td>\n";
 			}
-			if ($nf > 0) {
+			if ($c->getClosestFlag() > 0) {
 				$str .= "<td>+2</td>\n";
 			} else {
 				$str .= "<td>&nbsp;</td>\n";
 			}
 		}
-		$str .=  "<td align=right><b>".number_format($this->getBestResult($numberOfResults),2)."</b></td></tr>";
+		$str .=  "<td align=right><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td></tr>";
 		return $str;
 	}
 }

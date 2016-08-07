@@ -7,24 +7,36 @@ class PlayerTest extends PHPUnit_Framework_TestCase
 {
 	protected $p1;
 	protected $name;
-	private $resultArray;
+	protected $compList;
 	
     protected function setUp()
     {
         // Arrange
 		$this->name = "Kalle";
-		$this->resultArray = array(1,2,3,4,5,6);
-		$this->p1 = new Player($this->name,$this->resultArray);
+		$this->p1 = new Player($this->name);
+		$this->compList=array();
+		$this->compList[]= new Competition(1,"Oban1",11,36,3,1,0);
+		$this->compList[]= new Competition(2,"Oban2",6,34,1,0,1);
+		$this->compList[]= new Competition(3,"Oban3",11,36,5,1,0);
+		$this->compList[]= new Competition(4,"Oban4",6,34,6,0,1);
+		$this->compList[]= new Competition(5,"Oban5",11,36,11,1,0);
+		$this->compList[]= new Competition(6,"Oban6",6,34,5,1,1);		
+		$this->p1->addCompetition($this->compList[0]);
+		$this->p1->addCompetition($this->compList[1]);
+		$this->p1->addCompetition($this->compList[2]);
+		$this->p1->addCompetition($this->compList[3]);
+		$this->p1->addCompetition($this->compList[4]);
+		$this->p1->addCompetition($this->compList[5]);
 	}
 	
 	/**
      * @covers   \obanTour\Player::getBestResult
      * @uses     \obanTour\Player::__construct
      */
-	public function testGetBestResult()
+	public function testGetBestPoints()
 	{
-		$this->assertEquals(18, $this->p1->getBestResult(4));
-		$this->assertEquals(11, $this->p1->getBestResult(2));
+		$this->assertEquals(26, $this->p1->getBestPoints(4));
+		$this->assertEquals(20, $this->p1->getBestPoints(2));
 	}
 	
 	public function testGetName()
@@ -32,16 +44,16 @@ class PlayerTest extends PHPUnit_Framework_TestCase
 		$this->assertEquals($this->name, $this->p1->getName());
 	}
 
-	public function testGetResult()
+	public function testGetPoints()
 	{
 		$i=0;
-		foreach ($this->resultArray as $r) {
-			$this->assertEquals($r, $this->p1->getResult($i++));
+		foreach ($this->compList as $c) {
+			$this->assertEquals($c->getTotalPoints(), $this->p1->getPoints($i++));
 		}
 	}
 	
 	public function testGetTableString()
 	{
-		$this->assertEquals(count($this->resultArray) + 1, substr_count($this->p1->getTableString(4),"<td>"));
+		$this->assertEquals(count($this->compList) + 1, substr_count($this->p1->getTableString(4),"<td>"));
 	}
 }
