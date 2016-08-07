@@ -1,5 +1,7 @@
 <?php
 
+require_once("Competition.php");
+
 class Player {
 	private $name = "No name";
 	private $competitions = array();
@@ -19,8 +21,7 @@ class Player {
 		usort($sortedResult,function($a,$b) {
 			return $a < $b?1:-1;
 		});
-		print_r($sortedResult);
-		for ($i=1;$i<=$numberOfResults;$i++) {
+		for ($i=0;$i<$numberOfResults;$i++) {
 			$tot += $sortedResult[$i]->getTotalPoints();
 		}
 		return $tot;

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 require_once("Connections/pdo_connect.php");
-require_once("Player.php");
+require_once("src/Player.php");
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -26,7 +26,9 @@ $competitions = $competions_q->fetchAll();
 $result_sql = "SELECT CONCAT(fname,\" \",lname) AS name,\n";
 foreach ($competitions as $c) {
 	$result_sql .= "SUM(IF(c.id=". $c['id'] .",10*(".$c['numOfPlayers']."-r.rank)/(".$c['numOfPlayers']."-1)+1,0)) AS c". $c['id'] .",\n";
-	$result_sql .= "SUM(IF(p.id=". $c['nf'] .",2,0)) AS nf". $c['id'] .",\n";	
+	$result_sql .= "SUM(IF(c.id=". $c['id'] .",r.rank,0)) AS r". $c['id'] .",\n";
+	$result_sql .= "SUM(IF(p.id=". $c['ld'] .",2,0)) AS ld". $c['id'] .",\n";
+	$result_sql .= "SUM(IF(p.id=". $c['nf'] .",2,0)) AS nf". $c['id'] .",\n";
 }
 
 
@@ -43,21 +45,18 @@ $players_r = $result_q->fetchAll();
 
 $playerList=array();
 foreach ($players_r as $p) {
-	$result=array();
-	$nf=array();
+	$playerList[]=new Player($p['name']);
 	foreach ($competitions as $c) {
-		$result[] = number_format($p["c".$c['id']],2);
-		$nf[] = $p["nf".$c['id']];
-	}
-	$playerList[]=new Player($p['name'],$result);
+		$playerList[count($playerList)-1]->addCompetition(new Competition($c['id'],$c['name'],$c['numOfPlayers'],-1,$p["r".$c['id']],$p["nf".$c['id']],$p["ld".$c['id']]));
+	}	
 }
 
 $numOfCompetitions = 4;
 
 function cmp($a, $b)
 {
-	$resultA = $a->getBestResult(4);
-	$resultB = $b->getBestResult(4);
+	$resultA = $a->getBestPoints(4);
+	$resultB = $b->getBestPoints(4);
     return $resultA == $resultB ? 0 : ( $resultA > $resultB ) ? -1 : 1;
 }
 

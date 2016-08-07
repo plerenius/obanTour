@@ -35,7 +35,7 @@ class Competition {
 	}
 	
 	function getRankPoints() {
-		return (10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1);
+		return ($this->rank==0)?0:(10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1);
 	}
 	
 	function getTotalPoints() {
