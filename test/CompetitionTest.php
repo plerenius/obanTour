@@ -28,14 +28,17 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
 	}
 	
 	/**
-     * @covers   \obanTour\Player::getBestResult
-     * @uses     \obanTour\Player::__construct
+     * @covers   \obanTour\Competition::getId
+     * @uses     \obanTour\Competition::__construct
      */
-	public function testGetId()
-	{
+	public function testGetId() {
 		$this->assertEquals($this->id, $this->c1->getId());
 	}
 	
+	public function testGetName() {
+		$this->assertEquals($this->name, $this->c1->getName());
+	}
+
 	public function testGetRank() {
 		$this->assertEquals($this->rank, $this->c1->getRank());
 	}

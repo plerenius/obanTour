@@ -5,13 +5,16 @@ require_once("Competition.php");
 class Player {
 	private $name = "No name";
 	private $competitions = array();
+	private $numberOfBottles = array(0,0,0);
 	
 	function __construct($name) {
-		echo "Creating a player named $name<br />";
 		$this->name=$name;
 	}
 	
 	function addCompetition($comp) {
+		$this->numberOfBottles[0] += ($comp->getRank() == 1)?1:0;
+		$this->numberOfBottles[1] += ($comp->getLongestDrive() == 0)?0:1;	
+		$this->numberOfBottles[2] += ($comp->getClosestFlag() == 0)?0:1;
 		$this->competitions[] = $comp;
 	}
 	
@@ -50,7 +53,25 @@ class Player {
 				$str .= "<td>&nbsp;</td>\n";
 			}
 		}
-		$str .=  "<td align=right><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td></tr>";
+		$str .=  "<td align=right><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td>";
+		return $str;
+	}
+	
+	function getNumberOfBottles() {
+		return $this->numberOfBottles[0] + $this->numberOfBottles[1] + $this->numberOfBottles[2];
+	}
+	
+	function getBottleTableString() {
+		if (true) { //$this->getNumberOfBottles() != 0) {
+			$str  = "<td>".$this->name."</td>\n";
+			$str .= "<td align=right>".$this->numberOfBottles[0]."</td>\n";
+			$str .= "<td align=right>".$this->numberOfBottles[1]."</td>\n";
+			$str .= "<td align=right>".$this->numberOfBottles[2]."</td>\n";
+			$str .=  "<td align=right><b>".$this->getNumberOfBottles()."</b></td>";
+		}
+		else {
+			$str = "";
+		}
 		return $str;
 	}
 }

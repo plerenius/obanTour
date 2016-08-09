@@ -8,7 +8,6 @@ class Competition {
 	protected $numOfPlayers;
 	
 	function __construct($id, $name, $numOfPlayers, $result, $rank, $closestFlag, $longestDrive) {
-		echo "Creating a competition named $name<br />";
 		$this->id=$id;
 		$this->name=$name;
 		$this->numOfPlayers=$numOfPlayers;
@@ -20,6 +19,10 @@ class Competition {
 	
 	function getId() {
 		return $this->id;
+	}
+	
+	function getName() {
+		return $this->name;
 	}
 	
 	function getRank() {
