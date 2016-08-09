@@ -22,9 +22,9 @@ class Player {
 		$tot = 0;
 		$sortedResult = $this->competitions;
 		usort($sortedResult,function($a,$b) {
-			return $a < $b?1:-1;
+			return $a->getTotalPoints() < $b->getTotalPoints()?1:-1;
 		});
-		for ($i=0;$i<$numberOfResults;$i++) {
+		for ($i=0;$i<$numberOfResults && $i<count($sortedResult);$i++) {
 			$tot += $sortedResult[$i]->getTotalPoints();
 		}
 		return $tot;
@@ -39,7 +39,6 @@ class Player {
 	}
 	
 	function getTableString($numberOfResults) {
-		$nf=0;
 		$str = "<td>".$this->name."</td>\n";
 		foreach ($this->competitions as $c) {
 			if ($c->getRankPoints() == 0) {

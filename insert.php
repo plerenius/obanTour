@@ -38,12 +38,12 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 
 // Handle form submition
 if (isset($_POST['submit'])) {
-	$competition_stmt = $db->prepare("INSERT INTO competitions (name,yearsId,course,type,weather,nf,ld) 
-    VALUES (?,?,?,?,?,?,?)");
-	$competition_stmt->execute(array($_POST['comp_name'],$_POST['comp_year'],$_POST['comp_course'],$_POST['comp_type'],"moln", $_POST['nf'],$_POST['ld']));
-	print "procedure returned $return_value\n";
+	$competition_stmt = $db->prepare("INSERT INTO competitions (name,date,yearsId,course,type,weather,nf,ld) 
+    VALUES (?,?,?,?,?,?,?,?)");
+	$return_value=$competition_stmt->execute(array($_POST['comp_name'],$_POST['comp_date'],$_POST['comp_year'],$_POST['comp_course'],$_POST['comp_type'],"moln", $_POST['nf'],$_POST['ld']));
+	print "procedure returned $return_value<br />\n";
 	$comp_id = $db->lastInsertId();
-	echo "Tävling: " . $_POST['comp_name'] . " -> " . $comp_id;
+	echo "Tävling: " . $_POST['comp_name'] . " -> " . $comp_id . "<br />\n";
 
 	$result_stmt = $db->prepare("INSERT INTO results (players_id,competitions_id,result,rank)
 	VALUES (?,?,?,?)");
@@ -66,6 +66,7 @@ if (isset($_POST['submit'])) {
 <h1>Ny t&auml;vling</h1>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form1" id="form1">
 Tävlingsnamn: <input type="text" name="comp_name" value="" size="30" /><br />
+Datum: <input type="text" name="comp_date" value="2016-07-01" size="10" /><br />
 År: <input type="text" name="comp_year" value="2016" size="4" /><br />
 Tävlingstyp: <input type="text" name="comp_type" value="" size="30" /><br />
 Bana: <input type="text" name="comp_course" value="" size="30" /><br />

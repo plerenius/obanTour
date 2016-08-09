@@ -12,32 +12,35 @@ if (ISSET($_GET['year'])) {
 	$year=2016;
 }
 
-echo "Year set to $year!<br />";
-
 $competions_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.*,\n"
-	. " CONCAT(p_nf.fname,\" \",p_nf.lname) AS nfName, CONCAT(p_ld.fname,\" \",p_ld.lname) AS ldName FROM competitions AS c\n"
+	. "CONCAT(p_win.fname,\" \",p_win.lname) AS winner,\n"
+	. "CONCAT(p_nf.fname,\" \",p_nf.lname) AS nfName,\n"
+	. "CONCAT(p_ld.fname,\" \",p_ld.lname) AS ldName\n"
+	. "FROM competitions AS c\n"
 	. "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
+	. "LEFT JOIN (SELECT * FROM results WHERE rank=1) AS r_win ON r_win.competitions_id = c.id\n"
+	. "LEFT JOIN players AS p_win ON r_win.players_id = p_win.id\n"
 	. "LEFT JOIN players AS p_nf ON c.nf = p_nf.id\n"
 	. "LEFT JOIN players AS p_ld ON c.ld = p_ld.id\n"
-    . "WHERE c.yearsId = $year  GROUP BY c.id ORDER BY c.date\n";
+    . "WHERE c.yearsId = $year  GROUP BY c.id ORDER BY c.date, r.rank\n";
 //echo "$competions_sql<br />";
 
 $competions_q = $db->prepare($competions_sql);
 $competions_q->execute();
 $competitions = $competions_q->fetchAll();
 
-$result_sql = "SELECT CONCAT(fname,\" \",lname) AS name,\n";
+$result_sql = "SELECT\n";
 foreach ($competitions as $c) {
 	$result_sql .= "SUM(IF(c.id=". $c['id'] .",r.rank,0)) AS r". $c['id'] .",\n";
-	$result_sql .= "SUM(IF(p.id=". $c['ld'] .",2,0)) AS ld". $c['id'] .",\n";
-	$result_sql .= "SUM(IF(p.id=". $c['nf'] .",2,0)) AS nf". $c['id'] .",\n";
+	$result_sql .= "SUM(IF(p.id=". ($c['ld']!=NULL?$c['ld']:-1) .",2,0)) AS ld". $c['id'] .",\n";
+	$result_sql .= "SUM(IF(p.id=". ($c['nf']!=NULL?$c['nf']:-1) .",2,0)) AS nf". $c['id'] .",\n";
 }
 
 
-$result_sql .= "SUM(r.result+IF(p.id=c.nf,2,0)) AS total FROM competitions AS c\n"
+$result_sql .= "CONCAT(fname,\" \",lname) AS name FROM competitions AS c\n"
     . "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
 	. "LEFT JOIN players AS p ON r.players_id = p.id\n"
-    . "WHERE c.yearsId = $year GROUP BY p.id ORDER BY total DESC";
+    . "WHERE c.yearsId = $year GROUP BY p.id ORDER BY rank";
 //echo "$result_sql";
 $result_q = $db->prepare($result_sql);
 $result_q->execute();
@@ -70,12 +73,13 @@ function cmpBottles($a, $b)
 }
 
 usort($playerList, "cmpRank");
+echo "<h2>Resultat Oban ".$year."</h2>";
 ?>
-<h2>Summering</h2>
 <table>
 <tbody>
 <tr>
 <th>Del&auml;vling</th>
+<th>Bana</th>
 <th>Vinnare</th>
 <th>L&auml;ngsta Drive</th>
 <th>N&auml;rmast H&aring;l</th>
@@ -83,9 +87,10 @@ usort($playerList, "cmpRank");
 <?php
 foreach ($competitions as $c) {
 	echo "<tr><td>".$c['name']."</td>\n";
-	echo "<td>".$c['id']."</td>\n";	
-	echo "<td>".$c['ldName']."</td>\n";
-	echo "<td>".$c['nfName']."</td></tr>\n";
+	echo "<td>".$c['course']."</td>\n";	
+	echo "<td>".(strcmp($c['winner'],"")?$c['winner']:"-")."</td>\n";	
+	echo "<td>".(strcmp($c['ldName'],"")?$c['ldName']:"-")."</td>\n";
+	echo "<td>".(strcmp($c['nfName'],"")?$c['nfName']:"-")."</td></tr>\n";
 }
 ?>
 </tbody>

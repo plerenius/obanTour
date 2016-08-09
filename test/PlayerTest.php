@@ -35,8 +35,8 @@ class PlayerTest extends PHPUnit_Framework_TestCase
      */
 	public function testGetBestPoints()
 	{
-		$this->assertEquals(24, $this->p1->getBestPoints(4));
-		$this->assertEquals(12, $this->p1->getBestPoints(2));
+		$this->assertEquals(36, $this->p1->getBestPoints(4));
+		$this->assertEquals(22, $this->p1->getBestPoints(2));
 	}
 	
 	public function testGetName()
