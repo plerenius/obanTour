@@ -6,7 +6,8 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $players_sql = "SELECT p.*, COUNT(r.id) AS numbOfComp FROM players AS p\n"
     . "LEFT JOIN results AS r ON r.players_id = p.id\n"
-    . "GROUP BY p.id ORDER BY numbOfComp DESC, p.fname";
+//    . "GROUP BY p.id ORDER BY numbOfComp DESC, p.fname";
+    . "GROUP BY p.id ORDER BY p.fname";	
 $players_q = $db->prepare($players_sql);
 $players_q->execute();
 $players_r = $players_q->fetchAll();
@@ -40,7 +41,7 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 if (isset($_POST['submit'])) {
 	$competition_stmt = $db->prepare("INSERT INTO competitions (name,date,yearsId,course,type,weather,nf,ld) 
     VALUES (?,?,?,?,?,?,?,?)");
-	$return_value=$competition_stmt->execute(array($_POST['comp_name'],$_POST['comp_date'],$_POST['comp_year'],$_POST['comp_course'],$_POST['comp_type'],"moln", $_POST['nf'],$_POST['ld']));
+	$return_value=$competition_stmt->execute(array($_POST['comp_name'],$_POST['comp_date'],$_POST['comp_year'],$_POST['comp_course'],$_POST['comp_type'],NULL, $_POST['nf'],$_POST['ld']));
 	print "procedure returned $return_value<br />\n";
 	$comp_id = $db->lastInsertId();
 	echo "Tävling: " . $_POST['comp_name'] . " -> " . $comp_id . "<br />\n";
@@ -65,20 +66,22 @@ if (isset($_POST['submit'])) {
 
 <h1>Ny t&auml;vling</h1>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form1" id="form1">
-Tävlingsnamn: <input type="text" name="comp_name" value="" size="30" /><br />
-Datum: <input type="text" name="comp_date" value="2016-07-01" size="10" /><br />
+Tävlingsnamn: <input type="text" name="comp_name" value="2016-5" size="30" /><br />
+Datum: <input type="text" name="comp_date" value="2016-08-29" size="10" /><br />
 År: <input type="text" name="comp_year" value="2016" size="4" /><br />
 Tävlingstyp: <input type="text" name="comp_type" value="" size="30" /><br />
 Bana: <input type="text" name="comp_course" value="" size="30" /><br />
 N&auml;rmst Flagg: <select name="nf">
+<option value="NULL">Ingen</option>
 <?php
 
 foreach($players_r as $nt){
-echo "<option value=".$nt['id'].">".$nt['fname']." ".$nt['lname']."</option>";
+	echo "<option value=".$nt['id'].">".$nt['fname']." ".$nt['lname']."</option>";
 }
 ?>
 </select><br />
 Longest Drive: <select name="ld">
+<option value="NULL">Ingen</option>
 <?php 
 foreach($players_r as $nt){
 	echo "<option value=".$nt['id'].">".$nt['fname']." ".$nt['lname']."</option>";

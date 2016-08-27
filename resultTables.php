@@ -136,6 +136,9 @@ foreach ($playerList as $p) {
 usort($playerList, "cmpBottles");
 $pos=0;
 foreach ($playerList as $p) {
+	if ($p->getNumberOfBottles() == 0) {
+		break;
+	}
 	$pos++;
 	echo "<tr><td>".$pos."</td>\n";
 	echo $p->getBottleTableString();

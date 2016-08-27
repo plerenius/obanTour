@@ -37,7 +37,9 @@ $bottles_r = $bottles_q->fetchAll();
 <?php
 foreach ($years as $y) {
 	echo "<th>".$y['year']."</th>\n";
+	$total[$y['year']]=0;
 }
+$total['tot']=0;
 
 ?>
 <th>Totalt</th>
@@ -46,6 +48,9 @@ foreach ($years as $y) {
 $pos=1;
 $old_pos=1;
 foreach ($bottles_r as $p) {
+	if ($p['vinpavor'] == 0) {
+		break;
+	}
 	if ($pos-2>=0 and $p['vinpavor'] == $bottles_r[$pos-2]['vinpavor']) {
 		echo "<tr><td align='right'>T".$old_pos."</td>\n";
 	} elseif ($pos<count($bottles_r) and $p['vinpavor'] == $bottles_r[$pos]['vinpavor']) {
@@ -59,8 +64,17 @@ foreach ($bottles_r as $p) {
 	echo "<td>".$p['name']."</td>\n";
 	foreach ($years as $y) {
 		echo "<td align='right'>".$p["p".$y['year']]."</td>\n";
+		$total[$y['year']]+=$p["p".$y['year']];
 	}
 	echo "<td align='right'>".$p['vinpavor']."</td>\n";
+	$total['tot']+=$p['vinpavor'];
 	echo "</tr>";
 }
+echo "<tr><td></td><td></td>";
+foreach ($years as $y) {
+	echo "<td align='right'>".$total[$y['year']]."</td>\n";
+}
+echo "<td align='right'>".$total['tot']."</td></tr>\n";
 ?>
+</table>
+</tbody>
