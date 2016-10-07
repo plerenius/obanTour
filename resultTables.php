@@ -52,7 +52,7 @@ $playerList=array();
 foreach ($players_r as $p) {
 	$playerList[]=new Player($p['name']);
 	foreach ($competitions as $c) {
-		$playerList[count($playerList)-1]->addCompetition(new Competition($c['id'],$c['name'],$c['numOfPlayers'],-1,$p["r".$c['id']],$p["nf".$c['id']],$p["ld".$c['id']]));
+		$playerList[count($playerList)-1]->addCompetition(new Competition($c['id'],$c['name'],$c['numOfPlayers'],$c['doublePoints'],-1,$p["r".$c['id']],$p["nf".$c['id']],$p["ld".$c['id']]));
 	}	
 }
 
@@ -96,7 +96,8 @@ foreach ($competitions as $c) {
 </tbody>
 </table>
 
-<h3>Rankinglista</h3>
+<h2 align="center">Aktuell ställning The Oban Tour <?php echo $year; ?></h2>
+Det är resultaten från de fyra bästa deltävlingarna som räknas med i totalen.
 <table>
 <tbody>
 <tr>

@@ -6,8 +6,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $players_sql = "SELECT p.*, COUNT(r.id) AS numbOfComp FROM players AS p\n"
     . "LEFT JOIN results AS r ON r.players_id = p.id\n"
-//    . "GROUP BY p.id ORDER BY numbOfComp DESC, p.fname";
-    . "GROUP BY p.id ORDER BY p.fname";	
+    . "GROUP BY p.id ORDER BY numbOfComp DESC, p.fname";
 $players_q = $db->prepare($players_sql);
 $players_q->execute();
 $players_r = $players_q->fetchAll();
@@ -39,12 +38,12 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 
 // Handle form submition
 if (isset($_POST['submit'])) {
-	$competition_stmt = $db->prepare("INSERT INTO competitions (name,date,yearsId,course,type,weather,nf,ld) 
-    VALUES (?,?,?,?,?,?,?,?)");
-	$return_value=$competition_stmt->execute(array($_POST['comp_name'],$_POST['comp_date'],$_POST['comp_year'],$_POST['comp_course'],$_POST['comp_type'],NULL, $_POST['nf'],$_POST['ld']));
+	$competition_stmt = $db->prepare("INSERT INTO competitions (name,date,yearsId,course,type,weather,nf,ld,doublePoint) 
+    VALUES (?,?,?,?,?,?,?,?,?)");
+	$return_value=$competition_stmt->execute(array($_POST['comp_name'],$_POST['comp_date'],$_POST['comp_year'],$_POST['comp_course'],$_POST['comp_type'],NULL, $_POST['nf'],$_POST['ld'],$_POST['doublePoint']));
 	print "procedure returned $return_value<br />\n";
 	$comp_id = $db->lastInsertId();
-	echo "Tävling: " . $_POST['comp_name'] . " -> " . $comp_id . "<br />\n";
+	echo "T&auml;vling: " . $_POST['comp_name'] . " -> " . $comp_id . "<br />\n";
 
 	$result_stmt = $db->prepare("INSERT INTO results (players_id,competitions_id,result,rank)
 	VALUES (?,?,?,?)");
@@ -59,6 +58,8 @@ if (isset($_POST['submit'])) {
 
 <head>
 <meta http-equiv="Content-Type" content="text/html" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
 <title>Mata in ny Oban T&auml;vling</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
@@ -66,11 +67,11 @@ if (isset($_POST['submit'])) {
 
 <h1>Ny t&auml;vling</h1>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form1" id="form1">
-Tävlingsnamn: <input type="text" name="comp_name" value="2016-5" size="30" /><br />
-Datum: <input type="text" name="comp_date" value="2016-08-29" size="10" /><br />
-År: <input type="text" name="comp_year" value="2016" size="4" /><br />
-Tävlingstyp: <input type="text" name="comp_type" value="" size="30" /><br />
-Bana: <input type="text" name="comp_course" value="" size="30" /><br />
+T&auml;vlingsnamn: <input type="text" name="comp_name" value="2016-7" size="30" /><br />
+Datum: <input type="text" name="comp_date" value="2016-10-08" size="10" /><br />
+&Aring;r: <input type="text" name="comp_year" value="2016" size="4" /><br />
+T&auml;vlingstyp: <input type="text" name="comp_type" value="" size="30" /><br />
+Bana: <input type="text" name="comp_course" value="LinkÃ¶pings Gk" size="30" /><br />
 N&auml;rmst Flagg: <select name="nf">
 <option value="NULL">Ingen</option>
 <?php
@@ -91,7 +92,7 @@ foreach($players_r as $nt){
 <table>
 <tr>
 <th align=left>Namn</th>
-<th align=left>Ant Tävlingar</th>
+<th align=left>#T&auml;vl</th>
 <th align=left>Resultat</th>
 <th align=left>Placering</th>
 </tr>

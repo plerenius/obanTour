@@ -1,16 +1,21 @@
 <?php
 
 class Competition {
+	protected $id;
+	protected $name;
+	protected $doublePoints;
 	protected $result;
 	protected $rank;
 	protected $closestFlag;
 	protected $longestDrive;
 	protected $numOfPlayers;
 	
-	function __construct($id, $name, $numOfPlayers, $result, $rank, $closestFlag, $longestDrive) {
+	function __construct($id, $name, $numOfPlayers, $doublePoints,
+		$result, $rank, $closestFlag, $longestDrive) {
 		$this->id=$id;
 		$this->name=$name;
 		$this->numOfPlayers=$numOfPlayers;
+		$this->doublePoints=$doublePoints;
 		$this->result=$result;
 		$this->rank=$rank;
 		$this->closestFlag=$closestFlag;
@@ -37,11 +42,20 @@ class Competition {
 		return $this->longestDrive;
 	}
 	
+	function getDoublePoints() {
+		return $this->doublePoints;
+	}
+	
 	function getRankPoints() {
-		return ($this->rank==0)?0:(10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1);
+		$points = ($this->rank==0)?0:(10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1);
+		if ($this->doublePoints == 1) {
+			return 2*$points;
+		} else {
+			return $points;
+		}
 	}
 	
 	function getTotalPoints() {
-		return $this->getRankPoints() + (($this->closestFlag != 0)?2:0);
+		return $this->getRankPoints() + (($this->closestFlag != 0)?2*($this->doublePoints==1?2:1):0);
 	}
 }

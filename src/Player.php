@@ -47,7 +47,11 @@ class Player {
 				$str .= "<td align=right>".number_format($c->getRankPoints(),2)."</td>\n";
 			}
 			if ($c->getClosestFlag() > 0) {
-				$str .= "<td>+2</td>\n";
+				if ($c->getDoublePoints() == 1) {
+					$str .= "<td>+4</td>\n";
+				} else {
+					$str .= "<td>+2</td>\n";
+				}
 			} else {
 				$str .= "<td>&nbsp;</td>\n";
 			}
