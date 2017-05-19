@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.1.6
 -- http://www.phpmyadmin.net
 --
--- Värd: 127.0.0.1
--- Tid vid skapande: 03 aug 2016 kl 19:51
--- Serverversion: 10.1.13-MariaDB
--- PHP-version: 5.6.23
+-- Host: 127.0.0.1
+-- Generation Time: Aug 28, 2016 at 12:38 AM
+-- Server version: 5.6.16
+-- PHP Version: 5.5.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,20 +14,21 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Databas: `imath_se`
+-- Database: `imath_se`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `competitions`
+-- Table structure for table `competitions`
 --
 
-CREATE TABLE `competitions` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `competitions`;
+CREATE TABLE IF NOT EXISTS `competitions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
   `date` date DEFAULT NULL,
   `yearsId` int(11) NOT NULL,
@@ -35,50 +36,109 @@ CREATE TABLE `competitions` (
   `type` tinytext,
   `weather` tinytext,
   `nf` int(11) DEFAULT NULL,
-  `ld` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `ld` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
 
 --
--- Dumpning av Data i tabell `competitions`
+-- Dumping data for table `competitions`
 --
 
 INSERT INTO `competitions` (`id`, `name`, `date`, `yearsId`, `course`, `type`, `weather`, `nf`, `ld`) VALUES
 (1, '2016-1', '2016-05-13', 2016, 'Linköpings GK', NULL, 'Regnskurar', 2, 0),
-(2, '2016-2 Vårresan', '2016-05-21', 2016, 'Vårresan', NULL, NULL, 37, 17),
+(2, '2016-2', '2016-05-21', 2016, 'Vårresan', NULL, NULL, 37, 17),
 (3, '2016-3', '2016-06-12', 2016, 'Landeryd Södra', '0', '0', 37, 37),
 (6, '2016-4', '2016-06-29', 2016, 'Landeryd Norra', 'Poängbogey', 'moln', 2, 32),
-(7, '2015-1', NULL, 2015, 'Ljunghusen,Falsterbo,PGA Links', 'Eclectic', 'moln', 3, NULL);
+(7, '2015-1', '2015-05-01', 2015, 'Ljunghusen,Falsterbo,PGA Links', 'Eclectic', 'moln', 3, NULL),
+(8, '2015-2', '2015-06-01', 2015, 'Landeryd Norra', '', 'moln', 15, 45),
+(9, '2015-3', '2015-07-01', 2015, 'Vesterby GK', '?', 'moln', 37, 9),
+(10, '2015-4', '2015-08-01', 2015, 'Mjölby GK', '?', 'moln', 46, 32),
+(11, '2015-5', '2015-08-15', 2015, 'Ombergs GK', '?', 'moln', 11, 23),
+(12, '2015-6', '2016-09-01', 2015, 'Grönhögen, Ekerum', '?', 'moln', 46, 15),
+(13, '2015-7', '2016-10-01', 2015, 'Vesterby GK', '?', 'moln', 9, 15),
+(14, '2007-1', '2007-01-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL),
+(15, '2007-2', '2007-02-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL),
+(16, '2007-3', '2007-03-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL),
+(17, '2007-4', '2007-04-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL),
+(18, '2007-5', '2007-05-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL),
+(19, '2007-6', '2007-06-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL),
+(20, '2007-7', '2007-07-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL),
+(21, '2007-8', '2007-08-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL),
+(22, '2008-1', '2008-01-01', 2008, 'Örkelljunga GK', 'Poängbogey', NULL, 12, 50),
+(23, '2008-2', '2008-02-01', 2008, 'Ombergs GK', 'Poängbogey', NULL, 9, 50),
+(24, '2008-3', '2008-03-01', 2008, 'Linköpings GK', 'Poängbogey', NULL, 45, 21),
+(25, '2008-4', '2008-04-01', 2008, 'Landeryd Norra', 'Poängbogey', NULL, 42, 42),
+(26, '2008-5', '2008-05-01', 2008, 'Ombergs GK', 'Poängbogey', NULL, 15, 15),
+(27, '2008-6', '2008-06-01', 2008, 'Castleknock GC', 'Poängbogey', NULL, 29, 9),
+(28, '2009-1', '2009-01-01', 2009, 'Grönhögen GK', 'Slagtävling', NULL, 11, 47),
+(29, '2009-2', '2009-02-01', 2009, 'Linköpings GK', 'Slagtävling', NULL, 42, 36),
+(30, '2009-3', '2009-03-01', 2009, 'Landeryd Norra', 'Slagtävling', NULL, 11, 45),
+(31, '2009-4', '2009-04-01', 2009, 'Vesterby GK', 'Slagtävling', NULL, 6, 50),
+(32, '2009-5', '2009-05-01', 2009, 'Åtvidabergs GK', 'Slagtävling', NULL, 11, 29),
+(33, '2009-6', '2009-06-01', 2009, 'Alenda Alicante', 'Slagtävling', NULL, NULL, 15),
+(34, '2010-1', '2010-01-01', 2010, 'Hooks GK', 'Slagtävling', NULL, 15, 46),
+(35, '2010-2', '2010-02-01', 2010, 'Ombergs GK', 'Slagtävling', NULL, 15, 37),
+(36, '2010-3', '2010-03-01', 2010, 'Linköpings GK', 'Slagtävling', NULL, 9, 20),
+(37, '2010-4', '2010-04-01', 2010, 'Landeryd Norra', 'Slagtävling', NULL, 15, 45),
+(38, '2010-5', '2010-05-01', 2010, 'Bro Hof Stadium Course', 'Slagtävling', NULL, 37, 37),
+(39, '2010-6', '2010-06-01', 2010, 'Vesterby GK', 'Slagtävling', NULL, 15, 2),
+(40, '2011-1', '2011-01-01', 2011, 'Mjölby GK', 'Unknown', NULL, 14, 9),
+(41, '2011-2', '2011-02-01', 2011, 'Linköpings GK', 'Unknown', NULL, 15, 15),
+(42, '2011-3', '2011-03-01', 2011, 'Landeryd Norra', 'Unknown', NULL, 8, 48),
+(43, '2011-4', '2011-04-01', 2011, 'Mauritzbergs GK', 'Unknown', NULL, 15, 15),
+(44, '2011-5', '2011-05-01', 2011, 'Prince’s GC', 'Unknown', NULL, 9, 2),
+(45, '2011-6', '2011-06-01', 2011, 'Linköpings GK', 'Unknown', NULL, NULL, NULL),
+(46, '2012-1', '2012-01-01', 2012, 'Båstad Nya/Sand GK', 'Unknown', NULL, 45, 2),
+(47, '2012-2', '2012-01-02', 2012, 'Landeryd Norra', 'Unknown', NULL, 45, 2),
+(48, '2012-3', '2012-01-03', 2012, 'Landeryd Södra', 'Unknown', NULL, 2, 31),
+(49, '2012-4', '2012-01-04', 2012, 'Linköpings GK', 'Unknown', NULL, 17, 15),
+(50, '2012-5', '2012-01-05', 2012, 'PGA National', 'Unknown', NULL, 45, 15),
+(51, '2012-6', '2012-01-06', 2012, ' Åtvidabergs GK', 'Unknown', NULL, 15, 2),
+(52, '2013-1', '2013-01-01', 2013, 'Vesterby GK', 'Unknown', NULL, 2, 15),
+(53, '2013-2', '2013-01-02', 2013, 'Landeryd Norra', 'Unknown', NULL, 9, 9),
+(54, '2013-3', '2013-01-03', 2013, 'Linköpings Gk', 'Unknown', NULL, 23, 9),
+(55, '2013-4', '2013-01-04', 2013, 'Åtvidabergs GK', 'Unknown', NULL, 2, 2),
+(56, '2013-5', '2013-01-05', 2013, 'Bokskogen Gamla/Vasatorp TC', 'Unknown', NULL, 2, 17),
+(57, '2013-6', '2013-01-06', 2013, 'Linköpings GK', 'Unknown', NULL, 2, 17),
+(58, '2014-1', '2014-01-01', 2014, 'Gränna GK', 'Unknown', NULL, 15, 2),
+(59, '2014-2', '2014-01-02', 2014, 'Landeryd Norra', 'Unknown', NULL, 45, 23),
+(60, '2014-3', '2014-01-03', 2014, 'Vreta Kloster GK', 'Unknown', NULL, 37, 37),
+(61, '2014-4', '2014-01-04', 2014, 'Ombergs GK', 'Unknown', NULL, 45, 17),
+(62, '2014-5', '2014-01-05', 2014, 'Vidbynäs N/S och Kallfors', 'Unknown', NULL, 15, 2),
+(63, '2014-6', '2014-01-06', 2014, 'Linköpings GK', 'Unknown', NULL, 37, 9);
 
 -- --------------------------------------------------------
 
 --
--- Ersättningsstruktur för vy `comp_result`
+-- Stand-in structure for view `comp_result`
 --
-CREATE TABLE `comp_result` (
+DROP VIEW IF EXISTS `comp_result`;
+CREATE TABLE IF NOT EXISTS `comp_result` (
 `year` int(11)
 ,`fname` varchar(30)
 ,`lname` varchar(30)
 ,`result` double
 );
-
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `players`
+-- Table structure for table `players`
 --
 
-CREATE TABLE `players` (
+DROP TABLE IF EXISTS `players`;
+CREATE TABLE IF NOT EXISTS `players` (
   `id` int(11) NOT NULL,
   `fname` varchar(30) NOT NULL,
   `lname` varchar(30) NOT NULL,
   `email` tinytext,
   `golfId` varchar(10) DEFAULT NULL,
   `hcp` float DEFAULT NULL,
-  `mobil` varchar(20) DEFAULT NULL
+  `mobil` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `players`
+-- Dumping data for table `players`
 --
 
 INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`) VALUES
@@ -94,8 +154,7 @@ INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`
 (9, 'Håkan', 'Ritzén', 'hakan@ritzen.se', '710906-024', 9, '070-5235256'),
 (10, 'Jens', '?', '', '', 0, ''),
 (11, 'Jens', 'Bergendorff', 'jensbergendorff@gmail.com', '810301-028', 18, '070-5384813'),
-(12, 'Jesper', 'Broberg', '', '', 0, ''),
-(13, 'Jesper', 'Jansson', 'jansson.jesper@gmail.com', '810108-015', 0, '073-9238989'),
+(12, 'Jesper', 'Broberg', 'jansson.jesper@gmail.com', '810108-015', 0, '073-9238989'),
 (14, 'Joakim', 'Jerndal', 'jo-jer@sectra.com', '660117-030', 0, '070-6995990'),
 (15, 'Jocke', 'Kättström', 'jockekattstrom@gmail.com', '800123-012', 6, '070-2382948'),
 (16, 'Johan', 'Bernspång', '', '', 0, ''),
@@ -112,7 +171,6 @@ INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`
 (27, 'Malin', 'Björklund', '', '', 0, ''),
 (28, 'Mattias', 'Hallgren', '', '', 0, ''),
 (29, 'Mårten', 'Nygren', 'marten.nygren@gmail.com', '790211-016', 8, '073-3982688'),
-(30, 'Mårten', 'Nygren', '', '', 0, ''),
 (31, 'Naureen', 'Ghafoor', '', '', 0, ''),
 (32, 'Niklas', 'Svenzén', '', '', 0, ''),
 (33, 'Nina', 'Wollinger', '', '', 0, ''),
@@ -126,8 +184,7 @@ INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`
 (41, 'Petter', 'Knutsson', '', '', 0, ''),
 (42, 'Petter', 'Lerenius', 'plerenius@gmail.com', '790703-015', 17, '070-4820990'),
 (43, 'Richard', '?', '', '', 0, ''),
-(44, 'Stefan', 'Johansson', 'gstefanjohansson@gmail.com', '780616-003', 7, '070-8340315'),
-(45, 'Stefan', 'Lilliehjort', '', '', 0, ''),
+(45, 'Stefan', 'Lilliehjort', 'gstefanjohansson@gmail.com', '780616-003', 0, '070-8340315'),
 (46, 'Stefan', 'Melin', 'stefan.melin@gmail.com', '770404-030', 16, '070-3256121'),
 (47, 'Thomas', 'Schön', 'thomas@imath.se', '771225-006', 18, '073-5933887'),
 (48, 'Tommy', 'Dahlgren', '', '', 0, ''),
@@ -137,19 +194,21 @@ INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `results`
+-- Table structure for table `results`
 --
 
-CREATE TABLE `results` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `results`;
+CREATE TABLE IF NOT EXISTS `results` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `players_id` int(11) NOT NULL,
   `competitions_id` int(11) NOT NULL,
   `result` float NOT NULL,
-  `rank` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `rank` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=504 ;
 
 --
--- Dumpning av Data i tabell `results`
+-- Dumping data for table `results`
 --
 
 INSERT INTO `results` (`id`, `players_id`, `competitions_id`, `result`, `rank`) VALUES
@@ -190,22 +249,483 @@ INSERT INTO `results` (`id`, `players_id`, `competitions_id`, `result`, `rank`) 
 (41, 3, 7, 5, 9),
 (42, 29, 7, 4, 8),
 (43, 35, 7, -7, 3),
-(44, 42, 7, -5, 5);
+(44, 42, 7, -5, 5),
+(45, 17, 8, 2, 2),
+(46, 9, 8, 4, 4),
+(47, 11, 8, 6, 6),
+(48, 15, 8, 1, 1),
+(49, 37, 8, 7, 7),
+(50, 35, 8, 5, 5),
+(51, 45, 8, 3, 3),
+(52, 17, 9, 1, 1),
+(53, 9, 9, 5, 5),
+(54, 15, 9, 3, 3),
+(55, 37, 9, 4, 4),
+(56, 46, 9, 2, 2),
+(57, 23, 9, 6, 6),
+(58, 8, 9, 7, 7),
+(59, 17, 10, 2, 2),
+(60, 9, 10, 4, 4),
+(61, 46, 10, 3, 3),
+(62, 32, 10, 1, 1),
+(63, 34, 10, 5, 5),
+(64, 17, 11, 9, 9),
+(65, 9, 11, 8, 8),
+(66, 2, 11, 1, 1),
+(67, 11, 11, 4, 4),
+(68, 3, 11, 5, 5),
+(69, 23, 11, 3, 3),
+(70, 32, 11, 2, 2),
+(71, 8, 11, 7, 7),
+(72, 34, 11, 6, 6),
+(73, 17, 12, 7, 7),
+(74, 9, 12, 8, 8),
+(75, 2, 12, 5, 5),
+(76, 11, 12, 3, 3),
+(77, 15, 12, 6, 6),
+(78, 46, 12, 1, 1),
+(79, 3, 12, 4, 4),
+(80, 23, 12, 2, 2),
+(81, 9, 13, 4, 4),
+(82, 15, 13, 1, 1),
+(83, 46, 13, 2, 2),
+(84, 3, 13, 3, 3),
+(85, 8, 13, 7, 7),
+(86, 45, 13, 5, 5),
+(87, 11, 13, 6, 6),
+(88, 15, 14, 31, 5),
+(89, 2, 14, 32, 3),
+(90, 46, 14, 29, 8),
+(91, 45, 14, 30, 7),
+(92, 29, 14, 35, 1),
+(93, 42, 14, 34, 2),
+(94, 12, 14, 26, 12),
+(95, 19, 14, 27, 10),
+(96, 20, 14, 31, 6),
+(97, 24, 14, 27, 11),
+(98, 28, 14, 32, 4),
+(99, 47, 14, 29, 9),
+(100, 15, 15, 28, 5),
+(101, 2, 15, 29, 4),
+(102, 29, 15, 14, 9),
+(103, 42, 15, 30, 3),
+(104, 12, 15, 23, 7),
+(105, 20, 15, 33, 2),
+(106, 24, 15, 28, 6),
+(107, 28, 15, 34, 1),
+(108, 47, 15, 19, 8),
+(109, 15, 16, 29, 7),
+(110, 2, 16, 30, 5),
+(111, 42, 16, 29, 8),
+(112, 45, 16, 37, 1),
+(113, 12, 16, 23, 10),
+(114, 20, 16, 36, 2),
+(115, 24, 16, 33, 3),
+(116, 28, 16, 31, 4),
+(117, 47, 16, 30, 6),
+(118, 19, 16, 28, 9),
+(119, 7, 16, 15, 11),
+(120, 9, 17, 30, 4),
+(121, 2, 17, 38, 1),
+(122, 46, 17, 38, 2),
+(123, 42, 17, 28, 6),
+(124, 20, 17, 34, 3),
+(125, 24, 17, 25, 9),
+(126, 28, 17, 30, 5),
+(127, 47, 17, 26, 7),
+(128, 19, 17, 15, 10),
+(129, 16, 17, 13, 11),
+(130, 26, 17, 26, 8),
+(131, 15, 18, 32, 1),
+(132, 2, 18, 31, 3),
+(133, 42, 18, 32, 2),
+(134, 45, 18, 25, 5),
+(135, 24, 18, 26, 4),
+(136, 28, 18, 20, 6),
+(137, 10, 18, 14, 7),
+(138, 2, 19, 23, 8),
+(139, 42, 19, 29, 4),
+(140, 28, 19, 25, 6),
+(141, 12, 19, 24, 7),
+(142, 29, 19, 26, 5),
+(143, 7, 19, 19, 9),
+(144, 5, 19, 31, 3),
+(145, 43, 19, 35, 2),
+(146, 20, 19, 38, 1),
+(147, 2, 20, 18, 5),
+(148, 46, 20, 26, 3),
+(149, 45, 20, 31, 1),
+(150, 20, 20, 28, 2),
+(151, 47, 20, 15, 8),
+(152, 19, 20, 15, 7),
+(153, 29, 20, 15, 6),
+(154, 7, 20, 26, 4),
+(155, 15, 21, 33, 1),
+(156, 42, 21, 32, 2),
+(157, 45, 21, 12, 3),
+(158, 46, 22, 29, 5),
+(159, 42, 22, 22, 7),
+(160, 45, 22, 34, 1),
+(161, 29, 22, 24, 6),
+(162, 47, 22, 22, 8),
+(163, 12, 22, 29, 4),
+(164, 19, 22, 29, 3),
+(165, 50, 22, 32, 2),
+(166, 15, 23, 30, 3),
+(167, 9, 23, 29, 5),
+(168, 46, 23, 30, 4),
+(169, 42, 23, 28, 6),
+(170, 47, 23, 28, 7),
+(171, 4, 23, 23, 9),
+(172, 14, 23, 38, 1),
+(173, 36, 23, 24, 8),
+(174, 50, 23, 34, 2),
+(175, 9, 24, 34, 6),
+(176, 46, 24, 35, 4),
+(177, 42, 24, 30, 8),
+(178, 45, 24, 25, 10),
+(179, 47, 24, 24, 11),
+(180, 12, 24, 35, 3),
+(181, 23, 24, 24, 12),
+(182, 35, 24, 27, 9),
+(183, 50, 24, 36, 2),
+(184, 4, 24, 35, 5),
+(185, 14, 24, 38, 1),
+(186, 26, 24, 24, 13),
+(187, 36, 24, 20, 14),
+(188, 21, 24, 33, 7),
+(189, 15, 25, 31, 6),
+(190, 9, 25, 36, 2),
+(191, 46, 25, 26, 10),
+(192, 42, 25, 36, 3),
+(193, 45, 25, 26, 9),
+(194, 47, 25, 36, 4),
+(195, 12, 25, 28, 7),
+(196, 23, 25, 37, 1),
+(197, 14, 25, 27, 8),
+(198, 26, 25, 23, 11),
+(199, 36, 25, 34, 5),
+(200, 27, 25, 16, 12),
+(201, 2, 26, 27, 6),
+(202, 15, 26, 30, 4),
+(203, 9, 26, 31, 3),
+(204, 46, 26, 24, 8),
+(205, 23, 26, 32, 1),
+(206, 35, 26, 30, 5),
+(207, 4, 26, 33, 2),
+(208, 14, 26, 23, 10),
+(209, 36, 26, 24, 9),
+(210, 49, 26, 26, 7),
+(211, 15, 27, 32, 1),
+(212, 9, 27, 20, 6),
+(213, 42, 27, 31, 3),
+(214, 45, 27, 30, 4),
+(215, 29, 27, 28, 5),
+(216, 14, 27, 32, 2),
+(217, 35, 27, 19, 7),
+(218, 15, 28, 6, 2),
+(219, 42, 28, 30, 10),
+(220, 45, 28, 13, 5),
+(221, 47, 28, 16, 7),
+(222, 11, 28, -2, 1),
+(223, 12, 28, 21, 8),
+(224, 23, 28, 13, 6),
+(225, 36, 28, 11, 4),
+(226, 50, 28, 6, 3),
+(227, 33, 28, 29, 9),
+(228, 15, 29, 4, 4),
+(229, 9, 29, 5, 6),
+(230, 2, 29, 2, 3),
+(231, 42, 29, 14, 10),
+(232, 45, 29, 9, 7),
+(233, 11, 29, -9, 1),
+(234, 23, 29, 10, 8),
+(235, 29, 29, 19, 12),
+(236, 20, 29, 1, 2),
+(237, 36, 29, 4, 5),
+(238, 50, 29, 11, 9),
+(239, 33, 29, 15, 11),
+(240, 15, 30, 11, 9),
+(241, 2, 30, 3, 2),
+(242, 46, 30, 4, 6),
+(243, 42, 30, 25, 12),
+(244, 45, 30, 1, 1),
+(245, 47, 30, 3, 4),
+(246, 11, 30, 3, 5),
+(247, 23, 30, 23, 11),
+(248, 20, 30, 9, 8),
+(249, 36, 30, 7, 7),
+(250, 37, 30, 3, 3),
+(251, 33, 30, 19, 10),
+(252, 9, 31, 19, 7),
+(253, 2, 31, 9, 1),
+(254, 42, 31, 19, 8),
+(255, 45, 31, 15, 6),
+(256, 47, 31, 20, 9),
+(257, 29, 31, 13, 4),
+(258, 14, 31, 14, 5),
+(259, 37, 31, 12, 3),
+(260, 50, 31, 11, 2),
+(261, 26, 31, 42, 12),
+(262, 6, 31, 41, 11),
+(263, 25, 31, 35, 10),
+(264, 15, 32, 9, 4),
+(265, 2, 32, 1, 1),
+(266, 9, 32, 12, 5),
+(267, 46, 32, 4, 2),
+(268, 45, 32, 14, 6),
+(269, 11, 32, 15, 7),
+(270, 29, 32, 27, 9),
+(271, 37, 32, 8, 3),
+(272, 33, 32, 16, 8),
+(273, 15, 33, 2, 3),
+(274, 2, 33, 0, 1),
+(275, 42, 33, 20, 8),
+(276, 46, 33, 4, 4),
+(277, 45, 33, 9, 5),
+(278, 47, 33, 0, 2),
+(279, 29, 33, 17, 7),
+(280, 37, 33, 15, 6),
+(281, 22, 33, 5, 4),
+(282, 2, 34, 3, 3),
+(283, 9, 34, 12, 8),
+(284, 15, 34, 16, 9),
+(285, 23, 34, 10, 7),
+(286, 29, 34, 19, 11),
+(287, 35, 34, 17, 10),
+(288, 36, 34, 6, 4),
+(289, 37, 34, 9, 6),
+(290, 46, 34, 0, 1),
+(291, 45, 34, 1, 2),
+(292, 50, 34, 7, 5),
+(293, 9, 35, 13, 4),
+(294, 15, 35, 1, 1),
+(295, 37, 35, 13, 3),
+(296, 45, 35, 8, 2),
+(297, 47, 35, 16, 5),
+(298, 9, 36, 11, 8),
+(299, 14, 36, 4, 2),
+(300, 15, 36, 10, 7),
+(301, 20, 36, 29, 11),
+(302, 23, 36, 9, 6),
+(303, 25, 36, 4, 3),
+(304, 36, 36, 6, 5),
+(305, 37, 36, 6, 4),
+(306, 42, 36, 28, 10),
+(307, 46, 36, -3, 1),
+(308, 45, 36, 17, 9),
+(309, 2, 37, 1, 1),
+(310, 9, 37, 9, 9),
+(311, 12, 37, 11, 12),
+(312, 14, 37, 7, 7),
+(313, 15, 37, 10, 11),
+(314, 23, 37, 28, 13),
+(315, 25, 37, 8, 8),
+(316, 36, 37, 5, 4),
+(317, 37, 37, 2, 2),
+(318, 40, 37, 5, 5),
+(319, 46, 37, 4, 3),
+(320, 45, 37, 4, 3),
+(321, 50, 37, 6, 6),
+(322, 2, 38, -7, 1),
+(323, 9, 38, 14, 5),
+(324, 18, 38, 8, 3),
+(325, 37, 38, 3, 2),
+(326, 46, 38, 16, 6),
+(327, 45, 38, 14, 4),
+(328, 2, 39, 6, 3),
+(329, 9, 39, 6, 4),
+(330, 11, 39, 15, 8),
+(331, 14, 39, 1, 1),
+(332, 15, 39, 8, 5),
+(333, 25, 39, 13, 7),
+(334, 37, 39, 4, 2),
+(335, 46, 39, 8, 6),
+(336, 45, 39, 18, 9),
+(337, 2, 40, 10, 1),
+(338, 9, 40, 5, 5),
+(339, 14, 40, 9, 3),
+(340, 15, 40, 4, 4),
+(341, 25, 40, 0, 6),
+(342, 38, 40, 0, 6),
+(343, 45, 40, 8, 2),
+(344, 9, 41, 2, 5),
+(345, 8, 41, 4, 4),
+(346, 14, 41, 0, 6),
+(347, 15, 41, 16, 1),
+(348, 36, 41, 0, 6),
+(349, 46, 41, 8, 2),
+(350, 45, 41, 6, 3),
+(351, 2, 42, 8, 2),
+(352, 9, 42, 0, 6),
+(353, 8, 42, 3, 6),
+(354, 15, 42, 6, 3),
+(355, 23, 42, 0, 6),
+(356, 31, 42, 0, 6),
+(357, 36, 42, 10, 1),
+(358, 37, 42, 4, 4),
+(359, 46, 42, 0, 6),
+(360, 45, 42, 2, 5),
+(361, 48, 42, 3, 6),
+(362, 2, 43, 2, 5),
+(363, 9, 43, 10, 1),
+(364, 15, 43, 14, 2),
+(365, 23, 43, 4, 4),
+(366, 42, 43, 0, 6),
+(367, 46, 43, 0, 6),
+(368, 45, 43, 6, 3),
+(369, 2, 44, 7, 3),
+(370, 9, 44, 7, 3),
+(371, 15, 44, 10, 1),
+(372, 45, 44, 6, 2),
+(373, 2, 46, 11, 1),
+(374, 15, 46, 9, 2),
+(375, 36, 46, 3, 5),
+(376, 37, 46, 7, 3),
+(377, 42, 46, 1, 6),
+(378, 45, 46, 7, 4),
+(379, 1, 47, 4.33, 5),
+(380, 2, 47, 9.33, 2),
+(381, 11, 47, 6, 4),
+(382, 15, 47, 11, 1),
+(383, 23, 47, 2.67, 6),
+(384, 42, 47, 1, 7),
+(385, 45, 47, 9.67, 3),
+(386, 2, 48, 11.75, 2),
+(387, 9, 48, 3.5, 7),
+(388, 11, 48, 6, 5),
+(389, 15, 48, 7.25, 4),
+(390, 17, 48, 4.75, 6),
+(391, 31, 48, 2.25, 8),
+(392, 37, 48, 11, 1),
+(393, 42, 48, 1, 9),
+(394, 46, 48, 8.5, 3),
+(395, 2, 49, 11, 1),
+(396, 9, 49, 6.56, 5),
+(397, 8, 49, 8.78, 3),
+(398, 11, 49, 7.67, 4),
+(399, 15, 49, 4.33, 7),
+(400, 17, 49, 5.22, 8),
+(401, 31, 49, 2.11, 9),
+(402, 37, 49, 9.89, 2),
+(403, 39, 49, 5.44, 6),
+(404, 42, 49, 1, 10),
+(405, 2, 50, 9.33, 2),
+(406, 9, 50, 2.67, 6),
+(407, 11, 50, 6, 4),
+(408, 15, 50, 7.67, 3),
+(409, 37, 50, 1, 7),
+(410, 42, 50, 11, 1),
+(411, 45, 50, 6.33, 5),
+(412, 2, 51, 22, 1),
+(413, 9, 51, 13.43, 4),
+(414, 11, 51, 2, 8),
+(415, 15, 51, 11.71, 6),
+(416, 23, 51, 10.57, 5),
+(417, 37, 51, 19.14, 2),
+(418, 46, 51, 4.86, 7),
+(419, 45, 51, 16.96, 3),
+(420, 2, 52, 13, 1),
+(421, 9, 52, 1, 4),
+(422, 15, 52, 7.67, 2),
+(423, 42, 52, 4.33, 3),
+(424, 2, 53, 11, 1),
+(425, 9, 53, 7.67, 2),
+(426, 17, 53, 1, 4),
+(427, 23, 53, 4.33, 3),
+(428, 9, 54, 1, 4),
+(429, 8, 54, 11, 1),
+(430, 23, 54, 6.33, 3),
+(431, 35, 54, 7.67, 2),
+(432, 2, 55, 3, 3),
+(433, 9, 55, 11, 1),
+(434, 15, 55, 6, 2),
+(435, 2, 56, 13, 1),
+(436, 9, 56, 8.14, 3),
+(437, 15, 56, 9.57, 2),
+(438, 17, 56, 2.43, 7),
+(439, 23, 56, 6.71, 4),
+(440, 29, 56, 1, 8),
+(441, 39, 56, 3.86, 6),
+(442, 42, 56, 5.29, 5),
+(443, 2, 57, 22.66, 2),
+(444, 9, 57, 15.34, 3),
+(445, 8, 57, 8.66, 5),
+(446, 15, 57, 12, 4),
+(447, 17, 57, 2, 7),
+(448, 23, 57, 5.34, 6),
+(449, 45, 57, 22, 1),
+(450, 2, 58, 2.25, 8),
+(451, 9, 58, 9.75, 2),
+(452, 8, 58, 6, 5),
+(453, 15, 58, 6.75, 6),
+(454, 17, 58, 1, 9),
+(455, 23, 58, 7.25, 4),
+(456, 37, 58, 11, 1),
+(457, 42, 58, 8.5, 3),
+(458, 45, 58, 3.5, 7),
+(459, 2, 59, 8, 4),
+(460, 9, 59, 5, 7),
+(461, 8, 59, 2, 10),
+(462, 11, 59, 7, 5),
+(463, 15, 59, 3, 9),
+(464, 17, 59, 4, 8),
+(465, 23, 59, 9, 3),
+(466, 31, 59, 1, 11),
+(467, 37, 59, 10, 2),
+(468, 41, 59, 6, 6),
+(469, 45, 59, 13, 1),
+(470, 2, 60, 11, 1),
+(471, 9, 60, 9.89, 2),
+(472, 8, 60, 8.78, 3),
+(473, 11, 60, 2.11, 9),
+(474, 15, 60, 6.56, 5),
+(475, 17, 60, 3.22, 8),
+(476, 23, 60, 5.44, 6),
+(477, 29, 60, 1, 10),
+(478, 37, 60, 9.67, 4),
+(479, 45, 60, 4.33, 7),
+(480, 2, 61, 11, 1),
+(481, 9, 61, 3.5, 7),
+(482, 8, 61, 6, 5),
+(483, 11, 61, 8.5, 3),
+(484, 15, 61, 9.75, 2),
+(485, 17, 61, 7.25, 4),
+(486, 37, 61, 4.75, 6),
+(487, 46, 61, 1, 9),
+(488, 45, 61, 4.25, 8),
+(489, 2, 62, 7.67, 3),
+(490, 9, 62, 6, 4),
+(491, 11, 62, 4.33, 5),
+(492, 15, 62, 13, 1),
+(493, 17, 62, 1, 7),
+(494, 42, 62, 2.67, 6),
+(495, 45, 62, 9.33, 2),
+(496, 2, 63, 13.43, 4),
+(497, 9, 63, 7.71, 6),
+(498, 15, 63, 22, 1),
+(499, 17, 63, 16.29, 2),
+(500, 31, 63, 2, 8),
+(501, 37, 63, 23.14, 2),
+(502, 46, 63, 10.57, 5),
+(503, 45, 63, 4.86, 7);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur `season`
+-- Table structure for table `season`
 --
 
-CREATE TABLE `season` (
+DROP TABLE IF EXISTS `season`;
+CREATE TABLE IF NOT EXISTS `season` (
   `year` int(11) NOT NULL,
   `type` tinytext NOT NULL,
-  `noOfRounds` int(11) NOT NULL
+  `noOfRounds` int(11) NOT NULL,
+  PRIMARY KEY (`year`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumpning av Data i tabell `season`
+-- Dumping data for table `season`
 --
 
 INSERT INTO `season` (`year`, `type`, `noOfRounds`) VALUES
@@ -223,75 +743,32 @@ INSERT INTO `season` (`year`, `type`, `noOfRounds`) VALUES
 -- --------------------------------------------------------
 
 --
--- Ersättningsstruktur för vy `vinlista`
+-- Stand-in structure for view `vinlista`
 --
-CREATE TABLE `vinlista` (
+DROP VIEW IF EXISTS `vinlista`;
+CREATE TABLE IF NOT EXISTS `vinlista` (
 `year` int(11)
-,`fname` varchar(30)
-,`lname` varchar(30)
+,`name` varchar(60)
 ,`vinpavor` decimal(25,0)
 );
-
 -- --------------------------------------------------------
 
 --
--- Struktur för vy `comp_result`
+-- Structure for view `comp_result`
 --
 DROP TABLE IF EXISTS `comp_result`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `comp_result`  AS  select `c`.`yearsId` AS `year`,`p`.`fname` AS `fname`,`p`.`lname` AS `lname`,sum((`r`.`result` + if((`c`.`nf` = `p`.`id`),2,0))) AS `result` from ((`competitions` `c` join `results` `r` on((`c`.`id` = `r`.`competitions_id`))) join `players` `p` on((`r`.`players_id` = `p`.`id`))) group by `c`.`yearsId`,`p`.`id` order by sum((`r`.`result` + if((`c`.`nf` = `p`.`id`),2,0))) desc ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `comp_result` AS select `c`.`yearsId` AS `year`,`p`.`fname` AS `fname`,`p`.`lname` AS `lname`,sum((`r`.`result` + if((`c`.`nf` = `p`.`id`),2,0))) AS `result` from ((`competitions` `c` join `results` `r` on((`c`.`id` = `r`.`competitions_id`))) join `players` `p` on((`r`.`players_id` = `p`.`id`))) group by `c`.`yearsId`,`p`.`id` order by sum((`r`.`result` + if((`c`.`nf` = `p`.`id`),2,0))) desc;
 
 -- --------------------------------------------------------
 
 --
--- Struktur för vy `vinlista`
+-- Structure for view `vinlista`
 --
 DROP TABLE IF EXISTS `vinlista`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vinlista`  AS  select `c`.`yearsId` AS `year`,`p`.`fname` AS `fname`,`p`.`lname` AS `lname`,sum(((if((`r`.`rank` = 1),1,0) + if((`c`.`nf` = `p`.`id`),1,0)) + if((`c`.`ld` = `p`.`id`),1,0))) AS `vinpavor` from ((`competitions` `c` left join `results` `r` on((`c`.`id` = `r`.`competitions_id`))) join `players` `p` on((`r`.`players_id` = `p`.`id`))) group by `c`.`yearsId`,`p`.`id` order by sum(((if((`r`.`rank` = 1),1,0) + if((`c`.`nf` = `p`.`id`),1,0)) + if((`c`.`ld` = `p`.`id`),1,0))) desc,`p`.`fname` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vinlista` AS select `c`.`yearsId` AS `year`,concat(`p`.`fname`,`p`.`lname`) AS `name`,sum(((if((`r`.`rank` = 1),1,0) + if((`c`.`nf` = `p`.`id`),1,0)) + if((`c`.`ld` = `p`.`id`),1,0))) AS `vinpavor` from ((`competitions` `c` left join `results` `r` on((`c`.`id` = `r`.`competitions_id`))) join `players` `p` on((`r`.`players_id` = `p`.`id`))) group by `c`.`yearsId`,`p`.`id` order by sum(((if((`r`.`rank` = 1),1,0) + if((`c`.`nf` = `p`.`id`),1,0)) + if((`c`.`ld` = `p`.`id`),1,0))) desc,`p`.`fname`;
 
---
--- Index för dumpade tabeller
---
-
---
--- Index för tabell `competitions`
---
-ALTER TABLE `competitions`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index för tabell `players`
---
-ALTER TABLE `players`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index för tabell `results`
---
-ALTER TABLE `results`
-  ADD PRIMARY KEY (`id`);
-
---
--- Index för tabell `season`
---
-ALTER TABLE `season`
-  ADD PRIMARY KEY (`year`);
-
---
--- AUTO_INCREMENT för dumpade tabeller
---
-
---
--- AUTO_INCREMENT för tabell `competitions`
---
-ALTER TABLE `competitions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT för tabell `results`
---
-ALTER TABLE `results`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

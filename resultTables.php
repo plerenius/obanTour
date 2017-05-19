@@ -2,6 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 require_once("Connections/pdo_connect.php");
+require_once("src/Player.php");
+
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (ISSET($_GET['year'])) {
@@ -9,54 +11,92 @@ if (ISSET($_GET['year'])) {
 } else {
 	$year=2016;
 }
-	echo "Year set to $year!<br />";
 
-class player {
-	public $name = "No name";
-	public $results = array(0,0,0,0,0,0);
-	public $total = 0;
-	public $topFour = array(-1,-2,-3,-4);
-	
-	function __construct($name,$results) {
-		
-	}
-	
-	function getBestFourResult() {
-		$tot = 0;
-		foreach ($topFour as $p) {
-			$tot += $p;
-		}
-		return $tot;
-	}
-}
-
-$competions_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.* FROM competitions AS c\n"
+$competions_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.*,\n"
+	. "CONCAT(p_win.fname,\" \",p_win.lname) AS winner,\n"
+	. "CONCAT(p_nf.fname,\" \",p_nf.lname) AS nfName,\n"
+	. "CONCAT(p_ld.fname,\" \",p_ld.lname) AS ldName\n"
+	. "FROM competitions AS c\n"
 	. "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
-    . "WHERE c.yearsId = $year  GROUP BY c.id ORDER BY c.date\n";
+	. "LEFT JOIN (SELECT * FROM results WHERE rank=1) AS r_win ON r_win.competitions_id = c.id\n"
+	. "LEFT JOIN players AS p_win ON r_win.players_id = p_win.id\n"
+	. "LEFT JOIN players AS p_nf ON c.nf = p_nf.id\n"
+	. "LEFT JOIN players AS p_ld ON c.ld = p_ld.id\n"
+    . "WHERE c.yearsId = $year  GROUP BY c.id ORDER BY c.date, r.rank\n";
 //echo "$competions_sql<br />";
 
 $competions_q = $db->prepare($competions_sql);
 $competions_q->execute();
 $competitions = $competions_q->fetchAll();
 
-$result_sql = "SELECT CONCAT(fname,\" \",lname) AS name,\n";
+$result_sql = "SELECT\n";
 foreach ($competitions as $c) {
-	$result_sql .= "SUM(IF(c.id=". $c['id'] .",10*(".$c['numOfPlayers']."-r.rank)/(".$c['numOfPlayers']."-1)+1,0)) AS c". $c['id'] .",\n";
-	$result_sql .= "SUM(IF(p.id=". $c['nf'] .",2,0)) AS nf". $c['id'] .",\n";	
+	$result_sql .= "SUM(IF(c.id=". $c['id'] .",r.rank,0)) AS r". $c['id'] .",\n";
+	$result_sql .= "SUM(IF(p.id=". ($c['ld']!=NULL?$c['ld']:-1) .",2,0)) AS ld". $c['id'] .",\n";
+	$result_sql .= "SUM(IF(p.id=". ($c['nf']!=NULL?$c['nf']:-1) .",2,0)) AS nf". $c['id'] .",\n";
 }
 
 
-$result_sql .= "SUM(r.result+IF(p.id=c.nf,2,0)) AS total FROM competitions AS c\n"
+$result_sql .= "CONCAT(fname,\" \",lname) AS name FROM competitions AS c\n"
     . "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
 	. "LEFT JOIN players AS p ON r.players_id = p.id\n"
-    . "WHERE c.yearsId = $year GROUP BY p.id ORDER BY total DESC";
+    . "WHERE c.yearsId = $year GROUP BY p.id ORDER BY rank";
 //echo "$result_sql";
 $result_q = $db->prepare($result_sql);
 $result_q->execute();
 
 $players_r = $result_q->fetchAll();
 //print_r($players_r[0]);
+
+$playerList=array();
+foreach ($players_r as $p) {
+	$playerList[]=new Player($p['name']);
+	foreach ($competitions as $c) {
+		$playerList[count($playerList)-1]->addCompetition(new Competition($c['id'],$c['name'],$c['numOfPlayers'],-1,$p["r".$c['id']],$p["nf".$c['id']],$p["ld".$c['id']]));
+	}	
+}
+
+$numOfCompetitions = 4;
+
+function cmpRank($a, $b)
+{
+	$resultA = $a->getBestPoints(4);
+	$resultB = $b->getBestPoints(4);
+    return $resultA == $resultB ? 0 : ( $resultA > $resultB ) ? -1 : 1;
+}
+
+function cmpBottles($a, $b)
+{
+	$bottlesA = $a->getNumberOfBottles();
+	$bottlesB = $b->getNumberOfBottles();
+    return $bottlesA == $bottlesB ? 0 : ( $bottlesA > $bottlesB ) ? -1 : 1;
+}
+
+usort($playerList, "cmpRank");
+echo "<h2>Resultat Oban ".$year."</h2>";
 ?>
+<table>
+<tbody>
+<tr>
+<th>Del&auml;vling</th>
+<th>Bana</th>
+<th>Vinnare</th>
+<th>L&auml;ngsta Drive</th>
+<th>N&auml;rmast H&aring;l</th>
+</tr>
+<?php
+foreach ($competitions as $c) {
+	echo "<tr><td>".$c['name']."</td>\n";
+	echo "<td>".$c['course']."</td>\n";	
+	echo "<td>".(strcmp($c['winner'],"")?$c['winner']:"-")."</td>\n";	
+	echo "<td>".(strcmp($c['ldName'],"")?$c['ldName']:"-")."</td>\n";
+	echo "<td>".(strcmp($c['nfName'],"")?$c['nfName']:"-")."</td></tr>\n";
+}
+?>
+</tbody>
+</table>
+
+<h3>Rankinglista</h3>
 <table>
 <tbody>
 <tr>
@@ -72,26 +112,36 @@ foreach ($competitions as $c) {
 </tr>
 <?php
 $pos=0;
-foreach ($players_r as $p) {
+foreach ($playerList as $p) {
 	$pos++;
 	echo "<tr><td>".$pos."</td>\n";
-	echo "<td>".$p['name']."</td>\n";
-	foreach ($competitions as $c) {
-		if ($p["c".$c['id']] == 0) {
-			echo "<td align=right>-</td>\n";
-		} else {
-			echo "<td align=right>".number_format($p["c".$c['id']],2)."</td>\n";
-		}
-		if ($p["nf".$c['id']] > 0) {
-			echo "<td>+2</td>\n";
-		} else {
-			echo "<td>&nbsp;</td>\n";
-		}
-	}
-	echo "<td align=right><b>".number_format($p['total'],2)."</b></td></tr>";
+	echo $p->getTableString($numOfCompetitions);
+	echo "</tr>";
 }
-echo "</table>";
 ?>
+</table>
+</tbody>
 
+<h3>Vinlista</h3>
+<table>
+<tbody>
+<tr>
+<th>#</th>
+<th>SPELARE</th>
+<th>Vinst</th>
+<th>Ld</th>
+<th>Nf</th>
+<th>Totalt</th>
 <?php
-$s="select `c`.`yearsId` AS `year`,`p`.`fname` AS `fname`,`p`.`lname` AS `lname`,sum(((if((`r`.`rank` = 1),1,0) + if((`c`.`nf` = `p`.`id`),1,0)) + if((`c`.`ld` = `p`.`id`),1,0))) AS `vinpavor` from ((`imath_se`.`competitions` `c` left join `imath_se`.`results` `r` on((`c`.`id` = `r`.`competitions_id`))) join `imath_se`.`players` `p` on((`r`.`players_id` = `p`.`id`))) group by `c`.`yearsId`,`p`.`id` order by sum(((if((`r`.`rank` = 1),1,0) + if((`c`.`nf` = `p`.`id`),1,0)) + if((`c`.`ld` = `p`.`id`),1,0))) desc,`p`.`fname`";
+usort($playerList, "cmpBottles");
+$pos=0;
+foreach ($playerList as $p) {
+	if ($p->getNumberOfBottles() == 0) {
+		break;
+	}
+	$pos++;
+	echo "<tr><td>".$pos."</td>\n";
+	echo $p->getBottleTableString();
+	echo "</tr>";
+}
+?>
