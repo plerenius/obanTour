@@ -1,7 +1,7 @@
 <?php
-require_once 'PHPUnit/Autoload.php';
+//require_once 'PHPUnit/Autoload.php';
 
-//use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class PlayerTest extends PHPUnit_Framework_TestCase
 {
