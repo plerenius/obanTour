@@ -7,4 +7,4 @@ php:
   - '7.1'
   - nightly
 
-script: phpunit --bootstrap .\autoload.php --testdox .\test\
+script: phpunit --bootstrap ./autoload.php --testdox ./test/
