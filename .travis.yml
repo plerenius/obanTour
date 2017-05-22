@@ -10,5 +10,5 @@ env:
   - secure: Z7ODxM/fMr2KlQYknO1iBm2dJ0usKhY/XQ17JsLhM2+yxi9Ikw5Lh6kUkT6vgHrJ4+m0+XmXgjKrw/UkJ5ChWPVRVEAgIfHp8rBuIx5pKul3DdRwgHTNUuzjV2IhsJ63P0SUxra5D0uY6q9qarFTsh4briLlApM55GGa3y6DJPJKEC8VlEXP/isnbmCUvftn6SPLhqBqjgunBO/4eTnKEl/kbnckOl7KoLazMCSxKAD4myY2bwHA46ZlgQth1nn2nKXArRqI6vZRpnTpIvzpdbmWQQSAyCuD3dcdGpIVuEkRFiV8Buk/ba1lXLeKsLPhuapbEEJsvi67OT5hOymCQHErvEj6VNU50pQO6u1qXkSUTscBBurLA5OKKEvet9Jclgc6L9z+Rn3p1oyrGWgknauYyWChZL6zgLIGcoY8eVeFmG25v/nNiY2w1v2VNY/nUwv1Jd/VZrMlKlfYc1Cw3tvICy6Oiut4BCKWMb5KaHDOkOzmH6lI1DoVM71M1RZN7m97N/41bRY5TzvyqJFBZr/Lh1FdihqIeF9F6gJj5uhkzwpme35LNa09qAMTfi8YN5/HwoqOgCHX1u5y2nssRE2Z4PJoqA2gaGXn7RkWwcyvZpA28jFWe8ZyOmuZr0WCypYoJnvEEBsaRlZqhac/5jFIo8K66h/zV0EjP7Yy3Jw=
 
 after_success:
-  "curl --ftp-create-dirs -T *.php -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result"
-  "curl --ftp-create-dirs -T src/* -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/src"  
+  - curl --ftp-create-dirs -T *.php -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result
+  - curl --ftp-create-dirs -T src/* -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/src
