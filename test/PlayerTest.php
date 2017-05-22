@@ -15,12 +15,12 @@ class PlayerTest extends PHPUnit_Framework_TestCase
 		$this->name = "Kalle";
 		$this->p1 = new Player($this->name);
 		$this->compList=array();
-		$this->compList[]= new Competition(1,"Oban1",11,36,3,1,0);
-		$this->compList[]= new Competition(2,"Oban2",6,34,1,0,1);
-		$this->compList[]= new Competition(3,"Oban3",11,36,5,1,0);
-		$this->compList[]= new Competition(4,"Oban4",6,34,6,0,1);
-		$this->compList[]= new Competition(5,"Oban5",11,36,11,1,0);
-		$this->compList[]= new Competition(6,"Oban6",6,34,5,1,1);		
+		$this->compList[]= new Competition(1,"Oban1",11,0,36,3,1,0); //  9+2=11p
+		$this->compList[]= new Competition(2,"Oban2",6,0,34,1,0,1);  // 11+0=11p
+		$this->compList[]= new Competition(3,"Oban3",11,0,36,5,1,0); //  7+2= 9p
+		$this->compList[]= new Competition(4,"Oban4",6,0,34,6,0,1);  //  1+0= 1p
+		$this->compList[]= new Competition(5,"Oban5",11,0,36,11,1,0);//  1+2= 3p
+		$this->compList[]= new Competition(6,"Oban6",6,1,34,5,1,1);	 //  6+4=10p
 		$this->p1->addCompetition($this->compList[0]);
 		$this->p1->addCompetition($this->compList[1]);
 		$this->p1->addCompetition($this->compList[2]);
@@ -35,8 +35,9 @@ class PlayerTest extends PHPUnit_Framework_TestCase
      */
 	public function testGetBestPoints()
 	{
-		$this->assertEquals(36, $this->p1->getBestPoints(4));
+		$this->assertEquals(41, $this->p1->getBestPoints(4));
 		$this->assertEquals(22, $this->p1->getBestPoints(2));
+		$this->assertEquals(45, $this->p1->getBestPoints(6));
 	}
 	
 	public function testGetName()

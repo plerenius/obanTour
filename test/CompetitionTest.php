@@ -9,6 +9,8 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
 	protected $id;
 	protected $name;
 	protected $numOfPlayers;
+	protected $doublePointsFalse;
+	protected $doublePointsTrue;
 	protected $result;
 	protected $rank;
 	protected $closestFlag;
@@ -24,7 +26,14 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
 		$this->rank = 2;
 		$this->closestFlag = 1;
 		$this->longestDrive = 1;
-		$this->c1 = new Competition($this->id,$this->name,$this->numOfPlayers,$this->result,$this->rank,$this->closestFlag,$this->longestDrive);
+		$this->doublePointsFalse = 0;
+		$this->doublePointsTrue = 1;
+		$this->c1 = new Competition($this->id,$this->name,$this->numOfPlayers,
+			$this->doublePointsFalse,$this->result,$this->rank,
+			$this->closestFlag,$this->longestDrive);
+		$this->c2 = new Competition($this->id,$this->name,$this->numOfPlayers,
+			$this->doublePointsTrue,$this->result,$this->rank,
+			$this->closestFlag,$this->longestDrive);
 	}
 	
 	/**
@@ -53,6 +62,10 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
 	
 	public function testGetRankPoints() {
 		$this->assertEquals(10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1,$this->c1->getRankPoints());
+	}
+
+	public function testGetDoubleRankPoints() {
+		$this->assertEquals((10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1)*2,$this->c2->getRankPoints());
 	}
 	
 	public function testGetTotalPoints() {

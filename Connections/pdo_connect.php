@@ -11,7 +11,7 @@ $password = '';
 // for a string that says what type of server we're connecting to, and how
 // to connect to it.  As long as the above is filled out, this line is all
 // you need :)
-$dsn = "mysql:host=$host;port=$port;dbname=$database";
+$dsn = "mysql:host=$host;port=$port;dbname=$database;charset=utf8";
 
 // Connect!
 $db = new PDO($dsn, $username, $password);
