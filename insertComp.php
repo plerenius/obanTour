@@ -38,9 +38,9 @@ function GetSQLValueString($theValue, $theType, $theDefinedValue = "", $theNotDe
 
 // Handle form submition
 if (isset($_POST['submit'])) {
-	$competition_stmt = $db->prepare("INSERT INTO competitions (name,date,yearsId,course,type,weather,nf,ld,doublePoint) 
+	$competition_stmt = $db->prepare("INSERT INTO competitions (name,date,yearsId,course,type,weather,nf,ld,doublePoints) 
     VALUES (?,?,?,?,?,?,?,?,?)");
-	$return_value=$competition_stmt->execute(array($_POST['comp_name'],$_POST['comp_date'],$_POST['comp_year'],$_POST['comp_course'],$_POST['comp_type'],NULL, $_POST['nf'],$_POST['ld'],$_POST['doublePoint']));
+	$return_value=$competition_stmt->execute(array($_POST['comp_name'],$_POST['comp_date'],$_POST['comp_year'],$_POST['comp_course'],$_POST['comp_type'],NULL, $_POST['nf'],$_POST['ld'],$_POST['doublePoints']));
 	print "procedure returned $return_value<br />\n";
 	$comp_id = $db->lastInsertId();
 	echo "T&auml;vling: " . $_POST['comp_name'] . " -> " . $comp_id . "<br />\n";
@@ -88,6 +88,10 @@ foreach($players_r as $nt){
 	echo "<option value=".$nt['id'].">".$nt['fname']." ".$nt['lname']."</option>";
 }
 ?>
+</select><br />
+Dubbla po&auml;ng: <select name="doublePoints">
+<option value=1>Ja</option>
+<option value=0>Nej</option>
 </select><br />
 <table>
 <tr>
