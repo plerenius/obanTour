@@ -67,11 +67,11 @@ if (isset($_POST['submit'])) {
 
 <h1>Ny t&auml;vling</h1>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form1" id="form1">
-T&auml;vlingsnamn: <input type="text" name="comp_name" value="2016-7" size="30" /><br />
-Datum: <input type="text" name="comp_date" value="2016-10-08" size="10" /><br />
+T&auml;vlingsnamn: <input type="text" name="comp_name" value="2017-3" size="30" /><br />
+Datum: <input type="text" name="comp_date" value="2017-05-29" size="10" /><br />
 &Aring;r: <input type="text" name="comp_year" value="2016" size="4" /><br />
 T&auml;vlingstyp: <input type="text" name="comp_type" value="" size="30" /><br />
-Bana: <input type="text" name="comp_course" value="Linköpings Gk" size="30" /><br />
+Bana: <input type="text" name="comp_course" value="Landeryd Norra Gk" size="30" /><br />
 N&auml;rmst Flagg: <select name="nf">
 <option value="NULL">Ingen</option>
 <?php
@@ -90,8 +90,8 @@ foreach($players_r as $nt){
 ?>
 </select><br />
 Dubbla po&auml;ng: <select name="doublePoints">
-<option value=1>Ja</option>
-<option value=0>Nej</option>
+<option value=0>Ja</option>
+<option value=1>Nej</option>
 </select><br />
 <table>
 <tr>
