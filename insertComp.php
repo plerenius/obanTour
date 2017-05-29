@@ -120,8 +120,8 @@ foreach($players_r as $nt){
 <td>Dubbla po&auml;ng:</td>
 <td>
 <select name="doublePoints">
-<option value=0>Ja</option>
-<option value=1>Nej</option>
+<option value=0>Nej</option>
+<option value=1>Ja</option>
 </select>
 </td>
 </tr>

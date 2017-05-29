@@ -10,7 +10,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if (ISSET($_GET['year'])) {
 	$year=$_GET['year'];
 } else {
-	$year=2016;
+	$year=date("Y");
 }
 
 $competions_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.*,\n"
