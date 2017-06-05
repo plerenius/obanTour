@@ -11,5 +11,5 @@ env:
     - secure: "j6e6WqyqH8G8z3s4N7LP4/W3ODCfXtVdfbOj7HcFBi3KCH37MCHcJFFiwnEbx4jsp97RAMkDTaIz7QSEag0oFY6UB0/RqfFIK8HOn9XO0/VQRONIRk9ybZE7eaJilApJoB85o9CxwB1Mksw4Vkd2rq3ZgA9Pd78ET/0ZnKLNGZy7WPcqtlBn9VDIdg3sQiYVmKuwQvHQxKZhK8w3Edrly5KbaBEeK+Y4ZklPKhmRKEnb/PUAHWjvXmSTQRmSvcwQ5/97RZUeIYB8/0p3KDUozAHe3B1TgVFWorz62/MRbjQj5WLejRlBL7M44VRHUmmJEvaNvd/96FIraj5HX19pHYyp6tEz2IEx9aFM1gWv7DZPTfoVubtcMOFzPA/x9LR0JZOyCdJmv4nlZR/NJR3wU8jsJHUEPDsVvea54MZUSxkeZ8G5o23n7lIM+YrRB0N10kWm2vlhnUdKpToeDXUaAYjJT1VFGPugbV/jbIe7AVqZgoq758rFjJWeb8H51xktD7mXZOFCUk6jtAjHwCNqKVpeVwc/guf3shBGrpyRYb4lkkGziCFz6axlzi+DtDIxB6clYc72HcekUHSjLanIMm3/bxDKYo322HPyv1ECyzw1CrYYdfQez7qpqqEVDP9lfPbUh8t0JfJmf6Qw2HmVusnV0RYYW+I/WouDapUwdB8="
     
 after_success:
-  - curl --ftp-create-dirs -T "{competitionTable,insertComp,resultTables,wineTables}.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/
+  - curl --ftp-create-dirs -T "{inc_result,result,competitionTable,insertComp,resultTables,wineTables}.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/
   - curl --ftp-create-dirs -T "src/{Player,Competition}.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/src/
