@@ -42,9 +42,9 @@ class Player {
 		$str = "<td>".$this->name."</td>\n";
 		foreach ($this->competitions as $c) {
 			if ($c->getRankPoints() == 0) {
-				$str .= "<td align=right>-</td>\n";
+				$str .= "<td align=\"right\">-</td>\n";
 			} else {
-				$str .= "<td align=right>".number_format($c->getRankPoints(),2)."</td>\n";
+				$str .= "<td align=\"right\">".number_format($c->getRankPoints(),2)."</td>\n";
 			}
 			if ($c->getClosestFlag() > 0) {
 				if ($c->getDoublePoints() == 1) {
@@ -56,7 +56,7 @@ class Player {
 				$str .= "<td>&nbsp;</td>\n";
 			}
 		}
-		$str .=  "<td align=right><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td>";
+		$str .=  "<td align=\"right\"><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td>";
 		return $str;
 	}
 	
@@ -67,10 +67,10 @@ class Player {
 	function getBottleTableString() {
 		if (true) { //$this->getNumberOfBottles() != 0) {
 			$str  = "<td>".$this->name."</td>\n";
-			$str .= "<td align=right>".$this->numberOfBottles[0]."</td>\n";
-			$str .= "<td align=right>".$this->numberOfBottles[1]."</td>\n";
-			$str .= "<td align=right>".$this->numberOfBottles[2]."</td>\n";
-			$str .=  "<td align=right><b>".$this->getNumberOfBottles()."</b></td>";
+			$str .= "<td align=\"right\">".$this->numberOfBottles[0]."</td>\n";
+			$str .= "<td align=\"right\">".$this->numberOfBottles[1]."</td>\n";
+			$str .= "<td align=\"right\">".$this->numberOfBottles[2]."</td>\n";
+			$str .=  "<td align=\"right\"><b>".$this->getNumberOfBottles()."</b></td>";
 		}
 		else {
 			$str = "";
