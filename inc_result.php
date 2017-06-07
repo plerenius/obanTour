@@ -69,76 +69,86 @@ function cmpBottles($a, $b)
 }
 
 usort($playerList, "cmpRank");
-echo "<p>";
+
+//***********************************
+// Start printing the overview table
+//***********************************
 echo "<h2>Resultat Oban ".$year."</h2>\n";
 echo "<table>\n";
 echo "<tbody>\n";
-echo "<tr>\n";
-echo "<th>Del&auml;vling</th>\n";
-echo "<th>Bana</th>\n";
-echo "<th>Vinnare</th>\n";
-echo "<th>L&auml;ngsta Drive</th>\n";
-echo "<th>N&auml;rmast H&aring;l</th>\n";
-echo "</tr>\n";
+echo "  <tr>\n";
+echo "    <th>Del&auml;vling</th>\n";
+echo "    <th>Bana</th>\n";
+echo "    <th>Vinnare</th>\n";
+echo "    <th>L&auml;ngsta Drive</th>\n";
+echo "    <th>N&auml;rmast H&aring;l</th>\n";
+echo "  </tr>\n";
 
 foreach ($competitions as $c) {
-	echo "<tr><td>".$c['name']."</td>\n";
-	echo "<td>".$c['course']."</td>\n";	
-	echo "<td>".(strcmp($c['winner'],"")?$c['winner']:"-")."</td>\n";	
-	echo "<td>".(strcmp($c['ldName'],"")?$c['ldName']:"-")."</td>\n";
-	echo "<td>".(strcmp($c['nfName'],"")?$c['nfName']:"-")."</td></tr>\n";
+	echo "  <tr>\n    <td>".$c['name']."</td>\n";
+	echo "    <td>".$c['course']."</td>\n";	
+	echo "    <td>".(strcmp($c['winner'],"")?$c['winner']:"-")."</td>\n";	
+	echo "    <td>".(strcmp($c['ldName'],"")?$c['ldName']:"-")."</td>\n";
+	echo "    <td>".(strcmp($c['nfName'],"")?$c['nfName']:"-")."</td>\n  </tr>\n";
 }
 echo "</tbody>\n";
 echo "</table>\n";
 
-echo "<h2>Aktuell ställning The Oban Tour <?php echo $year; ?></h2>\n";
-echo "Det är resultaten från de fyra bästa deltävlingarna som räknas med i totalen.\n";
+//***********************************
+// Print the result table
+//***********************************
+echo "<h2>Aktuell ställning The Oban Tour " . $year . "</h2>\n";
+echo "<p>Det är resultaten från de fyra bästa deltävlingarna som räknas med i totalen.</p>\n";
 echo "<table>\n";
 echo "<tbody>\n";
-echo "<tr>\n";
-echo "<th>#</th>\n";
-echo "<th>SPELARE</th>\n";
+echo "  <tr>\n";
+echo "    <th>#</th>\n";
+echo "    <th>SPELARE</th>\n";
 $i=1;
 foreach ($competitions as $c) {
-	echo "<th style='text-align:\"right\";'>#".$i++."</th><th>&nbsp;</th>";
+	echo "    <th style='text-align:\"right\";'>#".$i++."</th>\n";
+    echo "    <th>&nbsp;</th>\n";
 }
-echo "<th style='text-align:\"right\";'>TOTALT</th>\n";
-echo "</tr>\n";
+echo "    <th style='text-align:\"right\";'>TOTALT</th>\n";
+echo "  </tr>\n";
 // Print rows of players
 $pos=0;
 foreach ($playerList as $p) {
 	$pos++;
-	echo "<tr><td>".$pos."</td>\n";
-	echo $p->getTableString($numOfCompetitions);
-	echo "</tr>";
+	echo "  <tr>\n";
+    echo "    <td>".$pos."</td>\n";
+	echo $p->getTableString($numOfCompetitions)."\n";
+	echo "  </tr>\n";
 }
 echo "</tbody>\n";
 echo "</table>\n";
 
 //***********************************
-//  Vinlistan
+//  Print the Wine list
 //***********************************
+usort($playerList, "cmpBottles");
+$pos=0;
 echo "<h3>Vinlista</h3>\n";
 echo "<table>\n";
 echo "<tbody>\n";
-echo "<tr>\n";
-echo "<th>#</th>\n";
-echo "<th>SPELARE</th>\n";
-echo "<th>Vinst</th>\n";
-echo "<th>Ld</th>\n";
-echo "<th>Nf</th>\n";
-echo "<th>Totalt</th>\n</tr>\n";
-usort($playerList, "cmpBottles");
-$pos=0;
+echo "  <tr>\n";
+echo "    <th>#</th>\n";
+echo "    <th>SPELARE</th>\n";
+echo "    <th>Vinst</th>\n";
+echo "    <th>Ld</th>\n";
+echo "    <th>Nf</th>\n";
+echo "    <th>Totalt</th>\n</tr>\n";
 foreach ($playerList as $p) {
 	if ($p->getNumberOfBottles() == 0) {
 		break;
 	}
 	$pos++;
-	echo "<tr><td>".$pos."</td>\n";
+	echo "  <tr>\n";
+    echo "    <td>".$pos."</td>\n";
 	echo $p->getBottleTableString();
-	echo "</tr>";
+	echo "  </tr>\n";
 }
 echo "</tbody>\n</table>\n";
+echo "<p>";
 echo "</p>";
 ?>
