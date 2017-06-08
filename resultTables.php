@@ -116,9 +116,9 @@ foreach ($competitions as $c) {
 $pos=0;
 foreach ($playerList as $p) {
 	$pos++;
-	echo "<tr><td>".$pos."</td>\n";
+	echo "<tr>\n<td>".$pos."</td>\n";
 	echo $p->getTableString($numOfCompetitions);
-	echo "</tr>";
+	echo "\n</tr>";
 }
 ?>
 </table>
@@ -144,6 +144,8 @@ foreach ($playerList as $p) {
 	$pos++;
 	echo "<tr><td>".$pos."</td>\n";
 	echo $p->getBottleTableString();
-	echo "</tr>";
+	echo "\n</tr>";
 }
 ?>
+</tbody>
+</table>
