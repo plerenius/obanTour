@@ -1,11 +1,11 @@
 <?php
-require_once("Connections/pdo_connect.php");
-require_once("src/Player.php");
+require_once(realpath(dirname(__FILE__)."/../Connections/pdo_connect.php"));
+require_once(realpath(dirname(__FILE__)."/../src/Player.php"));
 
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 if (!ISSET($year)) {
-	$year=2016;//date("Y");
+	$year=date("Y");
 }
 
 $competions_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.*,\n"

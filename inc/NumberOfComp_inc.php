@@ -1,5 +1,5 @@
 <?php
-require_once("Connections/pdo_connect.php");
+require_once(realpath(dirname(__FILE__)."/../Connections/pdo_connect.php"));
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $years_sql = "SELECT * FROM season";
