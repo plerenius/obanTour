@@ -6,8 +6,7 @@
 </head>
 <body>
 <?php
-include "inc_result.php";
+include "inc/SeasonResult_inc.php";
 ?>
-
 </body>
 </html>
