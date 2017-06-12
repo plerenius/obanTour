@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-<title>Mata in ny Oban T&auml;vling</title>
+<title>Antal T&auml;vlingar</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
