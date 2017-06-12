@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
+-- version 3.5.8.1
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 07, 2016 at 10:18 PM
--- Server version: 5.6.16
--- PHP Version: 5.5.9
+-- Host: imath.se.mysql:3306
+-- Generation Time: Jun 12, 2017 at 12:42 PM
+-- Server version: 10.1.22-MariaDB-1~xenial
+-- PHP Version: 5.4.45-0+deb7u8
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -26,7 +26,6 @@ SET time_zone = "+00:00";
 -- Table structure for table `competitions`
 --
 
-DROP TABLE IF EXISTS `competitions`;
 CREATE TABLE IF NOT EXISTS `competitions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
@@ -39,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `competitions` (
   `ld` int(11) DEFAULT NULL,
   `doublePoints` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
 
 --
 -- Dumping data for table `competitions`
@@ -108,7 +107,11 @@ INSERT INTO `competitions` (`id`, `name`, `date`, `yearsId`, `course`, `type`, `
 (62, '2014-5', '2014-01-05', 2014, 'Vidbynäs N/S och Kallfors', 'Unknown', NULL, 15, 2, 0),
 (63, '2014-6', '2014-01-06', 2014, 'Linköpings GK', 'Unknown', NULL, 37, 9, 1),
 (64, '2016-5', '2016-08-28', 2016, 'Katrineholm', 'Slaggolf', NULL, 3, 34, 0),
-(65, '2016-6', '2016-09-25', 2016, 'St Andrews New/Castle', 'Poängbogey', NULL, 37, 17, 0);
+(65, '2016-6', '2016-09-25', 2016, 'St Andrews New/Castle', 'Poängbogey', NULL, 37, 17, 0),
+(66, '2016-7', '2016-10-08', 2016, 'Linköpings Gk', 'Flaggolf', NULL, 17, 17, 1),
+(67, '2017-1', '2017-04-08', 2017, 'Vesterby Gk', 'Poängbogey', NULL, 17, 17, 0),
+(69, '2017-2', '2017-05-07', 2017, 'Vasatorp TC', 'Poängbogey med bonus', NULL, 3, 11, 0),
+(70, '2017-3', '2017-05-29', 2017, 'Landeryd Norra', 'Poängbogey med joker', NULL, 3, 17, 0);
 
 -- --------------------------------------------------------
 
@@ -116,7 +119,6 @@ INSERT INTO `competitions` (`id`, `name`, `date`, `yearsId`, `course`, `type`, `
 -- Table structure for table `players`
 --
 
-DROP TABLE IF EXISTS `players`;
 CREATE TABLE IF NOT EXISTS `players` (
   `id` int(11) NOT NULL,
   `fname` varchar(30) NOT NULL,
@@ -168,7 +170,7 @@ INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`
 (34, 'Patrik', 'Johansson', '', '', 0, ''),
 (35, 'Patrik', 'Preimer', 'pa-pre@sectra.se', '', 17, ''),
 (36, 'Pedro', 'Botella', 'pbotella@gmail.com', '810913-014', 24, '070-2769760'),
-(37, 'Per', 'Pettersson', 'perpettersson74@gmail.com', '741203-021', 5, '070-9652372'),
+(37, 'Per', 'Lineryd', 'per.lineryd@gmail.com', '741203-021', 5, '070-9652372'),
 (38, 'Peter', '?', '', '', 0, ''),
 (39, 'Peter', 'Högfeldt', '', '', 0, ''),
 (40, 'Peter', 'Melin', '', '', 0, ''),
@@ -188,7 +190,6 @@ INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`
 -- Table structure for table `results`
 --
 
-DROP TABLE IF EXISTS `results`;
 CREATE TABLE IF NOT EXISTS `results` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `players_id` int(11) NOT NULL,
@@ -196,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `results` (
   `result` float NOT NULL,
   `rank` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=521 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=559 ;
 
 --
 -- Dumping data for table `results`
@@ -716,7 +717,37 @@ INSERT INTO `results` (`id`, `players_id`, `competitions_id`, `result`, `rank`) 
 (517, 23, 65, 29, 8),
 (518, 37, 65, 30, 4),
 (519, 42, 65, 25, 3),
-(520, 45, 65, 35, 2);
+(520, 45, 65, 35, 2),
+(521, 15, 66, 0, 2),
+(522, 9, 66, 0, 5),
+(523, 46, 66, 0, 4),
+(524, 37, 66, 0, 1),
+(525, 11, 66, 0, 6),
+(526, 17, 66, 0, 3),
+(527, 15, 67, 32, 3),
+(528, 9, 67, 28, 6),
+(529, 2, 67, 33, 2),
+(530, 45, 67, 20, 9),
+(531, 46, 67, 35, 1),
+(532, 23, 67, 26, 7),
+(533, 17, 67, 30, 4),
+(534, 3, 67, 30, 5),
+(535, 34, 67, 25, 8),
+(544, 15, 69, 35, 3),
+(545, 9, 69, 21, 8),
+(546, 2, 69, 35, 1),
+(547, 42, 69, 24, 7),
+(548, 37, 69, 35, 2),
+(549, 11, 69, 32.5, 4),
+(550, 17, 69, 32, 5),
+(551, 3, 69, 30.5, 6),
+(552, 15, 70, 34, 7),
+(553, 46, 70, 38, 4),
+(554, 37, 70, 40, 1),
+(555, 11, 70, 37, 5),
+(556, 17, 70, 36, 6),
+(557, 3, 70, 39, 3),
+(558, 34, 70, 40, 2);
 
 -- --------------------------------------------------------
 
@@ -724,7 +755,6 @@ INSERT INTO `results` (`id`, `players_id`, `competitions_id`, `result`, `rank`) 
 -- Table structure for table `season`
 --
 
-DROP TABLE IF EXISTS `season`;
 CREATE TABLE IF NOT EXISTS `season` (
   `year` int(11) NOT NULL,
   `type` tinytext NOT NULL,
@@ -746,7 +776,8 @@ INSERT INTO `season` (`year`, `type`, `noOfRounds`) VALUES
 (2013, 'rank', 3),
 (2014, 'rank', 3),
 (2015, 'rank', 4),
-(2016, 'rank', 4);
+(2016, 'rank', 4),
+(2017, 'rank', 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
