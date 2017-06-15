@@ -70,11 +70,11 @@ if (isset($_POST['submit'])) {
 <table>
 <tr>
 <td>T&auml;vlingsnamn:</td>
-<td><input type="text" name="comp_name" value="2017-3" size="30" /></td>
+<td><input type="text" name="comp_name" value="2017-4" size="30" /></td>
 </tr>
 <tr>
 <td>Datum:</td>
-<td><input type="text" name="comp_date" value="2017-05-29" size="10" /></td>
+<td><input type="text" name="comp_date" value="2017-06-15" size="10" /></td>
 </tr>
 <tr>
 <td>&Aring;r:</td>
@@ -83,11 +83,11 @@ if (isset($_POST['submit'])) {
 <tr>
 <td>
 T&auml;vlingstyp:</td>
-<td><input type="text" name="comp_type" value="" size="30" /></td>
+<td><input type="text" name="comp_type" value="Poängbogey med lite twist" size="30" /></td>
 </tr>
 <tr>
 <td>Bana:</td>
-<td><input type="text" name="comp_course" value="Landeryd Norra Gk" size="30" /></td>
+<td><input type="text" name="comp_course" value="Landeryd Södra" size="30" /></td>
 </tr>
 <tr>
 <td>N&auml;rmst Flagg:</td>
