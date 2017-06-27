@@ -10,7 +10,11 @@ $years_q->execute();
 $years = $years_q->fetchAll();
 
 if(!isset($type)) {
-  $type=$_GET["type"];
+	if(isset($_GET["type"])) {
+		$type=$_GET["type"];
+	} else {
+		$type="all";
+	}
 }
 echo "<p>Typ: $type</p>\n";
 if ($type=="win"){
@@ -35,8 +39,7 @@ $bottles_sql .= "sum(".$wineStr.") AS vinpavor\n"
     . "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
 	. "LEFT JOIN players AS p ON r.players_id = p.id\n"
     . "GROUP BY p.id ORDER BY vinpavor DESC, name";
-//
-echo "$bottles_sql";
+//echo "$bottles_sql";
 $bottles_q = $db->prepare($bottles_sql);
 $bottles_q->execute();
 
