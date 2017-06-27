@@ -9,16 +9,34 @@ $years_q = $db->prepare($years_sql);
 $years_q->execute();
 $years = $years_q->fetchAll();
 
+if(!isset($type)) {
+  $type=$_GET["type"];
+}
+echo "<p>Typ: $type</p>\n";
+if ($type=="win"){
+	$wineStr="IF(rank=1,1,0)";
+}
+elseif ($type=="nf") {
+	$wineStr="IF(nf=p.id,1,0)";
+}
+elseif ($type=="ld") {
+	$wineStr="IF((ld=p.id),1,0)";
+}
+else {
+	$wineStr="IF(rank=1,1,0)+IF(nf=p.id),1,0)+IF((ld=p.id),1,0)";
+}
+
 $bottles_sql = "SELECT CONCAT(fname,\" \",lname) AS name,\n";
 foreach ($years as $y) {
-	$bottles_sql .= "SUM(IF(c.yearsId=". $y['year'] .",if(rank=1,1,0)+if(nf=p.id,1,0)+if(ld=p.id,1,0),0)) AS p". $y['year'] .",\n";
+	$bottles_sql .= "SUM(IF(c.yearsId=". $y['year'] .",(".$wineStr."),0)) AS p". $y['year'] .",\n";
 }
-$bottles_sql .= "sum(((if((rank=1),1,0)+if((nf=p.id),1,0))+if((ld=p.id),1,0))) AS vinpavor\n"
+$bottles_sql .= "sum(".$wineStr.") AS vinpavor\n"
 	. "FROM competitions AS c\n"
     . "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
 	. "LEFT JOIN players AS p ON r.players_id = p.id\n"
     . "GROUP BY p.id ORDER BY vinpavor DESC, name";
-//echo "$bottles_sql";
+//
+echo "$bottles_sql";
 $bottles_q = $db->prepare($bottles_sql);
 $bottles_q->execute();
 

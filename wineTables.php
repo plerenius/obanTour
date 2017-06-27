@@ -9,6 +9,7 @@
 </head>
 <body>
 <?php
-include "inc/NumberOfWineBottles_inc.php";
+//$type="ld";
+include "inc/NumberOfWines_inc.php";
 ?>
 </body>

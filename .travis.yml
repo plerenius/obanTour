@@ -13,4 +13,4 @@ env:
 after_success:
   - curl --ftp-create-dirs -T "{seasonResult,competitionTable,insertComp,resultTables,wineTables}.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/
   - curl --ftp-create-dirs -T "src/{Player,Competition}.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/src/
-  - curl --ftp-create-dirs -T "inc/{NumberOfWineBottles_inc,NumberOfComp_inc,SeasonResult_inc}.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/inc/
+  - curl --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking}_inc.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.imath.se/obantour/result/inc/
