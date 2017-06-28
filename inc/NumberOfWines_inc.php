@@ -11,23 +11,27 @@ $years = $years_q->fetchAll();
 
 if(!isset($type)) {
 	if(isset($_GET["type"])) {
-		$type=$_GET["type"];
+	$type=$_GET["type"];
 	} else {
 		$type="all";
 	}
 }
-echo "<p>Typ: $type</p>\n";
+
 if ($type=="win"){
 	$wineStr="IF(rank=1,1,0)";
+	$heading="Antal t&auml;vlings vinster";
 }
 elseif ($type=="nf") {
 	$wineStr="IF(nf=p.id,1,0)";
+	$heading="Antal n&auml;rmst flagg";
 }
-elseif ($type=="ld") {
-	$wineStr="IF((ld=p.id),1,0)";
+elseif ($type=='ld') {
+	$wineStr="IF(ld=p.id,1,0)";
+	$heading="Antal l&auml;ngst drive";
 }
 else {
-	$wineStr="IF(rank=1,1,0)+IF(nf=p.id),1,0)+IF((ld=p.id),1,0)";
+	$wineStr="IF(rank=1,1,0)+IF(nf=p.id,1,0)+IF(ld=p.id,1,0)";
+	$heading="Antal vinare";
 }
 
 $bottles_sql = "SELECT CONCAT(fname,\" \",lname) AS name,\n";
@@ -46,7 +50,7 @@ $bottles_q->execute();
 $bottles_r = $bottles_q->fetchAll();
 //print_r($players_r[0]);
 
-echo "<h3>Vinlista</h3>\n";
+echo "<h3>${heading}</h3>\n";
 echo "<table>\n";
 echo "<tbody>\n";
 echo "  <tr>\n";
