@@ -104,7 +104,7 @@ echo "</table>\n";
 // Print the result table
 //***********************************
 echo "<h2>Aktuell ställning The Oban Tour " . $year . "</h2>\n";
-echo "<p>Det är resultaten från de fyra bästa deltävlingarna som räknas med i totalen.</p>\n";
+echo "<p>Det är resultaten från de ". $numOfCompetitions . " bästa deltävlingarna som räknas med i totalen.</p>\n";
 echo "<table>\n";
 echo "<tbody>\n";
 echo "  <tr>\n";
@@ -114,6 +114,9 @@ $i=1;
 foreach ($competitions as $c) {
 	echo "    <th style='text-align:\"right\";'>#".$i++."</th>\n";
     echo "    <th>&nbsp;</th>\n";
+}
+if ($year == 2017) {
+    echo "    <th style='text-align:\"right\";'>BONUS</th>\n";
 }
 echo "    <th style='text-align:\"right\";'>TOTALT</th>\n";
 echo "  </tr>\n";

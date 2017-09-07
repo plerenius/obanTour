@@ -30,16 +30,22 @@ class Player {
 			$tot += $sortedResult[$i]->getTotalPoints();
 		}
 
-		// Bonus from Season 2017
-		if ($this->pointVersion == "rank2017") {
-            $noOfComp=array_reduce($sortedResult, function ($count, $comp) {
-                return ($comp->getTotalPoints() > 0) ? ++$count : $count;
-                }); 
-			$tot += max($noOfComp-$numberOfResults,0);
-		}
+        $tot += $this->getBonusPoints($numberOfResults);
 
 		return $tot;
 	}
+
+    function getBonusPoints($numberOfResults) {
+        $bonus = 0;
+        // Bonus from Season 2017
+		if ($this->pointVersion == "rank2017") {
+            $noOfComp=array_reduce($this->competitions, function ($count, $comp) {
+                return ($comp->getTotalPoints() > 0) ? ++$count : $count;
+                });
+			$bonus = max($noOfComp-$numberOfResults,0);
+		}
+        return $bonus;
+    }
 
 	function getName() {
 		return $this->name;
@@ -75,6 +81,9 @@ class Player {
 				$str .= "<td>&nbsp;</td>\n";
 			}
 		}
+        if ($this->pointVersion == "rank2017") {
+            $str .= "<td  align=\"right\">".$this->getBonusPoints($numberOfResults)."</td>\n";
+        }
 		$str .=  "<td align=\"right\"><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td>";
 		return $str;
 	}
