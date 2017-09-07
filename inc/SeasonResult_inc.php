@@ -8,6 +8,12 @@ if (!ISSET($year)) {
 	$year=date("Y");
 }
 
+if ($year == 2017) {
+    $pointVersion = "rank2017";
+} else {
+    $pointVersion = "rank";
+}
+
 $competions_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.*,\n"
 	. "CONCAT(p_win.fname,\" \",p_win.lname) AS winner,\n"
 	. "CONCAT(p_nf.fname,\" \",p_nf.lname) AS nfName,\n"
@@ -46,7 +52,7 @@ $players_r = $result_q->fetchAll();
 
 $playerList=array();
 foreach ($players_r as $p) {
-	$playerList[]=new Player($p['name']);
+	$playerList[]=new Player($p['name'],$pointVersion);
 	foreach ($competitions as $c) {
 		$playerList[count($playerList)-1]->addCompetition(new Competition($c['id'],$c['name'],$c['numOfPlayers'],$c['doublePoints'],-1,$p["r".$c['id']],$p["nf".$c['id']],$p["ld".$c['id']]));
 	}	

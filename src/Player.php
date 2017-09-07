@@ -4,20 +4,22 @@ require_once("Competition.php");
 
 class Player {
 	private $name = "No name";
+	private $pointVersion = 0;
 	private $competitions = array();
 	private $numberOfBottles = array(0,0,0);
-	
-	function __construct($name) {
+
+	function __construct($name,$pointVersion) {
 		$this->name=$name;
+		$this->pointVersion = $pointVersion;
 	}
-	
+
 	function addCompetition($comp) {
 		$this->numberOfBottles[0] += ($comp->getRank() == 1)?1:0;
-		$this->numberOfBottles[1] += ($comp->getLongestDrive() == 0)?0:1;	
+		$this->numberOfBottles[1] += ($comp->getLongestDrive() == 0)?0:1;
 		$this->numberOfBottles[2] += ($comp->getClosestFlag() == 0)?0:1;
 		$this->competitions[] = $comp;
 	}
-	
+
 	function getBestPoints($numberOfResults) {
 		$tot = 0;
 		$sortedResult = $this->competitions;
@@ -27,17 +29,31 @@ class Player {
 		for ($i=0;$i<$numberOfResults && $i<count($sortedResult);$i++) {
 			$tot += $sortedResult[$i]->getTotalPoints();
 		}
+
+		// Bonus from Season 2017
+		if ($this->pointVersion == "rank2017") {
+			$tot += max(count($sortedResult)-$numberOfResults,0);
+		}
+
 		return $tot;
 	}
-	
+
 	function getName() {
 		return $this->name;
 	}
-	
+
+	function getPointVersion() {
+		return $this->name;
+	}
+
+	function setPointVersion($pointVersion) {
+		$this->pointVersion=$pointVersion;
+	}
+
 	function getPoints($index) {
 		return $this->competitions[$index]->getTotalPoints();
 	}
-	
+
 	function getTableString($numberOfResults) {
 		$str = "<td>".$this->name."</td>\n";
 		foreach ($this->competitions as $c) {
@@ -59,11 +75,11 @@ class Player {
 		$str .=  "<td align=\"right\"><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td>";
 		return $str;
 	}
-	
+
 	function getNumberOfBottles() {
 		return $this->numberOfBottles[0] + $this->numberOfBottles[1] + $this->numberOfBottles[2];
 	}
-	
+
 	function getBottleTableString() {
 		if (true) { //$this->getNumberOfBottles() != 0) {
 			$str  = "<td>".$this->name."</td>\n";
