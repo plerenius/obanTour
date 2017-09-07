@@ -32,7 +32,10 @@ class Player {
 
 		// Bonus from Season 2017
 		if ($this->pointVersion == "rank2017") {
-			$tot += max(count($sortedResult)-$numberOfResults,0);
+            $noOfComp=array_reduce($sortedResult, function ($count, $comp) {
+                return ($comp->getTotalPoints() > 0) ? ++$count : $count;
+                }); 
+			$tot += max($noOfComp-$numberOfResults,0);
 		}
 
 		return $tot;
