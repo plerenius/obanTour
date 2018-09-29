@@ -8,11 +8,13 @@ if (!ISSET($year)) {
 	$year=date("Y");
 }
 
-if ($year == 2017) {
+//TODO: Find the correct values from a db quary
+if ($year >= 2017) {
     $pointVersion = "rank2017";
 } else {
     $pointVersion = "rank";
 }
+$numOfCompetitions = 4;
 
 $competions_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.*,\n"
 	. "CONCAT(p_win.fname,\" \",p_win.lname) AS winner,\n"
@@ -58,7 +60,6 @@ foreach ($players_r as $p) {
 	}	
 }
 
-$numOfCompetitions = 4;
 
 function cmpRank($a, $b)
 {
