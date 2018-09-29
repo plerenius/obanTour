@@ -116,7 +116,8 @@ foreach ($competitions as $c) {
 	echo "    <th style='text-align:\"right\";'>#".$i++."</th>\n";
     echo "    <th>&nbsp;</th>\n";
 }
-if ($year == 2017) {
+//TODO: Fix this ugly dirty fix...
+if ($year >= 2017) {
     echo "    <th style='text-align:\"right\";'>BONUS</th>\n";
 }
 echo "    <th style='text-align:\"right\";'>TOTALT</th>\n";
