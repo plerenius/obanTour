@@ -68,7 +68,8 @@ class PlayerTest extends PHPUnit_Framework_TestCase
 
 	public function testGetTableString()
 	{
-		$this->assertEquals(count($this->compList) + 1, substr_count($this->p1->getTableString(4),"<td>"));
+		//$this->assertEquals(count($this->compList) + 1, substr_count($this->p1->getTableString(4),"<td>"));
+		$this->assertEquals(1, substr_count($this->p1->getTableString(4),"<td>")); // <td> for name
 	}
 
 	public function testGetNumberOfBottles()
