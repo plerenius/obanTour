@@ -20,19 +20,20 @@ class Player {
 		$this->competitions[] = $comp;
 	}
 
+   function getTopResults($numberOfResults) {
+        $results = array();
+        foreach ($this->competitions as $c) {
+            array_push($results, $c->getTotalPoints());
+        }
+        rsort($results);
+        $topResults = array_slice($results,0,$numberOfResults);
+        return $topResults;
+    }
+    
 	function getBestPoints($numberOfResults) {
-		$tot = 0;
-		$sortedResult = $this->competitions;
-		usort($sortedResult,function($a,$b) {
-			return $a->getTotalPoints() < $b->getTotalPoints()?1:-1;
-		});
-		for ($i=0;$i<$numberOfResults && $i<count($sortedResult);$i++) {
-			$tot += $sortedResult[$i]->getTotalPoints();
-		}
-
-        $tot += $this->getBonusPoints($numberOfResults);
-
-		return $tot;
+        $totalPoints = array_sum($this->getTopResults($numberOfResults));
+        $totalPoints += $this->getBonusPoints($numberOfResults);
+        return $totalPoints;
 	}
 
     function getBonusPoints($numberOfResults) {
@@ -52,7 +53,7 @@ class Player {
 	}
 
 	function getPointVersion() {
-		return $this->name;
+		return $this->pointVersion;
 	}
 
 	function setPointVersion($pointVersion) {
@@ -64,22 +65,25 @@ class Player {
 	}
 
 	function getTableString($numberOfResults) {
+        $topResults = $this->getTopResults($numberOfResults);
 		$str = "<td>".$this->name."</td>\n";
 		foreach ($this->competitions as $c) {
+            $bgcolor = (in_array($c->getTotalPoints(), $topResults)) ? "#bbffbb" : "#ffffff";
+                    
 			if ($c->getRankPoints() == 0) {
+                $bgcolor = "#ffffff";
 				$str .= "<td align=\"right\">-</td>\n";
 			} else {
-				$str .= "<td align=\"right\">".number_format($c->getRankPoints(),2)."</td>\n";
+				$str .= "<td align=\"right\" bgcolor=\"$bgcolor\">".number_format($c->getRankPoints(),2)."</td>\n";
 			}
-			if ($c->getClosestFlag() > 0) {
-				if ($c->getDoublePoints() == 1) {
-					$str .= "<td>+4</td>\n";
-				} else {
-					$str .= "<td>+2</td>\n";
-				}
+            // Bonus
+            $str .= "<td bgcolor=\"$bgcolor\">";
+            if ($c->getClosestFlag() > 0) {
+                $str .= ($c->getDoublePoints() == 1) ? "+4" : "+2";
 			} else {
-				$str .= "<td>&nbsp;</td>\n";
+				$str .= "&nbsp;";
 			}
+            $str .= "</td>\n";
 		}
         if ($this->pointVersion == "rank2017") {
             $str .= "<td  align=\"right\">".$this->getBonusPoints($numberOfResults)."</td>\n";
