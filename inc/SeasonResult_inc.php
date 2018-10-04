@@ -113,11 +113,11 @@ echo "    <th>#</th>\n";
 echo "    <th>SPELARE</th>\n";
 $i=1;
 foreach ($competitions as $c) {
-	echo "    <th style='text-align:right;'>#".$i++."</th>\n";
+	echo "    <th style='text-align:center;'>#".$i++."</th>\n";
 }
 //TODO: Fix this ugly dirty fix...
 if ($year >= 2017) {
-    echo "    <th style='text-align:right;'>BONUS</th>\n";
+    echo "    <th>BONUS</th>\n";
 }
 echo "    <th style='text-align:right;'>TOTALT</th>\n";
 echo "  </tr>\n";

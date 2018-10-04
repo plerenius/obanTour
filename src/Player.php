@@ -71,21 +71,21 @@ class Player {
             $bgcolor = (in_array($c->getTotalPoints(), $topResults)) ? "#bbffbb" : "#ffffff";
                     
 			if ($c->getRankPoints() == 0) {
-				$str .= "<td align=\"right\">-</td>\n";
+				$str .= "<td style='text-align:right;'>-</td>\n";
 			} else {
-                $str .= "<td ";
+                $str .= "<td style='";
                 // Underline when Closest to Pin is won
-                $str .= ($c->getClosestFlag() > 0 ? "style=\"text-decoration:underline;\" ": "");
-                $str .= "align=right bgcolor=\"$bgcolor\">";
+                $str .= ($c->getClosestFlag() > 0 ? "text-decoration:underline;": "");
+                $str .= "text-align:right;' bgcolor=\"$bgcolor\">";
                 $str .= number_format($c->getTotalPoints(),2);
                 $str .= "</td>\n";
 			}
             $str .= "</td>\n";
 		}
         if ($this->pointVersion == "rank2017") {
-            $str .= "<td  align=right>".$this->getBonusPoints($numberOfResults)."</td>\n";
+            $str .= "<td style='text-align:right;'>".$this->getBonusPoints($numberOfResults)."</td>\n";
         }
-		$str .=  "<td align=right><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td>";
+		$str .=  "<td style='text-align:right;'><b>".number_format($this->getBestPoints($numberOfResults),2)."</b></td>";
 		return $str;
 	}
 
