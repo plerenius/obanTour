@@ -113,21 +113,20 @@ echo "    <th>#</th>\n";
 echo "    <th>SPELARE</th>\n";
 $i=1;
 foreach ($competitions as $c) {
-	echo "    <th style='text-align:\"right\";'>#".$i++."</th>\n";
-    echo "    <th>&nbsp;</th>\n";
+	echo "    <th style='text-align:right;'>#".$i++."</th>\n";
 }
 //TODO: Fix this ugly dirty fix...
 if ($year >= 2017) {
-    echo "    <th style='text-align:\"right\";'>BONUS</th>\n";
+    echo "    <th style='text-align:right;'>BONUS</th>\n";
 }
-echo "    <th style='text-align:\"right\";'>TOTALT</th>\n";
+echo "    <th style='text-align:right;'>TOTALT</th>\n";
 echo "  </tr>\n";
 // Print rows of players
 $pos=0;
 foreach ($playerList as $p) {
 	$pos++;
 	echo "  <tr>\n";
-    echo "    <td>".$pos."</td>\n";
+    echo "    <td style='text-align:right;'>".$pos."</td>\n";
 	echo $p->getTableString($numOfCompetitions)."\n";
 	echo "  </tr>\n";
 }
