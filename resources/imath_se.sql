@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: imath.se.mysql:3306
--- Generation Time: Jun 12, 2017 at 12:42 PM
--- Server version: 10.1.22-MariaDB-1~xenial
--- PHP Version: 5.4.45-0+deb7u8
+-- Generation Time: Apr 29, 2019 at 08:56 PM
+-- Server version: 10.1.30-MariaDB-1~xenial
+-- PHP Version: 5.4.45-0+deb7u13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `competitions` (
   `ld` int(11) DEFAULT NULL,
   `doublePoints` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=71 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=84 ;
 
 --
 -- Dumping data for table `competitions`
@@ -108,10 +108,23 @@ INSERT INTO `competitions` (`id`, `name`, `date`, `yearsId`, `course`, `type`, `
 (63, '2014-6', '2014-01-06', 2014, 'Linköpings GK', 'Unknown', NULL, 37, 9, 1),
 (64, '2016-5', '2016-08-28', 2016, 'Katrineholm', 'Slaggolf', NULL, 3, 34, 0),
 (65, '2016-6', '2016-09-25', 2016, 'St Andrews New/Castle', 'Poängbogey', NULL, 37, 17, 0),
-(66, '2016-7', '2016-10-08', 2016, 'Linköpings Gk', 'Flaggolf', NULL, 17, 17, 1),
-(67, '2017-1', '2017-04-08', 2017, 'Vesterby Gk', 'Poängbogey', NULL, 17, 17, 0),
+(66, '2016-7', '2016-10-08', 2016, 'Linköpings GK', 'Flaggolf', NULL, 17, 17, 1),
+(67, '2017-1', '2017-04-08', 2017, 'Vesterby GK', 'Poängbogey', NULL, 17, 17, 0),
 (69, '2017-2', '2017-05-07', 2017, 'Vasatorp TC', 'Poängbogey med bonus', NULL, 3, 11, 0),
-(70, '2017-3', '2017-05-29', 2017, 'Landeryd Norra', 'Poängbogey med joker', NULL, 3, 17, 0);
+(70, '2017-3', '2017-05-29', 2017, 'Landeryd Norra', 'Poängbogey med joker', NULL, 3, 17, 0),
+(71, '2017-4', '2017-06-15', 2017, 'Landeryd Södra', 'Poängbogey med lite twist', NULL, 37, 11, 0),
+(72, '2017-5', '2017-08-20', 2017, 'Åtvidabergs GK', 'Poängbogey', NULL, 11, 2, 0),
+(73, '2017-6', '2017-09-03', 2017, 'Fjällbacka/Strömstad/Mjölkeröd', 'Eclectic med lite twist', NULL, 9, 15, 0),
+(74, '2017-7', '2017-09-16', 2017, 'Landeryd Norra', 'Flaggtävling', NULL, 11, 37, 1),
+(75, '2018-1', '2018-05-06', 2018, 'Sölvesborgs GK, Åhus Östra och Växjö GK', 'Eclectic poängbogey', NULL, 17, 17, 0),
+(76, '2018-2', '2018-05-15', 2018, 'Linköpings GK', 'Poängbogey med mulligans, kast och jokerhål.', NULL, 9, 15, 0),
+(77, '2018-3', '2018-06-11', 2018, 'Vesterby GK', 'Poängbogey', NULL, 9, 37, 0),
+(78, '2018-4', '2018-06-25', 2018, 'Klinga', 'Poängbogey', NULL, NULL, 9, 0),
+(79, '2018-5', '2018-08-15', 2018, 'Linköping GK', 'Poängbogey med streck och favorit hål', NULL, 45, 3, 0),
+(80, '2018-6', '2018-09-02', 2018, 'Visby GK', 'Matchspel tre dagar', NULL, 15, 15, 0),
+(81, '2018-7', '2018-09-16', 2018, 'Vadstena GK', '?', NULL, 15, 34, 0),
+(82, '2018-8', '2018-09-29', 2018, 'Landeryd Norra', 'Flaggolf', NULL, 17, 17, 1),
+(83, '2019-1', '2019-04-22', 2019, 'Vesterby', 'Poängbogey med lag bästboll/sämstboll', NULL, 37, 17, 0);
 
 -- --------------------------------------------------------
 
@@ -195,9 +208,9 @@ CREATE TABLE IF NOT EXISTS `results` (
   `players_id` int(11) NOT NULL,
   `competitions_id` int(11) NOT NULL,
   `result` float NOT NULL,
-  `rank` int(11) DEFAULT NULL,
+  `rank` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=559 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=659 ;
 
 --
 -- Dumping data for table `results`
@@ -747,7 +760,107 @@ INSERT INTO `results` (`id`, `players_id`, `competitions_id`, `result`, `rank`) 
 (555, 11, 70, 37, 5),
 (556, 17, 70, 36, 6),
 (557, 3, 70, 39, 3),
-(558, 34, 70, 40, 2);
+(558, 34, 70, 40, 2),
+(559, 15, 71, 33, 6),
+(560, 9, 71, 29, 7),
+(561, 2, 71, 35, 3),
+(562, 46, 71, 41, 2),
+(563, 37, 71, 42, 1),
+(564, 11, 71, 24, 10),
+(565, 17, 71, 35, 4),
+(566, 23, 71, 28, 8),
+(567, 3, 71, 34, 5),
+(568, 34, 71, 27, 9),
+(569, 15, 72, 25, 8),
+(570, 2, 72, 29, 4),
+(571, 46, 72, 27, 7),
+(572, 37, 72, 35, 1),
+(573, 11, 72, 29, 6),
+(574, 17, 72, 32, 3),
+(575, 23, 72, 25, 9),
+(576, 3, 72, 29, 5),
+(577, 34, 72, 33, 2),
+(578, 15, 73, 0, 8),
+(579, 2, 73, 0, 7),
+(580, 9, 73, 0, 2),
+(581, 46, 73, 0, 6),
+(582, 11, 73, 0, 5),
+(583, 17, 73, 0, 4),
+(584, 23, 73, 0, 1),
+(585, 3, 73, 0, 3),
+(586, 34, 73, 0, 9),
+(587, 15, 74, 0, 6),
+(588, 2, 74, 0, 1),
+(589, 9, 74, 0, 3),
+(590, 46, 74, 0, 9),
+(591, 37, 74, 0, 5),
+(592, 11, 74, 0, 2),
+(593, 17, 74, 0, 7),
+(594, 23, 74, 0, 8),
+(595, 3, 74, 0, 4),
+(596, 34, 74, 0, 10),
+(597, 15, 75, 39, 6),
+(598, 2, 75, 46.5, 1),
+(599, 9, 75, 38, 7),
+(600, 45, 75, 36.5, 8),
+(601, 37, 75, 41.5, 4),
+(602, 11, 75, 42.5, 2),
+(603, 17, 75, 41, 5),
+(604, 23, 75, 33, 9),
+(605, 3, 75, 42, 3),
+(606, 15, 76, 33, 8),
+(607, 2, 76, 39, 4),
+(608, 9, 76, 38, 6.5),
+(609, 45, 76, 38, 6.5),
+(610, 37, 76, 39, 5),
+(611, 11, 76, 42, 2.5),
+(612, 17, 76, 45, 1),
+(613, 34, 76, 42, 2.5),
+(614, 15, 77, 26, 5),
+(615, 9, 77, 24, 6),
+(616, 37, 77, 31, 3),
+(617, 11, 77, 33, 2),
+(618, 17, 77, 40, 1),
+(619, 23, 77, 30, 4),
+(620, 34, 77, 23, 7),
+(621, 15, 78, 32, 2.5),
+(622, 9, 78, 32, 2.5),
+(623, 45, 78, 26, 8),
+(624, 37, 78, 31, 4.5),
+(625, 17, 78, 31, 4.5),
+(626, 23, 78, 30, 6),
+(627, 3, 78, 34, 1),
+(628, 34, 78, 29, 7),
+(629, 15, 79, 30, 5),
+(630, 9, 79, 31, 3),
+(631, 45, 79, 30, 5),
+(632, 37, 79, 37, 1),
+(633, 17, 79, 37, 2),
+(634, 3, 79, 23, 7),
+(635, 34, 79, 30, 5),
+(636, 15, 80, 0, 1),
+(637, 9, 80, 0, 3.5),
+(638, 11, 80, 0, 3.5),
+(639, 3, 80, 0, 2),
+(640, 15, 81, 0, 4),
+(641, 9, 81, 0, 6),
+(642, 2, 81, 0, 2),
+(643, 17, 81, 0, 1),
+(644, 3, 81, 0, 3),
+(645, 34, 81, 0, 5),
+(646, 15, 82, 0, 3),
+(647, 9, 82, 0, 5),
+(648, 45, 82, 0, 2),
+(649, 37, 82, 0, 1),
+(650, 17, 82, 0, 6),
+(651, 3, 82, 0, 4),
+(652, 15, 83, 35, 1),
+(653, 9, 83, 31, 5),
+(654, 45, 83, 34, 2),
+(655, 37, 83, 34, 2),
+(656, 17, 83, 33, 4),
+(657, 23, 83, 23, 7),
+(658, 3, 83, 28, 6);
 
 -- --------------------------------------------------------
 
@@ -777,7 +890,9 @@ INSERT INTO `season` (`year`, `type`, `noOfRounds`) VALUES
 (2014, 'rank', 3),
 (2015, 'rank', 4),
 (2016, 'rank', 4),
-(2017, 'rank', 4);
+(2017, 'rank2017', 4),
+(2018, 'rank2017', 4),
+(2019, 'rank2017', 4);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
