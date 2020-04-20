@@ -3,7 +3,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-class CompetitionTest extends PHPUnit_Framework_TestCase
+class CompetitionTest extends TestCase
 {
 	protected $c1;
 	protected $id;
@@ -16,7 +16,7 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
 	protected $closestFlag;
 	protected $longestDrive;
 	
-    protected function setUp()
+    protected function setUp() : void
     {
         // Arrange
 		$this->id = 9;
@@ -26,8 +26,8 @@ class CompetitionTest extends PHPUnit_Framework_TestCase
 		$this->rank = 2;
 		$this->closestFlag = 1;
 		$this->longestDrive = 1;
-		$this->doublePointsFalse = 0;
-		$this->doublePointsTrue = 1;
+		$this->doublePointsFalse = 1;
+		$this->doublePointsTrue = 2;
 		$this->c1 = new Competition($this->id,$this->name,$this->numOfPlayers,
 			$this->doublePointsFalse,$this->result,$this->rank,
 			$this->closestFlag,$this->longestDrive);

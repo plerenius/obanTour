@@ -50,18 +50,20 @@ if (isset($_POST['submit'])) {
   $competition_stmt = $db->prepare("INSERT INTO competitions (name,date,yearsId,course,type,weather,nf,ld,doublePoints) 
     VALUES (?,?,?,?,?,?,?,?,?)");
   $return_value = $competition_stmt->execute(array($_POST['comp_name'], $_POST['comp_date'], $_POST['comp_year'], $_POST['comp_course'], $_POST['comp_type'], NULL, $_POST['nf'], $_POST['ld'], $_POST['doublePoints']));
-  print "procedure returned $return_value<br />\n";
+  // print "procedure returned $return_value<br />\n";
   $comp_id = $db->lastInsertId();
-  echo "T&auml;vling: " . $_POST['comp_name'] . " -> " . $comp_id . "<br />\n";
+  // echo "T&auml;vling: " . $_POST['comp_name'] . " -> " . $comp_id . "<br />\n";
 
   $result_stmt = $db->prepare("INSERT INTO results (players_id,competitions_id,result,rank)
-	VALUES (?,?,?,?)");
+  VALUES (?,?,?,?)");
   for ($i = 0; $i < $_POST['numbOfPlayers']; $i++) {
     if ($_POST["rank_$i"] != "") {
       $result_stmt->execute(array($_POST["id_$i"], $comp_id, $_POST["result_$i"], $_POST["rank_$i"]));
-      echo "DB ID f&ouml;r " . $_POST["id_$i"] . ": " . $db->lastInsertId() . "<br />\n";
+      // echo "DB ID f&ouml;r " . $_POST["id_$i"] . ": " . $db->lastInsertId() . "<br />\n";
     }
   }
+  header("Location: ./seasonResult.php");
+  die();
 }
 ?>
 
@@ -94,18 +96,12 @@ if (isset($_POST['submit'])) {
           <table>
             <tr>
               <td>T&auml;vlingsnamn:</td>
-              <td><input class="form-control" type="text" name="comp_name" value=<?php echo date("\"Y-4\""); ?> size="30" /></td>
+              <td><input class="form-control" type="text" name="comp_name" value=<?php echo date("\"Y-1\""); ?> size="30" /></td>
             </tr>
             <tr>
               <td>Datum:</td>
               <td><input class="form-control" type="text" name="comp_date" value=<?php echo date("\"Y-m-d\""); ?> size="10" /></td>
             </tr>
-            <!--
-            <tr>
-              <td>&Aring;r:</td>
-              <td><input class="form-control" type="text" name="comp_year" value=<?php echo date("\"Y\""); ?> size="4" /></td>
-            </tr>
-            -->
             <tr>
               <td>
                 T&auml;vlingstyp:</td>
@@ -143,11 +139,11 @@ if (isset($_POST['submit'])) {
               </td>
             </tr>
             <tr>
-              <td>Dubbla po&auml;ng:</td>
+              <td>1,5 x po&auml;ng:</td>
               <td>
                 <select class="form-control" name="doublePoints">
-                  <option value=0>Nej</option>
-                  <option value=1>Ja</option>
+                  <option value=1>Nej</option>
+                  <option value=1.5>Ja</option>
                 </select>
               </td>
             </tr>
@@ -166,11 +162,11 @@ if (isset($_POST['submit'])) {
                 echo "<tr>\n";
                 echo "<td>" . $nt['fname'] . " " . $nt['lname'] . "</td>\n";
                 echo "<td>\n"
-                  . "<input type=\"text\" class=\"form-control\" name=\"result_$i\" value=\"\" size=\"5\" />\n"
+                  . "<input type=\"text\" class=\"form-control\" name=\"result_$i\" value=\"\" size=\"5\"/>\n"
                   . "<input type=\"hidden\" name=\"id_$i\" value=\"" . $nt['id'] . "\"/>\n"
                   . "</td>\n";
                 echo "<td>"
-                  . "<input type=\"text\" class=\"form-control\" name=\"rank_$i\" value=\"\" size=\"5\" />"
+                  . "<input type=\"text\" class=\"form-control\" name=\"rank_$i\" value=\"\" size=\"5\"/>"
                   . "</td>\n";
                 echo "</tr>\n";
                 $i++;

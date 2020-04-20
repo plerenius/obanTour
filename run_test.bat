@@ -1,1 +1,1 @@
-phpunit --bootstrap .\autoload.php --testdox .\test\
+.\vendor\bin\phpunit --bootstrap .\autoload.php --testdox .\test\
