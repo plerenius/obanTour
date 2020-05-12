@@ -1,11 +1,7 @@
 language: php
-php:
-- '7.3'
-- '7.4'
 
 script:
-  git grep -l ":git_id:" | xargs sed -e "s/:git_id:/`git describe --abbrev=10 --dirty --always --tags`/"
-  git grep -l ":pub_date:" | xargs sed -e "s/:pub_date:/$(date '+%Y-%m-%d %H:%M')/"
+  ./update-tags.sh
   phpunit --bootstrap ./autoload.php --testdox ./test/
 
 env:
