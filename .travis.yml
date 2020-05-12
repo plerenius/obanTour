@@ -15,3 +15,5 @@ after_success:
   ftp://ftp.lerenius.se/obantour/result/src/
 - curl --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking,Courses}_inc.php"
   -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/inc/
+- curl --ftp-create-dirs -T "index.html"
+  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
