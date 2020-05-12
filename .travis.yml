@@ -1,7 +1,7 @@
 language: php
 
 script:
-  ./update-tags.sh
+  ./update_tags.sh
   phpunit --bootstrap ./autoload.php --testdox ./test/
 
 env:
