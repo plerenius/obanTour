@@ -31,7 +31,7 @@
           <?php
               require "inc/SeasonResult_inc.php";
               printTables();
-          ?>
+            ?>
         </div>
       </div>
     </section>

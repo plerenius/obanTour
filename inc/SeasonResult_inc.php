@@ -1,12 +1,14 @@
 <?php
 /**
  * This file prints out the comments
+ * 
+ * PHP version 7
  *
  * @category Golf
  * @package  Player
  * @author   Petter <petter@lerenius.se>
  * @license  xxx http://
- * @version  GIT:
+ * @version  GIT: :git_id:
  * @link     http://obantour.lerenius.se
  */
 require realpath(dirname(__FILE__)."/../Connections/pdo_connect.php");
@@ -46,6 +48,8 @@ function cmpBottles($a, $b)
 
 /**
  * Print the result
+ * 
+ * @return void No return value
  */
 function printTables()
 {
@@ -73,7 +77,8 @@ function printTables()
         . "CONCAT(p_ld.fname,\" \",LEFT(p_ld.lname,1)) AS ldName\n"
         . "FROM competitions AS c\n"
         . "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
-        . "LEFT JOIN (SELECT * FROM results WHERE rank=1) AS r_win ON r_win.competitions_id = c.id\n"
+        . "LEFT JOIN (SELECT * FROM results WHERE rank=1) AS r_win "
+        . "ON r_win.competitions_id = c.id\n"
         . "LEFT JOIN players AS p_win ON r_win.players_id = p_win.id\n"
         . "LEFT JOIN players AS p_nf ON c.nf = p_nf.id\n"
         . "LEFT JOIN players AS p_ld ON c.ld = p_ld.id\n"
@@ -87,8 +92,10 @@ function printTables()
     $result_sql = "SELECT\n";
     foreach ($competitions as $c) {
         $result_sql .= "SUM(IF(c.id=". $c['id'] .",r.rank,0)) AS r". $c['id'] .",\n";
-        $result_sql .= "SUM(IF(p.id=". ($c['ld']!=null?$c['ld']:-1).",2,0)) AS ld". $c['id'].",\n";
-        $result_sql .= "SUM(IF(p.id=". ($c['nf']!=null?$c['nf']:-1).",2,0)) AS nf". $c['id'].",\n";
+        $result_sql .= "SUM(IF(p.id=". ($c['ld']!=null?$c['ld']:-1).",2,0)) ";
+        $result_sql .= "AS ld". $c['id'].",\n";
+        $result_sql .= "SUM(IF(p.id=". ($c['nf']!=null?$c['nf']:-1).",2,0)) ";
+        $result_sql .= "AS nf". $c['id'].",\n";
     }
 
 
@@ -107,7 +114,12 @@ function printTables()
     foreach ($players_r as $p) {
         $playerList[]=new Player($p['name'], $pointVersion);
         foreach ($competitions as $c) {
-            $playerList[count($playerList)-1]->addCompetition(new Competition($c['id'], $c['name'], $c['numOfPlayers'], $c['doublePoints'], -1, $p["r".$c['id']], $p["nf".$c['id']], $p["ld".$c['id']]));
+            $playerList[count($playerList)-1]->addCompetition(
+                new Competition(
+                    $c['id'], $c['name'], $c['numOfPlayers'], $c['doublePoints'], -1,
+                    $p["r".$c['id']], $p["nf".$c['id']], $p["ld".$c['id']]
+                )
+            );
         }    
     }
 
@@ -132,7 +144,8 @@ function printTables()
         echo "    <td>".$c['course']."</td>\n";    
         echo "    <td>".(strcmp($c['winner'], "")?$c['winner']:"-")."</td>\n";    
         echo "    <td>".(strcmp($c['ldName'], "")?$c['ldName']:"-")."</td>\n";
-        echo "    <td>".(strcmp($c['nfName'], "")?$c['nfName']:"-")."</td>\n  </tr>\n";
+        echo "    <td>".(strcmp($c['nfName'], "")?$c['nfName']:"-")."</td>\n";
+        echo "  </tr>\n";
     }
     echo "</tbody>\n";
     echo "</table>\n";
@@ -141,8 +154,10 @@ function printTables()
     // Print the result table
     //***********************************
     echo "<h2>Aktuell ställning The Oban Tour " . $year . "</h2>\n";
-    echo "<p>Det är resultaten från de ". $numOfCompetitions . " bästa deltävlingarna som räknas med i totalen.</p>\n";
-    echo "<p>Närmst flagg markeras med understrykning. De tävlingar som räknas med i totalen är grönmarkerade.</p>";
+    echo "<p>Det är resultaten från de ". $numOfCompetitions;
+    echo " bästa deltävlingarna som räknas med i totalen.</p>\n";
+    echo "<p>Närmst flagg markeras med understrykning. De tävlingar ";
+    echo "som räknas med i totalen är grönmarkerade.</p>";
     echo "<table>\n";
     echo "<tbody>\n";
     echo "  <tr>\n";

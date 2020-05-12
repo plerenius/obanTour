@@ -1,6 +1,18 @@
 <?php
-
-class Competition {
+/**
+ * This file prints out the comments
+ * 
+ * PHP version 7
+ *
+ * @category Golf
+ * @package  Competition
+ * @author   Petter <petter@lerenius.se>
+ * @license  xxx http://
+ * @version  GIT: :git_id:
+ * @link     http://obantour.lerenius.se
+ */
+class Competition
+{
     protected $id;
     protected $name;
     protected $doublePoints;
@@ -10,8 +22,10 @@ class Competition {
     protected $longestDrive;
     protected $numOfPlayers;
     
-    function __construct($id, $name, $numOfPlayers, $doublePoints,
-        $result, $rank, $closestFlag, $longestDrive) {
+    function __construct(
+        $id, $name, $numOfPlayers, $doublePoints,
+        $result, $rank, $closestFlag, $longestDrive
+    ) {
         $this->id=$id;
         $this->name=$name;
         $this->numOfPlayers=$numOfPlayers;
@@ -22,36 +36,47 @@ class Competition {
         $this->longestDrive=$longestDrive;
     }
     
-    function getId() {
+    function getId()
+    {
         return $this->id;
     }
     
-    function getName() {
+    function getName()
+    {
         return $this->name;
     }
     
-    function getRank() {
+    function getRank()
+    {
         return $this->rank;
     }
     
-    function getClosestFlag() {
+    function getClosestFlag()
+    {
         return $this->closestFlag;
     }
     
-    function getLongestDrive() {
+    function getLongestDrive()
+    {
         return $this->longestDrive;
     }
     
-    function getDoublePoints() {
+    function getDoublePoints()
+    {
         return $this->doublePoints;
     }
     
-    function getRankPoints() {
-        $points = ($this->rank==0)?0:(10 * ($this->numOfPlayers - $this->rank) / ($this->numOfPlayers - 1) + 1);
+    function getRankPoints()
+    {
+        $points = ($this->rank==0) ?
+            0 : 
+            (10 * ($this->numOfPlayers - $this->rank)/($this->numOfPlayers - 1) + 1);
         return $this->doublePoints * $points;
     }
     
-    function getTotalPoints() {
-        return $this->getRankPoints() + (($this->closestFlag != 0)?2*$this->doublePoints:0);
+    function getTotalPoints()
+    {
+        return $this->getRankPoints() +
+            (($this->closestFlag != 0)?2*$this->doublePoints:0);
     }
 }
