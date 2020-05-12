@@ -9,11 +9,7 @@ env:
   - secure: ihH8Ct69uc2y9AZL3NrG4usfv7/8rHFH3dNzOTFhGxdFCdHeaGNZTHJxdxmR1+T3ukzvCkoctnuOqaAh6FKdhEKlxLLcBmcA+SpARAEteKhJJLr21VX8mwKTKtAUA31er+E5NTeeCusoqkUxuWf4OSdRUWF4oTo2yf9HTL0UVqEXh/eLB0kIIO/vy3PrutkYCBHRU3ONgthCHcHNKD1lpayLzcITlXENURJ5YbA+qCYpd2PSJk/bL44vr4bT1hAkhX0IDi039P3PytXTJqS86E3AVxIe7FVVV7ubNrKe0QUjR9DFvLd0aCvV6aZTwLNr35DzOKD8i5PHKL3EyAAl/EOiS5ASQYeWqeDF70Q2Rv77rXjNOV8nC4qAz3Ybny0/P2xxunQ+4ppNBjJ8b+E18GKL4tih8qWkdHVPF9Zsu1WMUf0tkXJMrhTnhIMLmZ1AwUsaSsCoRogINO671GeTda07SOJRB30MY/O5lw/8HISORJTvbHPEK10KHxxpCjOobfBvvpakavvMMquUmTt9jzk6QwqP1kZpLn7wlJYQ7X1Xd/flJPISIXifE89N8xr9or0rXDT66aM3AtsAkjl4tFFs+bKfXNvSbyuwUGY3nW+Lvc7NL6GWygoYDk/4PhJqTRy1XRCpdlRewaW6kDzYU8AHvVFB8R2lGMHjztxkzuo=
 
 after_success:
-- curl --ftp-create-dirs -T "{seasonResult,competitionTable,insertComp,resultTables,wineTables}.php"
-  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
-- curl --ftp-create-dirs -T "src/{Player,Competition}.php" -u $FTP_USER:$FTP_PASSW
-  ftp://ftp.lerenius.se/obantour/result/src/
-- curl --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking,Courses}_inc.php"
-  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/inc/
-- curl --ftp-create-dirs -T "index.html"
-  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
+- curl --ftp-create-dirs -T "{seasonResult,competitionTable,insertComp,wineTables}.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
+- curl --ftp-create-dirs -T "src/{Player,Competition}.php" -u $FTP_USER:$FTP_PASSW  ftp://ftp.lerenius.se/obantour/result/src/
+- curl --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking,Courses}_inc.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/inc/
+- curl --ftp-create-dirs -T "index.html" -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
