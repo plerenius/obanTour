@@ -14,5 +14,6 @@ $password = '';
 $dsn = "mysql:host=$host;port=$port;dbname=$database;charset=utf8";
 
 // Connect!
+global $db;
 $db = new PDO($dsn, $username, $password);
 ?>

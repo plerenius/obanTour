@@ -13,6 +13,7 @@
  * @package  PHP
  * @author   Petter Lerenius <plerenius@gmail.com>
  * @license  http://url.com license_name
+ * @version  GIT: :git_id:
  * @link     github.com/plerenius/obenatour
  */
 
