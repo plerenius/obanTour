@@ -1,8 +1,3 @@
-<!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
->
-<html xmlns="http://www.w3.org/1999/xhtml">
 <?php
 /**
  * Will implement page to insert new competition.
@@ -53,7 +48,7 @@ function getSQLValueString($theValue, $theType,
     $theValue = (!get_magic_quotes_gpc()) ? addslashes($theValue) : $theValue;
     switch ($theType) {
     case "text":
-        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+        $theValue = ($theValue != "") ? $theValue : "NULL";
         break;
     case "long":
     case "int":
@@ -61,10 +56,10 @@ function getSQLValueString($theValue, $theType,
         break;
     case "double":
         $theValue = strtr($theValue, ',', '.');
-        $theValue = ($theValue != "") ? "'" . doubleval($theValue) . "'" : "NULL";
+        $theValue = ($theValue != "") ? doubleval($theValue) : "NULL";
         break;
     case "date":
-        $theValue = ($theValue != "") ? "'" . $theValue . "'" : "NULL";
+        $theValue = ($theValue != "") ? $theValue : "NULL";
         break;
     case "defined":
         $theValue = ($theValue != "") ? $theDefinedValue : $theNotDefinedValue;
@@ -83,7 +78,7 @@ if (isset($_POST['submit'])) {
     $return_value = $competition_stmt->execute(
         array(
             getSQLValueString($_POST['comp_name'], "text"),
-            getSQLValueString($_POST['comp_date'], "date"),
+            $_POST['comp_date'],
             getSQLValueString($_POST['comp_year'], "int"),
             getSQLValueString($_POST['comp_course'], "text"),
             getSQLValueString($_POST['comp_type'], "text"),
@@ -114,7 +109,11 @@ if (isset($_POST['submit'])) {
     die();
 }
 ?>
-
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html" />
   <meta charset="UTF-8">
