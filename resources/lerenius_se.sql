@@ -1,150 +1,161 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.8.1
--- http://www.phpmyadmin.net
+-- version 5.0.2
+-- https://www.phpmyadmin.net/
 --
--- Host: imath.se.mysql:3306
--- Generation Time: Apr 29, 2019 at 08:56 PM
--- Server version: 10.1.30-MariaDB-1~xenial
--- PHP Version: 5.4.45-0+deb7u13
+-- Värd: lerenius.se.mysql.service.one.com:3306
+-- Tid vid skapande: 06 jun 2020 kl 20:33
+-- Serverversion: 10.3.21-MariaDB-1:10.3.21+maria~bionic
+-- PHP-version: 7.2.24-0ubuntu0.18.04.6
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `imath_se`
+-- Databas: `lerenius_se`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `competitions`
+-- Tabellstruktur `competitions`
 --
 
-CREATE TABLE IF NOT EXISTS `competitions` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `competitions`;
+CREATE TABLE `competitions` (
+  `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `date` date DEFAULT NULL,
   `yearsId` int(11) NOT NULL,
-  `course` tinytext,
-  `type` tinytext,
-  `weather` tinytext,
+  `course` tinytext DEFAULT NULL,
+  `type` tinytext DEFAULT NULL,
+  `weather` tinytext DEFAULT NULL,
   `nf` int(11) DEFAULT NULL,
   `ld` int(11) DEFAULT NULL,
-  `doublePoints` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=84 ;
+  `doublePoints` decimal(5,2) NOT NULL DEFAULT 1.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `competitions`
+-- Dumpning av Data i tabell `competitions`
 --
 
 INSERT INTO `competitions` (`id`, `name`, `date`, `yearsId`, `course`, `type`, `weather`, `nf`, `ld`, `doublePoints`) VALUES
-(1, '2016-1', '2016-05-13', 2016, 'Linköpings GK', NULL, 'Regnskurar', 2, 0, 0),
-(2, '2016-2', '2016-05-21', 2016, 'Vårresan', NULL, NULL, 37, 17, 0),
-(3, '2016-3', '2016-06-12', 2016, 'Landeryd Södra', '0', NULL, 37, 37, 0),
-(6, '2016-4', '2016-06-29', 2016, 'Landeryd Norra', 'Poängbogey', NULL, 2, 32, 0),
-(7, '2015-1', '2015-05-01', 2015, 'Ljunghusen,Falsterbo,PGA Links', 'Eclectic', NULL, 3, NULL, 0),
-(8, '2015-2', '2015-06-01', 2015, 'Landeryd Norra', '', NULL, 15, 45, 0),
-(9, '2015-3', '2015-07-01', 2015, 'Vesterby GK', '?', NULL, 37, 9, 0),
-(10, '2015-4', '2015-08-01', 2015, 'Mjölby GK', '?', NULL, 46, 32, 0),
-(11, '2015-5', '2015-08-15', 2015, 'Ombergs GK', '?', NULL, 11, 23, 0),
-(12, '2015-6', '2016-09-01', 2015, 'Grönhögen, Ekerum', '?', NULL, 46, 15, 0),
-(13, '2015-7', '2016-10-01', 2015, 'Vesterby GK', '?', NULL, 9, 15, 1),
-(14, '2007-1', '2007-01-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, 0),
-(15, '2007-2', '2007-02-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, 0),
-(16, '2007-3', '2007-03-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, 0),
-(17, '2007-4', '2007-04-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, 0),
-(18, '2007-5', '2007-05-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, 0),
-(19, '2007-6', '2007-06-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, 0),
-(20, '2007-7', '2007-07-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, 0),
-(21, '2007-8', '2007-08-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, 0),
-(22, '2008-1', '2008-01-01', 2008, 'Örkelljunga GK', 'Poängbogey', NULL, 12, 50, 0),
-(23, '2008-2', '2008-02-01', 2008, 'Ombergs GK', 'Poängbogey', NULL, 9, 50, 0),
-(24, '2008-3', '2008-03-01', 2008, 'Linköpings GK', 'Poängbogey', NULL, 45, 21, 0),
-(25, '2008-4', '2008-04-01', 2008, 'Landeryd Norra', 'Poängbogey', NULL, 42, 42, 0),
-(26, '2008-5', '2008-05-01', 2008, 'Ombergs GK', 'Poängbogey', NULL, 15, 15, 0),
-(27, '2008-6', '2008-06-01', 2008, 'Castleknock GC', 'Poängbogey', NULL, 29, 9, 0),
-(28, '2009-1', '2009-01-01', 2009, 'Grönhögen GK', 'Slagtävling', NULL, 11, 47, 0),
-(29, '2009-2', '2009-02-01', 2009, 'Linköpings GK', 'Slagtävling', NULL, 42, 36, 0),
-(30, '2009-3', '2009-03-01', 2009, 'Landeryd Norra', 'Slagtävling', NULL, 11, 45, 0),
-(31, '2009-4', '2009-04-01', 2009, 'Vesterby GK', 'Slagtävling', NULL, 6, 50, 0),
-(32, '2009-5', '2009-05-01', 2009, 'Åtvidabergs GK', 'Slagtävling', NULL, 11, 29, 0),
-(33, '2009-6', '2009-06-01', 2009, 'Alenda Alicante', 'Slagtävling', NULL, NULL, 15, 0),
-(34, '2010-1', '2010-01-01', 2010, 'Hooks GK', 'Slagtävling', NULL, 15, 46, 0),
-(35, '2010-2', '2010-02-01', 2010, 'Ombergs GK', 'Slagtävling', NULL, 15, 37, 0),
-(36, '2010-3', '2010-03-01', 2010, 'Linköpings GK', 'Slagtävling', NULL, 9, 20, 0),
-(37, '2010-4', '2010-04-01', 2010, 'Landeryd Norra', 'Slagtävling', NULL, 15, 45, 0),
-(38, '2010-5', '2010-05-01', 2010, 'Bro Hof Stadium Course', 'Slagtävling', NULL, 37, 37, 0),
-(39, '2010-6', '2010-06-01', 2010, 'Vesterby GK', 'Slagtävling', NULL, 15, 2, 0),
-(40, '2011-1', '2011-01-01', 2011, 'Mjölby GK', 'Unknown', NULL, 14, 9, 0),
-(41, '2011-2', '2011-02-01', 2011, 'Linköpings GK', 'Unknown', NULL, 15, 15, 0),
-(42, '2011-3', '2011-03-01', 2011, 'Landeryd Norra', 'Unknown', NULL, 8, 48, 0),
-(43, '2011-4', '2011-04-01', 2011, 'Mauritzbergs GK', 'Unknown', NULL, 15, 15, 0),
-(44, '2011-5', '2011-05-01', 2011, 'Prince’s GC', 'Unknown', NULL, 9, 2, 0),
-(45, '2011-6', '2011-06-01', 2011, 'Linköpings GK', 'Unknown', NULL, NULL, NULL, 0),
-(46, '2012-1', '2012-01-01', 2012, 'Båstad Nya/Sand GK', 'Unknown', NULL, 45, 2, 0),
-(47, '2012-2', '2012-01-02', 2012, 'Landeryd Norra', 'Unknown', NULL, 45, 2, 0),
-(48, '2012-3', '2012-01-03', 2012, 'Landeryd Södra', 'Unknown', NULL, 2, 31, 0),
-(49, '2012-4', '2012-01-04', 2012, 'Linköpings GK', 'Unknown', NULL, 17, 15, 0),
-(50, '2012-5', '2012-01-05', 2012, 'PGA National', 'Unknown', NULL, 45, 15, 0),
-(51, '2012-6', '2012-01-06', 2012, ' Åtvidabergs GK', 'Unknown', NULL, 15, 2, 1),
-(52, '2013-1', '2013-01-01', 2013, 'Vesterby GK', 'Unknown', NULL, 2, 15, 0),
-(53, '2013-2', '2013-01-02', 2013, 'Landeryd Norra', 'Unknown', NULL, 9, 9, 0),
-(54, '2013-3', '2013-01-03', 2013, 'Linköpings Gk', 'Unknown', NULL, 23, 9, 0),
-(55, '2013-4', '2013-01-04', 2013, 'Åtvidabergs GK', 'Unknown', NULL, 2, 2, 0),
-(56, '2013-5', '2013-01-05', 2013, 'Bokskogen Gamla/Vasatorp TC', 'Unknown', NULL, 2, 17, 0),
-(57, '2013-6', '2013-01-06', 2013, 'Linköpings GK', 'Unknown', NULL, 2, 17, 1),
-(58, '2014-1', '2014-01-01', 2014, 'Gränna GK', 'Unknown', NULL, 15, 2, 0),
-(59, '2014-2', '2014-01-02', 2014, 'Landeryd Norra', 'Unknown', NULL, 45, 23, 0),
-(60, '2014-3', '2014-01-03', 2014, 'Vreta Kloster GK', 'Unknown', NULL, 37, 37, 0),
-(61, '2014-4', '2014-01-04', 2014, 'Ombergs GK', 'Unknown', NULL, 45, 17, 0),
-(62, '2014-5', '2014-01-05', 2014, 'Vidbynäs N/S och Kallfors', 'Unknown', NULL, 15, 2, 0),
-(63, '2014-6', '2014-01-06', 2014, 'Linköpings GK', 'Unknown', NULL, 37, 9, 1),
-(64, '2016-5', '2016-08-28', 2016, 'Katrineholm', 'Slaggolf', NULL, 3, 34, 0),
-(65, '2016-6', '2016-09-25', 2016, 'St Andrews New/Castle', 'Poängbogey', NULL, 37, 17, 0),
-(66, '2016-7', '2016-10-08', 2016, 'Linköpings GK', 'Flaggolf', NULL, 17, 17, 1),
-(67, '2017-1', '2017-04-08', 2017, 'Vesterby GK', 'Poängbogey', NULL, 17, 17, 0),
-(69, '2017-2', '2017-05-07', 2017, 'Vasatorp TC', 'Poängbogey med bonus', NULL, 3, 11, 0),
-(70, '2017-3', '2017-05-29', 2017, 'Landeryd Norra', 'Poängbogey med joker', NULL, 3, 17, 0),
-(71, '2017-4', '2017-06-15', 2017, 'Landeryd Södra', 'Poängbogey med lite twist', NULL, 37, 11, 0),
-(72, '2017-5', '2017-08-20', 2017, 'Åtvidabergs GK', 'Poängbogey', NULL, 11, 2, 0),
-(73, '2017-6', '2017-09-03', 2017, 'Fjällbacka/Strömstad/Mjölkeröd', 'Eclectic med lite twist', NULL, 9, 15, 0),
-(74, '2017-7', '2017-09-16', 2017, 'Landeryd Norra', 'Flaggtävling', NULL, 11, 37, 1),
-(75, '2018-1', '2018-05-06', 2018, 'Sölvesborgs GK, Åhus Östra och Växjö GK', 'Eclectic poängbogey', NULL, 17, 17, 0),
-(76, '2018-2', '2018-05-15', 2018, 'Linköpings GK', 'Poängbogey med mulligans, kast och jokerhål.', NULL, 9, 15, 0),
-(77, '2018-3', '2018-06-11', 2018, 'Vesterby GK', 'Poängbogey', NULL, 9, 37, 0),
-(78, '2018-4', '2018-06-25', 2018, 'Klinga', 'Poängbogey', NULL, NULL, 9, 0),
-(79, '2018-5', '2018-08-15', 2018, 'Linköping GK', 'Poängbogey med streck och favorit hål', NULL, 45, 3, 0),
-(80, '2018-6', '2018-09-02', 2018, 'Visby GK', 'Matchspel tre dagar', NULL, 15, 15, 0),
-(81, '2018-7', '2018-09-16', 2018, 'Vadstena GK', '?', NULL, 15, 34, 0),
-(82, '2018-8', '2018-09-29', 2018, 'Landeryd Norra', 'Flaggolf', NULL, 17, 17, 1),
-(83, '2019-1', '2019-04-22', 2019, 'Vesterby', 'Poängbogey med lag bästboll/sämstboll', NULL, 37, 17, 0);
+(1, '2016-1', '2016-05-13', 2016, 'Linköpings GK', NULL, 'Regnskurar', 2, 0, '1.00'),
+(2, '2016-2', '2016-05-21', 2016, 'Vårresan', NULL, NULL, 37, 17, '1.00'),
+(3, '2016-3', '2016-06-12', 2016, 'Landeryd Södra', '0', NULL, 37, 37, '1.00'),
+(6, '2016-4', '2016-06-29', 2016, 'Landeryd Norra', 'Poängbogey', NULL, 2, 32, '1.00'),
+(7, '2015-1', '2015-05-01', 2015, 'Ljunghusen,Falsterbo,PGA Links', 'Eclectic', NULL, 3, NULL, '1.00'),
+(8, '2015-2', '2015-06-01', 2015, 'Landeryd Norra', '', NULL, 15, 45, '1.00'),
+(9, '2015-3', '2015-07-01', 2015, 'Vesterby GK', '?', NULL, 37, 9, '1.00'),
+(10, '2015-4', '2015-08-01', 2015, 'Mjölby GK', '?', NULL, 46, 32, '1.00'),
+(11, '2015-5', '2015-08-15', 2015, 'Ombergs GK', '?', NULL, 11, 23, '1.00'),
+(12, '2015-6', '2016-09-01', 2015, 'Grönhögen, Ekerum', '?', NULL, 46, 15, '1.00'),
+(13, '2015-7', '2016-10-01', 2015, 'Vesterby GK', '?', NULL, 9, 15, '2.00'),
+(14, '2007-1', '2007-01-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, '1.00'),
+(15, '2007-2', '2007-02-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, '1.00'),
+(16, '2007-3', '2007-03-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, '1.00'),
+(17, '2007-4', '2007-04-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, '1.00'),
+(18, '2007-5', '2007-05-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, '1.00'),
+(19, '2007-6', '2007-06-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, '1.00'),
+(20, '2007-7', '2007-07-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, '1.00'),
+(21, '2007-8', '2007-08-01', 2007, '?', 'Poängbogey', NULL, NULL, NULL, '1.00'),
+(22, '2008-1', '2008-01-01', 2008, 'Örkelljunga GK', 'Poängbogey', NULL, 12, 50, '1.00'),
+(23, '2008-2', '2008-02-01', 2008, 'Ombergs GK', 'Poängbogey', NULL, 9, 50, '1.00'),
+(24, '2008-3', '2008-03-01', 2008, 'Linköpings GK', 'Poängbogey', NULL, 45, 21, '1.00'),
+(25, '2008-4', '2008-04-01', 2008, 'Landeryd Norra', 'Poängbogey', NULL, 42, 42, '1.00'),
+(26, '2008-5', '2008-05-01', 2008, 'Ombergs GK', 'Poängbogey', NULL, 15, 15, '1.00'),
+(27, '2008-6', '2008-06-01', 2008, 'Castleknock GC', 'Poängbogey', NULL, 29, 9, '1.00'),
+(28, '2009-1', '2009-01-01', 2009, 'Grönhögen GK', 'Slagtävling', NULL, 11, 47, '1.00'),
+(29, '2009-2', '2009-02-01', 2009, 'Linköpings GK', 'Slagtävling', NULL, 42, 36, '1.00'),
+(30, '2009-3', '2009-03-01', 2009, 'Landeryd Norra', 'Slagtävling', NULL, 11, 45, '1.00'),
+(31, '2009-4', '2009-04-01', 2009, 'Vesterby GK', 'Slagtävling', NULL, 6, 50, '1.00'),
+(32, '2009-5', '2009-05-01', 2009, 'Åtvidabergs GK', 'Slagtävling', NULL, 11, 29, '1.00'),
+(33, '2009-6', '2009-06-01', 2009, 'Alenda Alicante', 'Slagtävling', NULL, NULL, 15, '1.00'),
+(34, '2010-1', '2010-01-01', 2010, 'Hooks GK', 'Slagtävling', NULL, 15, 46, '1.00'),
+(35, '2010-2', '2010-02-01', 2010, 'Ombergs GK', 'Slagtävling', NULL, 15, 37, '1.00'),
+(36, '2010-3', '2010-03-01', 2010, 'Linköpings GK', 'Slagtävling', NULL, 9, 20, '1.00'),
+(37, '2010-4', '2010-04-01', 2010, 'Landeryd Norra', 'Slagtävling', NULL, 15, 45, '1.00'),
+(38, '2010-5', '2010-05-01', 2010, 'Bro Hof Stadium Course', 'Slagtävling', NULL, 37, 37, '1.00'),
+(39, '2010-6', '2010-06-01', 2010, 'Vesterby GK', 'Slagtävling', NULL, 15, 2, '1.00'),
+(40, '2011-1', '2011-01-01', 2011, 'Mjölby GK', 'Unknown', NULL, 14, 9, '1.00'),
+(41, '2011-2', '2011-02-01', 2011, 'Linköpings GK', 'Unknown', NULL, 15, 15, '1.00'),
+(42, '2011-3', '2011-03-01', 2011, 'Landeryd Norra', 'Unknown', NULL, 8, 48, '1.00'),
+(43, '2011-4', '2011-04-01', 2011, 'Mauritzbergs GK', 'Unknown', NULL, 15, 15, '1.00'),
+(44, '2011-5', '2011-05-01', 2011, 'Prince’s GC', 'Unknown', NULL, 9, 2, '1.00'),
+(45, '2011-6', '2011-06-01', 2011, 'Linköpings GK', 'Unknown', NULL, NULL, NULL, '1.00'),
+(46, '2012-1', '2012-01-01', 2012, 'Båstad Nya/Sand GK', 'Unknown', NULL, 45, 2, '1.00'),
+(47, '2012-2', '2012-01-02', 2012, 'Landeryd Norra', 'Unknown', NULL, 45, 2, '1.00'),
+(48, '2012-3', '2012-01-03', 2012, 'Landeryd Södra', 'Unknown', NULL, 2, 31, '1.00'),
+(49, '2012-4', '2012-01-04', 2012, 'Linköpings GK', 'Unknown', NULL, 17, 15, '1.00'),
+(50, '2012-5', '2012-01-05', 2012, 'PGA National', 'Unknown', NULL, 45, 15, '1.00'),
+(51, '2012-6', '2012-01-06', 2012, ' Åtvidabergs GK', 'Unknown', NULL, 15, 2, '2.00'),
+(52, '2013-1', '2013-01-01', 2013, 'Vesterby GK', 'Unknown', NULL, 2, 15, '1.00'),
+(53, '2013-2', '2013-01-02', 2013, 'Landeryd Norra', 'Unknown', NULL, 9, 9, '1.00'),
+(54, '2013-3', '2013-01-03', 2013, 'Linköpings GK', 'Unknown', NULL, 23, 9, '1.00'),
+(55, '2013-4', '2013-01-04', 2013, 'Åtvidabergs GK', 'Unknown', NULL, 2, 2, '1.00'),
+(56, '2013-5', '2013-01-05', 2013, 'Bokskogen Gamla/Vasatorp TC', 'Unknown', NULL, 2, 17, '1.00'),
+(57, '2013-6', '2013-01-06', 2013, 'Linköpings GK', 'Unknown', NULL, 2, 17, '2.00'),
+(58, '2014-1', '2014-01-01', 2014, 'Gränna GK', 'Unknown', NULL, 15, 2, '1.00'),
+(59, '2014-2', '2014-01-02', 2014, 'Landeryd Norra', 'Unknown', NULL, 45, 23, '1.00'),
+(60, '2014-3', '2014-01-03', 2014, 'Vreta Kloster GK', 'Unknown', NULL, 37, 37, '1.00'),
+(61, '2014-4', '2014-01-04', 2014, 'Ombergs GK', 'Unknown', NULL, 45, 17, '1.00'),
+(62, '2014-5', '2014-01-05', 2014, 'Vidbynäs N/S och Kallfors', 'Unknown', NULL, 15, 2, '1.00'),
+(63, '2014-6', '2014-01-06', 2014, 'Linköpings GK', 'Unknown', NULL, 37, 9, '2.00'),
+(64, '2016-5', '2016-08-28', 2016, 'Katrineholm', 'Slaggolf', NULL, 3, 34, '1.00'),
+(65, '2016-6', '2016-09-25', 2016, 'St Andrews New/Castle', 'Poängbogey', NULL, 37, 17, '1.00'),
+(66, '2016-7', '2016-10-08', 2016, 'Linköpings GK', 'Flaggolf', NULL, 17, 17, '2.00'),
+(67, '2017-1', '2017-04-08', 2017, 'Vesterby GK', 'Poängbogey', NULL, 17, 17, '1.00'),
+(69, '2017-2', '2017-05-07', 2017, 'Vasatorp TC', 'Poängbogey med bonus', NULL, 3, 11, '1.00'),
+(70, '2017-3', '2017-05-29', 2017, 'Landeryd Norra', 'Poängbogey med joker', NULL, 3, 17, '1.00'),
+(71, '2017-4', '2017-06-15', 2017, 'Landeryd Södra', 'Poängbogey med lite twist', NULL, 37, 11, '1.00'),
+(72, '2017-5', '2017-08-20', 2017, 'Åtvidabergs GK', 'Poängbogey', NULL, 11, 2, '1.00'),
+(73, '2017-6', '2017-09-03', 2017, 'Fjällbacka/Strömstad/Mjölkeröd', 'Eclectic med lite twist', NULL, 9, 15, '1.00'),
+(74, '2017-7', '2017-09-16', 2017, 'Landeryd Norra', 'Flaggtävling', NULL, 11, 37, '2.00'),
+(75, '2018-1', '2018-05-06', 2018, 'Sölvesborgs GK, Åhus Östra och Växjö GK', 'Eclectic poängbogey', NULL, 17, 17, '1.00'),
+(76, '2018-2', '2018-05-15', 2018, 'Linköpings GK', 'Poängbogey med mulligans, kast och jokerhål.', NULL, 9, 15, '1.00'),
+(77, '2018-3', '2018-06-11', 2018, 'Vesterby GK', 'Poängbogey', NULL, 9, 37, '1.00'),
+(78, '2018-4', '2018-06-25', 2018, 'Klinga', 'Poängbogey', NULL, NULL, 9, '1.00'),
+(79, '2018-5', '2018-08-15', 2018, 'Linköpings GK', 'Poängbogey med streck och favorit hål', NULL, 45, 3, '1.00'),
+(80, '2018-6', '2018-09-02', 2018, 'Visby GK', 'Matchspel tre dagar', NULL, 15, 15, '1.00'),
+(81, '2018-7', '2018-09-16', 2018, 'Vadstena GK', '?', NULL, 15, 34, '1.00'),
+(82, '2018-8', '2018-09-29', 2018, 'Landeryd Norra', 'Flaggolf', NULL, 17, 17, '2.00'),
+(83, '2019-1', '2019-04-22', 2019, 'Vesterby GK', 'Poängbogey med lag bästboll/sämstboll', NULL, 37, 17, '1.00'),
+(84, '2019-2', '2019-05-12', 2019, 'Sand, Jönköpings GK', 'Poängbogey + bonus', NULL, 3, 17, '1.00'),
+(85, '2019-3', '2019-05-27', 2019, 'Landeryd Södra', 'Knasboll: Pb med succ färre klubbor', NULL, 51, 17, '1.00'),
+(86, '2019-4', '2019-06-11', 2019, 'Linköpings GK', 'Poängbogey med inlåsning', NULL, 45, 45, '1.00'),
+(87, '2019-5', '2019-06-26', 2019, 'Landeryd Norra', 'Poängbogey med livlinor', NULL, 17, 34, '1.00'),
+(88, '2019-6', '2019-08-25', 2019, 'Vadstena GK ', 'Slaggolf', NULL, 23, 11, '1.00'),
+(91, '2019-7', '2019-09-14', 2019, 'Mälarö / Kallfors', 'Poängbogey två dagar', NULL, 3, 15, '1.00'),
+(96, '2019-8', '2019-10-05', 2019, 'Vesterby GK', 'Flagggolf', NULL, 45, 17, '1.50'),
+(97, '2020-1', '2020-04-19', 2020, 'Vesterby GK', 'Poängbogey', NULL, 45, 2, '1.00'),
+(99, '2020-2', '2020-05-05', 2020, 'Linköpings GK', 'Poängbogey med regelbrottinlåsning', NULL, 34, 37, '1.00'),
+(108, '2020-3', '2020-05-18', 2020, 'Landeryd Södra', 'Knasboll: Poängbogey med sucesivt färre klubbor', NULL, 37, 17, '1.00');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `players`
+-- Tabellstruktur `players`
 --
 
-CREATE TABLE IF NOT EXISTS `players` (
+DROP TABLE IF EXISTS `players`;
+CREATE TABLE `players` (
   `id` int(11) NOT NULL,
   `fname` varchar(30) NOT NULL,
   `lname` varchar(30) NOT NULL,
-  `email` tinytext,
+  `email` tinytext DEFAULT NULL,
   `golfId` varchar(10) DEFAULT NULL,
   `hcp` float DEFAULT NULL,
-  `mobil` varchar(20) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `mobil` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `players`
+-- Dumpning av Data i tabell `players`
 --
 
 INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`) VALUES
@@ -192,28 +203,31 @@ INSERT INTO `players` (`id`, `fname`, `lname`, `email`, `golfId`, `hcp`, `mobil`
 (43, 'Richard', '?', '', '', 0, ''),
 (45, 'Stefan', 'Lilliehjort', 'gstefanjohansson@gmail.com', '780616-003', 0, '070-8340315'),
 (46, 'Stefan', 'Melin', 'stefan.melin@gmail.com', '770404-030', 16, '070-3256121'),
-(47, 'Thomas', 'Schön', 'thomas@imath.se', '771225-006', 18, '073-5933887'),
+(47, 'Thomas', 'Schön', 'thomas@lerenius.se', '771225-006', 18, '073-5933887'),
 (48, 'Tommy', 'Dahlgren', '', '', 0, ''),
 (49, 'Ulf', 'Kättström', '', '', 0, ''),
-(50, 'Ulrica', 'Melin', 'ulrica.melin@gmail.com', '770422-005', 25, '070-5246130');
+(50, 'Ulrica', 'Melin', 'ulrica.melin@gmail.com', '770422-005', 25, '070-5246130'),
+(51, 'Fredrik', 'Nilsson', 'fredrik@nilssononline.se', NULL, NULL, NULL),
+(52, 'Sebastian', 'Harring', NULL, NULL, NULL, NULL),
+(53, 'Alfred', 'Carinder', NULL, '850311-002', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `results`
+-- Tabellstruktur `results`
 --
 
-CREATE TABLE IF NOT EXISTS `results` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+DROP TABLE IF EXISTS `results`;
+CREATE TABLE `results` (
+  `id` int(11) NOT NULL,
   `players_id` int(11) NOT NULL,
   `competitions_id` int(11) NOT NULL,
   `result` float NOT NULL,
-  `rank` float DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=659 ;
+  `rank` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `results`
+-- Dumpning av Data i tabell `results`
 --
 
 INSERT INTO `results` (`id`, `players_id`, `competitions_id`, `result`, `rank`) VALUES
@@ -856,27 +870,102 @@ INSERT INTO `results` (`id`, `players_id`, `competitions_id`, `result`, `rank`) 
 (651, 3, 82, 0, 4),
 (652, 15, 83, 35, 1),
 (653, 9, 83, 31, 5),
-(654, 45, 83, 34, 2),
-(655, 37, 83, 34, 2),
+(654, 45, 83, 34, 2.5),
+(655, 37, 83, 34, 2.5),
 (656, 17, 83, 33, 4),
 (657, 23, 83, 23, 7),
-(658, 3, 83, 28, 6);
+(658, 3, 83, 28, 6),
+(659, 9, 84, 33, 1),
+(660, 17, 84, 32, 3),
+(661, 42, 84, 1, 6),
+(662, 3, 84, 26, 4),
+(663, 34, 84, 25, 5),
+(664, 51, 84, 33, 2),
+(665, 15, 85, 29, 5),
+(666, 45, 85, 28, 6.5),
+(667, 17, 85, 33, 2),
+(668, 37, 85, 28, 6.5),
+(669, 23, 85, 20, 8),
+(670, 3, 85, 34, 1),
+(671, 34, 85, 30, 3),
+(672, 51, 85, 30, 3),
+(673, 17, 86, 37, 1),
+(674, 15, 86, 34, 3),
+(675, 9, 86, 36, 2),
+(676, 11, 86, 22, 5),
+(677, 45, 86, 32, 4),
+(678, 17, 87, 41, 1),
+(679, 9, 87, 40, 2),
+(680, 3, 87, 35, 3.5),
+(681, 23, 87, 34, 5),
+(682, 34, 87, 35, 3.5),
+(683, 45, 87, 28, 6),
+(684, 51, 87, 27, 7),
+(685, 15, 88, 74, 3),
+(686, 3, 88, 70, 1),
+(687, 11, 88, 78, 5),
+(688, 37, 88, 73, 2),
+(689, 23, 88, 77, 4),
+(690, 45, 88, 80, 6),
+(691, 15, 91, 60, 2),
+(692, 3, 91, 61, 1),
+(693, 9, 91, 58, 4),
+(694, 23, 91, 59, 3),
+(709, 15, 96, 37, 1),
+(710, 17, 96, 32, 4),
+(711, 3, 96, 30, 6),
+(712, 9, 96, 36, 2.5),
+(713, 34, 96, 36, 2.5),
+(714, 23, 96, 31, 5),
+(715, 45, 96, 28, 7),
+(716, 15, 97, 34, 2),
+(717, 9, 97, 31, 5.5),
+(718, 2, 97, 38, 1),
+(719, 45, 97, 28, 10),
+(720, 17, 97, 33, 3),
+(721, 37, 97, 30, 7.5),
+(722, 23, 97, 32, 4),
+(723, 11, 97, 29, 9),
+(724, 3, 97, 30, 7.5),
+(725, 34, 97, 26, 11),
+(726, 52, 97, 31, 5.5),
+(731, 15, 99, 33, 3),
+(732, 9, 99, 35, 1),
+(733, 45, 99, 29, 7),
+(734, 17, 99, 29, 10),
+(735, 37, 99, 32, 4.5),
+(736, 23, 99, 26, 11),
+(737, 11, 99, 28, 8.5),
+(738, 3, 99, 28, 8.5),
+(739, 34, 99, 32, 4.5),
+(740, 52, 99, 31, 6),
+(741, 53, 99, 35, 2),
+(805, 15, 108, 23, 10),
+(806, 3, 108, 28, 7.5),
+(807, 17, 108, 28, 7.5),
+(808, 9, 108, 29, 5.5),
+(809, 34, 108, 26, 9),
+(810, 23, 108, 29, 5.5),
+(811, 37, 108, 33, 1),
+(812, 11, 108, 30, 3),
+(813, 45, 108, 30, 3),
+(814, 52, 108, 30, 3);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `season`
+-- Tabellstruktur `season`
 --
 
-CREATE TABLE IF NOT EXISTS `season` (
+DROP TABLE IF EXISTS `season`;
+CREATE TABLE `season` (
   `year` int(11) NOT NULL,
   `type` tinytext NOT NULL,
-  `noOfRounds` int(11) NOT NULL,
-  PRIMARY KEY (`year`)
+  `noOfRounds` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `season`
+-- Dumpning av Data i tabell `season`
 --
 
 INSERT INTO `season` (`year`, `type`, `noOfRounds`) VALUES
@@ -892,7 +981,53 @@ INSERT INTO `season` (`year`, `type`, `noOfRounds`) VALUES
 (2016, 'rank', 4),
 (2017, 'rank2017', 4),
 (2018, 'rank2017', 4),
-(2019, 'rank2017', 4);
+(2019, 'rank2017', 4),
+(2020, 'rank2017', 4);
+
+--
+-- Index för dumpade tabeller
+--
+
+--
+-- Index för tabell `competitions`
+--
+ALTER TABLE `competitions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index för tabell `players`
+--
+ALTER TABLE `players`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index för tabell `results`
+--
+ALTER TABLE `results`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index för tabell `season`
+--
+ALTER TABLE `season`
+  ADD PRIMARY KEY (`year`);
+
+--
+-- AUTO_INCREMENT för dumpade tabeller
+--
+
+--
+-- AUTO_INCREMENT för tabell `competitions`
+--
+ALTER TABLE `competitions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+
+--
+-- AUTO_INCREMENT för tabell `results`
+--
+ALTER TABLE `results`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=817;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

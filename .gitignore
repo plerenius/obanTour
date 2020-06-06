@@ -1,3 +1,6 @@
+# DB secrets
+Connections/pdo_connect.php
+
 # PHP Unit framework
 vendor
 

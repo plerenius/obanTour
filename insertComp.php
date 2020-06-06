@@ -31,6 +31,11 @@ $players_q = $db->prepare($players_sql);
 $players_q->execute();
 $players_r = $players_q->fetchAll();
 
+// Figure out competition number
+$comp_id_q = $db->prepare("SELECT COUNT(id) AS comp_num FROM competitions WHERE YEAR(date) = YEAR(NOW())");
+$comp_id_q->execute();
+$comp_id = $comp_id_q->fetch(PDO::FETCH_ASSOC)['comp_num'] + 1;
+
 /**
  * The getSQLValueString will escape and correct the value before inputed in db.
  * 
@@ -99,8 +104,9 @@ if (isset($_POST['submit'])) {
             $result_stmt->execute(
                 array(
                     $_POST["id_$i"],
-                    $comp_id, $_POST["result_$i"],
-                    $_POST["rank_$i"]
+                    $comp_id, 
+                    getSQLValueString($_POST["result_$i"],"double"),
+                    getSQLValueString($_POST["rank_$i"], "double")
                 )
             );
         }
@@ -147,8 +153,8 @@ if (isset($_POST['submit'])) {
     <div class="row justify-content-center">
       <div class="col-8">
         <h1>
-          Ny t&auml;vling
-          <a class="btn btn-outline-info" href="./insertComp.php?all=true">
+          Ny t&auml;vling: <?php echo date("Y-$comp_id"); ?>
+          <a class="btn btn-outline-info float-right" href="./insertComp.php?all=true">
             Visa alla spelare
           </a>
         </h1>
@@ -159,15 +165,11 @@ if (isset($_POST['submit'])) {
           <input type="hidden" name="comp_year"
             value=<?php echo date("\"Y\""); ?> size="4"
           />
+          <input type="hidden" name="comp_name"
+            value=<?php echo date("\"Y-$comp_id\""); ?>"
+          />
+          
           <table>
-            <tr>
-              <td>T&auml;vlingsnamn:</td>
-              <td>
-                <input class="form-control" type="text" name="comp_name"
-                  value=<?php echo date("\"Y-1\""); ?> size="30"
-                />
-              </td>
-            </tr>
             <tr>
               <td>Datum:</td>
               <td>
@@ -221,15 +223,10 @@ if (isset($_POST['submit'])) {
                 </select>
               </td>
             </tr>
-            <tr>
-              <td>1,5 x po&auml;ng:</td>
-              <td>
-                <select class="form-control" name="doublePoints">
-                  <option value=1>Nej</option>
-                  <option value=1.5>Ja</option>
-                </select>
-              </td>
-            </tr>
+            
+            <input type="hidden" name="doublePoints"
+            value=<?php echo ($comp_id == 8) ? 1.5 : 1; ?>"
+            />
           </table>
           <p></p>
           <p>
