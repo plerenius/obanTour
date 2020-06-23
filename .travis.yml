@@ -2,15 +2,13 @@ language: php
 script: "./run_test.sh"
 env:
   global:
-  - secure: dNI3QF8YK+tac0fiCcw1EtXPNQPJblkoMoH6KZQEy3zp7u860Bd75sbL5vvV09jvoVBmC2ViPIyeVpWtsvmcPiIAkqQnFEa5mZRDlO0NmFkaItqc6C4QHKDBskGYph8ptw1JL/97iL83X69YynrU+8yaXwU8ALilJ3XpJySI6H6wNfmCYmQDJdUyHoDHLhs9wXPRYSZqhQxriu0N4NTzPKjMphPmcSXiTaE8t4BXT0ujteYy9CkbbsX2LqczCIqJzACXGPmJdJwd373+Qw8/tf8hFp09k6DVKKf+YnQP05FEUvDzudWk/fzXExH9IPUB66nregpry7s5zRYhSz7rBjWeAP/4GQTTsCT1JtV+Odr2HlVmPCwwHqtoyMHU2GzhErpk8lUU1aThh7ntpvtaPhnKcYOt2Ejc8VV/+Cc7YU/neCavZ1RkCutuuzrrEdfVPXnh6kI/nCPHta+cmMyH6+TKTV0Itthq1IbZDxGlQZOem2/KqiOK49ebFs7CXjlIAGdk0NCQk9La2QdOnOVWS7jdX+BOurMLiOODQFcG6nFqk/LYpFbHOL7sX4y8hmOSvQid4SDGeqm8vKpLZg93r+pvT3mefotUJsyAL/F7hU7KjxMpTcwtQNndbAh+AJC8w4OueqIrIPuIABkI/fsgwrG+u5nuRXJvXyOtwh7pFAI=
-  - secure: U+r4rly9LgVtgeBeBijrb+nATDghEhNKxJ5HwuZIPci+DLgAmibSKXyrXSCx8b948PD953/1lzw+q0B+zSE7vVj7EXfh5U9epqQvQfHwiGniKIctfJ3E3oBX7UmeUphtnewONVSqaiXjq9M7UMEZQb+fzr5y/nRU6TI/zvO+x47uWYd3+eZJrYz2WdLzW+HZHw5yFgSsV2cdXSajlmfhlSFIOc8mYkGs+kQ2Q1gtxwmwqJm7hgCNBQdw9HwwLMcmgkevJD1KFrF41G7iJvTNxm2MN3FMz1FQACAWW4QrbqWh4Fs/UF9oYky64K3+gwqJOBGNwP9+hTwJQYWwPs+LxpC8XcYLhibdbHqb9hHq+QMsobamVpeIT7VBSRJ6mPn1xxlzHti3MBYGqE8Jojy3dMeKqXg0qfonYQhj7c7r3t6s3k0Pg79vwYFOC+CG5k/bfwZ6oYZMqjwDKvo6Fy7XikqwSm79DdmTrlZ8lBMfwWXVMbbioGU2Cd/gBVMj2Y64z9+f9iJBZd7YrI6kv68tcSBgv08hQ1GXY7peDOQT3mjk12pY0pc3Qw0XZEo6cfYSf7sNb+igrQEr6CcDhza+08ZzDQ5qpSqGqrJjZvF9Cq3FZQCsCAqfJZB6JOcoSbht/u+qn2AsN65qCUL7ERtiKIDxPQ3Q4k+htM2Lr1J3dTg=
-
+  - secure: c5ZuzklKVWnMQwLO/S6dvtNGLzVwbSO+C7zwlvL6Pe/W6Mily8/xzi+KyWE4z8E3AXLNMOaUMGFy+9w7JZacb/zvDzClnq8TF+hhic7o2Ga8PVp1t81ii7xeomiTAY0wG4cjMkqN7TuQRTHTLmHh4+0c8+pg2gTSQZvs+xcFAOra1ueF39FOmiAf8i1l2/0zo39Bj32B8JWcuJUQxjnHGrs7FAZv0pbQ8xQg3jaB6RJNUI2f/kle4IE6MOxNEDkaGGJlup8xvNm40KpcOjresBkE9f1XB1xqZEzBew5UutdaFiGPAG/fziQVoajepgZR33M/QBod8yb5QKlA9DW3Pz/WhigmSixcugD9H2AlcH5nhHjb9O3dz0hs+GcZLiQiE8IL6ThahbWPVzw95NeB37kSbq1+wsBCjtnDaQtUCRNHWazZ8UEGWL3D/e13a0G0v9bu0/VZxzUIe1Xxg89MP8kAT9hFa7o0fY1BatzosRYZwoYClmMmy5RmzBAFqrwB1AltbxRs8yCCbs6KZM5vJbKlkAwI2ZvXTlRnK90t47xGr4mizIYmJbsTyJGtR52aUyWBTp/y0U1JHYf01oywAscfk69EFPmDz7pc0F/DZjGmiMlXqVdrmc9QBFbaerTo/DOu6SauKJm34+hC84VshVxBV64ykh9NvEghZ1FX8rA=
+  - secure: HTmCS8pOkoSgl6/6UlizyloxWXiNZHHi7eX1eYiLkYmjxpfQgFcgn3KuCdEAv2HiNSpLXSOI33yfiFXDLGI/TmFF73nWd75+ZxmciTKinpYJm9nPTiKjTmfemLAwV1398wN3essFy+NzM8/KCRcFWnip3qN1HQ9RR4ddZ7RGuV0NoVUDp15XgXxU9cDuWSvdbd+DuRTjmuiwhxoSebVq2sA/72JWl/oRXF/W0qu/wIg0UAUrghkioyjB0FSMMlPTJyT2j2h4f7AmAJTyHiu7M/i0YXNl/hOZXXoeZwmS/zm46fY7gf4w4rigJwZtxF/wfOt3DLIWmXrAKcw5IxPTXY5ue1DIR8OOY74k1c0z/BONWG624DqBWA7c7ExB/huJNiOFfIeJIfUiesi1Okb7YP6XsvIxwGq6gdhc1iyU1ceWjQKACIRLtc4WvA6lwTv3dc0OVIWpTEIJMRyI9Qk4rl5K++He3yrYjVJbYTkUaRnxQPZYYBbCxaUjqPwUQet7aLaI7kleXgOtb1ebf7Qva8O/pj+M0jXebYYjbRbJ1Y0/VpilaWaEQpubwgdbAYaxXCpSLj6l6Tf8XKA2VN4AT5d3jRfKnlOcCM7r1g8XSSGChDaXOIYiqOMcc5rOFffpXVRZqx057tocYhhsQiwS5wQwove+ERR5gfID4HCb+Nw=
+  - secure: raefidlA44C6Nm6UX+V94aKpWfIoyxubDokUXPtG0GrHN6PQr9ceXsxSfz5UM4Gwgrxju77Ln2GJTIp/yEmWJYRlACWAAlczjTZ2b+19yR61g2HuSp8aDSgCWh1Np1q9eUwUsbvfu+3gmhmlnqzuDB9+PelOwoG2a2/dqUlJ1DljydAIRAXlHL9HlJisbaiCvBJrxDTuDIxncyS7TzixwdJGDBZ0/TxSvE7+5/j5tuTp6fMh2KOmP1lfu2nHaEmh/h3rlQA3KHYSoHvbYArUWt2qMKDOCjUzOdPn48GcRcmk1MzgEsFY5NW52SQggxep9mnifMwFavEJfhHxv80fslbO4I04LCmRU5lbD7J5YIrK2eCke8ph7LIiosm7Knd/50gCVXhtpgWOCXVngiJ6DZN7HxtyRqnUEEeQaJmwAXN8ESu5tE3vVw8TxMrep+t60uY5wg5ubto28BjYa0dUn9tNnB1kde+x79RO3t90T0jBKKhDMgsTZPefh1NnL4adRvPsZyjwrGmD/Jy6/C0x0cJkXvyhfXi7Q/P3A89e+5qmi0KvPIzwyKQryr/Qj1g5hx7/UbKH4qTH7tbgRCSZ1tdCC2yPwZ00xWQdTxEh+WYieXHZlVbkLr3nxLJdXv6dGV/1Jx9P38aKmT9Csf9WmuUK9a4fVZAhgLKEA1OHHM4=
 after_success:
 - curl --ftp-create-dirs -T "{seasonResult,competitionTable,insertComp,wineTables}.php"
-  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
-- curl --ftp-create-dirs -T "src/{Player,Competition}.php"
-  -u $FTP_USER:$FTP_PASSW  ftp://ftp.lerenius.se/obantour/result/src/
+  -u ${FTP_USER}:${FTP_PASSW} ftp://${FTP_URL}/obantour/result/
+- curl --ftp-create-dirs -T "src/{Player,Competition}.php" -u ${FTP_USER}:${FTP_PASSW}  ftp://${FTP_URL}/obantour/result/src/
 - curl --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking,Courses}_inc.php"
-  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/inc/
-- curl --ftp-create-dirs -T "index.html"
-  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
+  -u ${FTP_USER}:${FTP_PASSW} ftp://${FTP_URL}/obantour/result/inc/
+- curl --ftp-create-dirs -T "index.html" -u ${FTP_USER}:${FTP_PASSW} ftp://${FTP_URL}/obantour/result/
