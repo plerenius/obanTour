@@ -6,9 +6,9 @@ env:
   - secure: VBnoU5b2ScUqH94AWjQ4TD78jPiEB7Jj0VcnfIr3FRkmF78x5iHznSFkU45URWm7kLJoDFOrn+86GrReH8eRbyB/nQShS+72WX52j0O+bQoECEPNGI7U8MT9blHBSCpWaHwU4QuuaEptTCJ65M3l86zYD/9h6PEkOdWUp4ShNr3retjIzXOXBspuCdVrFT12UMaiEcG0fcMMiJBrud2s6JZKR463TuBvj5G0s5JZbpag381HuykGBT/NfC+CgxC8xaJhX9KdlFEEbcbsqQoat8uxnUqdPumC6DTIz3KBi0xnG4yz8OnmUt+vvXRe4yUHg0caxzNkYwnggrzSLLX31iqWzi5+o5FvfWFJP81EN3GOdzSCo/K/YCKYJkHs1C2js+fzi6lsF70nlICMiE+0O0oi1g7p4yJgCExzoiw/b9cfIz0N0yJjlzDxy4ALswfWCX8KTS2IPpIENYxjNFMYpwu+C7DnCBrvGlDl/6/RY00jr1I+hMdIZb7nYgvbY8k2KyCMH84q3vVKkzJhhhzDDn58hNtKT5YwfbM4o2QZ/d0oWo40SErNrZbjqGEP2xy3vnuaCS9wpIF5R7pj1Lx3aMv/i5Pz9JKdVKMkRGJ5wGbg0lGBRfBmw2QChaCxUeJWGRqLUnaCP8q6oHVUdx+ES1Jok5Z2N+QoPg9URvlDb2U=
   - secure: raefidlA44C6Nm6UX+V94aKpWfIoyxubDokUXPtG0GrHN6PQr9ceXsxSfz5UM4Gwgrxju77Ln2GJTIp/yEmWJYRlACWAAlczjTZ2b+19yR61g2HuSp8aDSgCWh1Np1q9eUwUsbvfu+3gmhmlnqzuDB9+PelOwoG2a2/dqUlJ1DljydAIRAXlHL9HlJisbaiCvBJrxDTuDIxncyS7TzixwdJGDBZ0/TxSvE7+5/j5tuTp6fMh2KOmP1lfu2nHaEmh/h3rlQA3KHYSoHvbYArUWt2qMKDOCjUzOdPn48GcRcmk1MzgEsFY5NW52SQggxep9mnifMwFavEJfhHxv80fslbO4I04LCmRU5lbD7J5YIrK2eCke8ph7LIiosm7Knd/50gCVXhtpgWOCXVngiJ6DZN7HxtyRqnUEEeQaJmwAXN8ESu5tE3vVw8TxMrep+t60uY5wg5ubto28BjYa0dUn9tNnB1kde+x79RO3t90T0jBKKhDMgsTZPefh1NnL4adRvPsZyjwrGmD/Jy6/C0x0cJkXvyhfXi7Q/P3A89e+5qmi0KvPIzwyKQryr/Qj1g5hx7/UbKH4qTH7tbgRCSZ1tdCC2yPwZ00xWQdTxEh+WYieXHZlVbkLr3nxLJdXv6dGV/1Jx9P38aKmT9Csf9WmuUK9a4fVZAhgLKEA1OHHM4=
 after_success:
-- curl --ftp-create-dirs -T "{seasonResult,competitionTable,insertComp,wineTables}.php"
+- curl -v --ftp-create-dirs -T "{seasonResult,competitionTable,insertComp,wineTables}.php"
   -u ${FTP_USER}:${FTP_PASSW} ftp://${FTP_URL}/obantour/result/
-- curl --ftp-create-dirs -T "src/{Player,Competition}.php" -u ${FTP_USER}:${FTP_PASSW}  ftp://${FTP_URL}/obantour/result/src/
-- curl --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking,Courses}_inc.php"
+- curl -v --ftp-create-dirs -T "src/{Player,Competition}.php" -u ${FTP_USER}:${FTP_PASSW}  ftp://${FTP_URL}/obantour/result/src/
+- curl -v --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking,Courses}_inc.php"
   -u ${FTP_USER}:${FTP_PASSW} ftp://${FTP_URL}/obantour/result/inc/
-- curl --ftp-create-dirs -T "index.html" -u ${FTP_USER}:${FTP_PASSW} ftp://${FTP_URL}/obantour/result/
+- curl -v --ftp-create-dirs -T "index.html" -u ${FTP_USER}:${FTP_PASSW} ftp://${FTP_URL}/obantour/result/
