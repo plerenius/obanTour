@@ -16,4 +16,8 @@ $dsn = "mysql:host=$host;port=$port;dbname=$database;charset=utf8";
 // Connect!
 global $db;
 $db = new PDO($dsn, $username, $password);
+
+// Avoid errors due to large requests
+$comp_id_q = $db->prepare("SET SQL_BIG_SELECTS=1");
+$comp_id_q->execute();
 ?>

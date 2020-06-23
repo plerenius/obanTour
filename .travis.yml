@@ -1,15 +1,16 @@
 language: php
-
-script:
-  ./run_test.sh
-
+script: "./run_test.sh"
 env:
   global:
-  - secure: llf1htWM28CcfBGFp8zYZi/zsrxZRjTlfch+7nHESaxPQ6z3PFw8YANlwTs71CFVGB5iYBroeviPiCkQqqMOHlZb4aThc+vEqhHuJbFi40G5z2cwcZWuVE+qzLnwGMu7ZJVVxy/67WCIJjW1bcMWkFaIQhWveLz1sRZPixTVMeMSXy/ihrghf7KUFhomZHl+irzkHVNRJZ4UFpiMoauvjDiKNWQMRxZJxWUfkkGKdB68SWBRhmBPAIzA62vg9thVh3+8j5gMJfyijrtThqRA+Yh8NBiUaIZY3ssgvsYKD6Qvi8pPeLwdl7X0DXWPio9Sbux7ioAoFiEp7xrNd8x9ql6s2y0HKGbCMlb332ZflZNnYVDcBkg+yV7BH3aNJrMcbNP57/S+B10Ky9SgM1GzwJs4gy+HfPlugw4KO5PkpuJOAhvBaf5nOkmPHdsxnctmNNwUPe0p4AtI5+agY/KNe7iqlz0kXaL1PyuHQamlI99Qgej0hnF//9RH5gynvC6PaClySJ+1bkLPhx5zXxOfvyLA/FNIR7VMfgsvctVtQP0wOGEH4H1ARAPs+m35sd0aeCpcEEVunw6q3sLESdrk50WO4+dd92oBaJQcIuQm6HBT2DRNWrY1Rn6hJUOLO2mj+16hmzfRGZ/rJNaEWjiTJu1VlH1oM7BqJxj3U2X9wp0=
-  - secure: ihH8Ct69uc2y9AZL3NrG4usfv7/8rHFH3dNzOTFhGxdFCdHeaGNZTHJxdxmR1+T3ukzvCkoctnuOqaAh6FKdhEKlxLLcBmcA+SpARAEteKhJJLr21VX8mwKTKtAUA31er+E5NTeeCusoqkUxuWf4OSdRUWF4oTo2yf9HTL0UVqEXh/eLB0kIIO/vy3PrutkYCBHRU3ONgthCHcHNKD1lpayLzcITlXENURJ5YbA+qCYpd2PSJk/bL44vr4bT1hAkhX0IDi039P3PytXTJqS86E3AVxIe7FVVV7ubNrKe0QUjR9DFvLd0aCvV6aZTwLNr35DzOKD8i5PHKL3EyAAl/EOiS5ASQYeWqeDF70Q2Rv77rXjNOV8nC4qAz3Ybny0/P2xxunQ+4ppNBjJ8b+E18GKL4tih8qWkdHVPF9Zsu1WMUf0tkXJMrhTnhIMLmZ1AwUsaSsCoRogINO671GeTda07SOJRB30MY/O5lw/8HISORJTvbHPEK10KHxxpCjOobfBvvpakavvMMquUmTt9jzk6QwqP1kZpLn7wlJYQ7X1Xd/flJPISIXifE89N8xr9or0rXDT66aM3AtsAkjl4tFFs+bKfXNvSbyuwUGY3nW+Lvc7NL6GWygoYDk/4PhJqTRy1XRCpdlRewaW6kDzYU8AHvVFB8R2lGMHjztxkzuo=
+  - secure: dNI3QF8YK+tac0fiCcw1EtXPNQPJblkoMoH6KZQEy3zp7u860Bd75sbL5vvV09jvoVBmC2ViPIyeVpWtsvmcPiIAkqQnFEa5mZRDlO0NmFkaItqc6C4QHKDBskGYph8ptw1JL/97iL83X69YynrU+8yaXwU8ALilJ3XpJySI6H6wNfmCYmQDJdUyHoDHLhs9wXPRYSZqhQxriu0N4NTzPKjMphPmcSXiTaE8t4BXT0ujteYy9CkbbsX2LqczCIqJzACXGPmJdJwd373+Qw8/tf8hFp09k6DVKKf+YnQP05FEUvDzudWk/fzXExH9IPUB66nregpry7s5zRYhSz7rBjWeAP/4GQTTsCT1JtV+Odr2HlVmPCwwHqtoyMHU2GzhErpk8lUU1aThh7ntpvtaPhnKcYOt2Ejc8VV/+Cc7YU/neCavZ1RkCutuuzrrEdfVPXnh6kI/nCPHta+cmMyH6+TKTV0Itthq1IbZDxGlQZOem2/KqiOK49ebFs7CXjlIAGdk0NCQk9La2QdOnOVWS7jdX+BOurMLiOODQFcG6nFqk/LYpFbHOL7sX4y8hmOSvQid4SDGeqm8vKpLZg93r+pvT3mefotUJsyAL/F7hU7KjxMpTcwtQNndbAh+AJC8w4OueqIrIPuIABkI/fsgwrG+u5nuRXJvXyOtwh7pFAI=
+  - secure: U+r4rly9LgVtgeBeBijrb+nATDghEhNKxJ5HwuZIPci+DLgAmibSKXyrXSCx8b948PD953/1lzw+q0B+zSE7vVj7EXfh5U9epqQvQfHwiGniKIctfJ3E3oBX7UmeUphtnewONVSqaiXjq9M7UMEZQb+fzr5y/nRU6TI/zvO+x47uWYd3+eZJrYz2WdLzW+HZHw5yFgSsV2cdXSajlmfhlSFIOc8mYkGs+kQ2Q1gtxwmwqJm7hgCNBQdw9HwwLMcmgkevJD1KFrF41G7iJvTNxm2MN3FMz1FQACAWW4QrbqWh4Fs/UF9oYky64K3+gwqJOBGNwP9+hTwJQYWwPs+LxpC8XcYLhibdbHqb9hHq+QMsobamVpeIT7VBSRJ6mPn1xxlzHti3MBYGqE8Jojy3dMeKqXg0qfonYQhj7c7r3t6s3k0Pg79vwYFOC+CG5k/bfwZ6oYZMqjwDKvo6Fy7XikqwSm79DdmTrlZ8lBMfwWXVMbbioGU2Cd/gBVMj2Y64z9+f9iJBZd7YrI6kv68tcSBgv08hQ1GXY7peDOQT3mjk12pY0pc3Qw0XZEo6cfYSf7sNb+igrQEr6CcDhza+08ZzDQ5qpSqGqrJjZvF9Cq3FZQCsCAqfJZB6JOcoSbht/u+qn2AsN65qCUL7ERtiKIDxPQ3Q4k+htM2Lr1J3dTg=
 
 after_success:
-- curl --ftp-create-dirs -T "{seasonResult,competitionTable,insertComp,wineTables}.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
-- curl --ftp-create-dirs -T "src/{Player,Competition}.php" -u $FTP_USER:$FTP_PASSW  ftp://ftp.lerenius.se/obantour/result/src/
-- curl --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking,Courses}_inc.php" -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/inc/
-- curl --ftp-create-dirs -T "index.html" -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
+- curl --ftp-create-dirs -T "{seasonResult,competitionTable,insertComp,wineTables}.php"
+  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
+- curl --ftp-create-dirs -T "src/{Player,Competition}.php"
+  -u $FTP_USER:$FTP_PASSW  ftp://ftp.lerenius.se/obantour/result/src/
+- curl --ftp-create-dirs -T "inc/{NumberOfWines,NumberOfComp,SeasonResult,WinesPerComp,Ranking,Courses}_inc.php"
+  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/inc/
+- curl --ftp-create-dirs -T "index.html"
+  -u $FTP_USER:$FTP_PASSW ftp://ftp.lerenius.se/obantour/result/
