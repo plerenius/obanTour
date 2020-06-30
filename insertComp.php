@@ -228,7 +228,12 @@ if (isset($_POST['submit'])) {
             value=<?php echo ($comp_id == 8) ? 1.5 : 1; ?>"
             />
           </table>
-          <p></p>
+          <p>
+             Mata in resultatet från tävlingen. Resultat kolumnen innehåller ett decimaltal
+             som motsvarar resultatet för spelaren, t.ex. poäng, antal slag.<br />
+             Placering är spelarens placering i tävlingen. Vid delad plats matar man in
+             +0.5, alltså delad andraplats ger 2.5 för de båda spelarna.
+          </p>
           <p>
             <table class="table table-sm table-striped">
               <tr>
