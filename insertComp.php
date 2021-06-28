@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
                 array(
                     $_POST["id_$i"],
                     $comp_id, 
-                    getSQLValueString($_POST["result_$i"],"double"),
+                    getSQLValueString($_POST["result_$i"], "double"),
                     getSQLValueString($_POST["rank_$i"], "double")
                 )
             );
@@ -234,7 +234,7 @@ if (isset($_POST['submit'])) {
              Placering är spelarens placering i tävlingen. Vid delad plats matar man in
              +0.5, alltså delad andraplats ger 2.5 för de båda spelarna.
           </p>
-          <p>
+          <p> 
             <table class="table table-sm table-striped">
               <tr>
                 <th align=left class="pr-3">Namn</th>

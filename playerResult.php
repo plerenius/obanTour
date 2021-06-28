@@ -19,10 +19,13 @@ if (ISSET($_GET['id'])) {
 }
 
 require realpath(dirname(__FILE__)."/Connections/pdo_connect.php");
-$competions_sql = "SELECT *\n"
-. "FROM results \n"
-. "WHERE players_id = $id\n";
-//echo "$competions_sql<br />";
+//SELECT COUNT(*) AS numComp, MAX(c.date) AS latestComp, YEAR(MIN(c.date)) AS rookieYear FROM `results` AS r LEFT JOIN competitions AS c ON c.id=r.competitions_id WHERE players_id=42
+$competions_sql = "SELECT * \n"
+. "FROM results AS r \n"
+. "LEFT JOIN competitions AS c ON c.id=r.competitions_id \n"
+. "WHERE players_id = $id\n"
+. "ORDER BY c.date \n";
+echo "$competions_sql <br />";
 $competions_q = $db->prepare($competions_sql);
 $competions_q->execute();
 $competitions = $competions_q->fetchAll();
@@ -34,7 +37,7 @@ $name_q->execute();
 $name = $name_q->fetch(PDO::FETCH_ASSOC)['name'];
 
 // Wins
-$wins_sql = "SELECT COUNT(r_win.id) AS numOfPlayers,c.name, c.course\n"
+$wins_sql = "SELECT COUNT(r.id) AS numOfPlayers,c.name, c.course\n"
 . "FROM competitions AS c\n"
 . "LEFT JOIN results AS r ON r.competitions_id = c.id\n"
 . "LEFT JOIN (SELECT * FROM results WHERE rank=1) AS r_win "
@@ -105,6 +108,17 @@ $lds = $ld_q->fetchAll();
               echo count($wins) ." Vinster</br>";
               echo count($nfs) . " Närmst hål</br>";
               echo count($lds) . " Längst drive</br>";
+              echo "Första tävlingen: "
+                . $competitions[0]['name'] . " på "
+                . $competitions[0]['course'] . ", " 
+                . $competitions[0]['result'] . "p gav plats "
+                . $competitions[0]['rank'] . "</br>";
+              $c_end = end($competitions);
+              echo "Senaste tävlingen: "
+                . $c_end['name'] . " på "
+                . $c_end['course'] . ", " 
+                . $c_end['result'] . "p gav plats "
+                . $c_end['rank'] . "</br>";
           ?>
           </p>
           
